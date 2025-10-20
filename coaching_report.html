@@ -3,328 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Athlete - Full Coaching Report</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e1e2e 0%, #2d2d44 100%);
-            color: #e0e0e0;
-            padding: 20px;
-            line-height: 1.7;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        header {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
-            padding: 50px 40px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
-        }
-
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 15px;
-            color: white;
-        }
-
-        .header-meta {
-            font-size: 1.1em;
-            opacity: 0.95;
-            color: white;
-            margin-bottom: 10px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-
-        .nav-links a {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 10px 20px;
-            border-radius: 8px;
-            color: white;
-            text-decoration: none;
-            transition: background 0.2s;
-        }
-
-        .nav-links a:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .toc {
-            background: linear-gradient(135deg, #3a3a5a 0%, #2d2d44 100%);
-            padding: 30px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .toc h2 {
-            color: #4a9eff;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #4a9eff;
-            padding-bottom: 10px;
-        }
-
-        .toc ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .toc li {
-            padding: 8px 0;
-        }
-
-        .toc a {
-            color: #4a9eff;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .toc a:hover {
-            color: #ffd700;
-        }
-
-        .section {
-            background: linear-gradient(135deg, #3a3a5a 0%, #2d2d44 100%);
-            padding: 35px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        h2 {
-            font-size: 2em;
-            color: #4a9eff;
-            border-bottom: 3px solid #4a9eff;
-            padding-bottom: 12px;
-            margin-bottom: 25px;
-        }
-
-        h3 {
-            font-size: 1.5em;
-            color: #ffd700;
-            margin-top: 25px;
-            margin-bottom: 15px;
-        }
-
-        h4 {
-            font-size: 1.2em;
-            color: #95e1d3;
-            margin-top: 20px;
-            margin-bottom: 12px;
-        }
-
-        p {
-            margin-bottom: 15px;
-            font-size: 1.05em;
-        }
-
-        ul, ol {
-            margin-left: 25px;
-            margin-bottom: 15px;
-        }
-
-        li {
-            margin-bottom: 10px;
-        }
-
-        .stat-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 25px 0;
-        }
-
-        .stat-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 4px solid;
-            text-align: center;
-        }
-
-        .stat-card.primary { border-left-color: #ffd700; }
-        .stat-card.secondary { border-left-color: #4ecdc4; }
-        .stat-card.tertiary { border-left-color: #ff6b6b; }
-
-        .stat-value {
-            font-size: 2.2em;
-            font-weight: bold;
-            color: #ffffff;
-            margin-bottom: 8px;
-        }
-
-        .stat-label {
-            font-size: 0.95em;
-            opacity: 0.85;
-        }
-
-        .highlight-box {
-            background: rgba(255, 215, 0, 0.1);
-            border-left: 5px solid #ffd700;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
-
-        .success-box {
-            background: rgba(74, 222, 128, 0.1);
-            border-left: 5px solid #4ade80;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
-
-        .warning-box {
-            background: rgba(255, 107, 107, 0.1);
-            border-left: 5px solid #ff6b6b;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
-
-        .info-box {
-            background: rgba(74, 158, 255, 0.1);
-            border-left: 5px solid #4a9eff;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        th {
-            background: rgba(74, 158, 255, 0.3);
-            padding: 15px;
-            text-align: left;
-            font-weight: bold;
-            color: #4a9eff;
-        }
-
-        td {
-            padding: 12px 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        tr:last-child td {
-            border-bottom: none;
-        }
-
-        .comparison-table td:nth-child(2),
-        .comparison-table td:nth-child(3) {
-            text-align: center;
-        }
-
-        .positive {
-            color: #4ade80;
-            font-weight: bold;
-        }
-
-        .negative {
-            color: #ff6b6b;
-            font-weight: bold;
-        }
-
-        .training-plan {
-            background: linear-gradient(135deg, #4a2d7c 0%, #371e5f 100%);
-            padding: 25px;
-            border-radius: 10px;
-            margin: 20px 0;
-            border-left: 5px solid #a855f7;
-        }
-
-        .training-plan h4 {
-            color: #a855f7;
-        }
-
-        .workout-week {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-        }
-
-        .workout-day {
-            padding: 10px;
-            margin: 8px 0;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 5px;
-        }
-
-        .workout-day strong {
-            color: #ffd700;
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            opacity: 0.7;
-            margin-top: 50px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        @media print {
-            body {
-                background: white;
-                color: black;
-            }
-            .section {
-                page-break-inside: avoid;
-            }
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 1.8em;
-            }
-            h2 {
-                font-size: 1.5em;
-            }
-            .stat-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <title>Athlete Name - Full Coaching Report</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="shared-styles.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🚴 Athlete - Performance Analysis</h1>
+            <h1><i class='bx bx-cycling'></i> Athlete Name - Performance Analysis</h1>
             <div class="header-meta">Analysis Period: April 2025 - October 2025</div>
-            <div class="header-meta">Report Generated: October 16, 2025</div>
+            <div class="header-meta">Report Generated: October 20, 2025</div>
             <div class="header-meta">Prepared by: Claude Code Performance Analyzer</div>
 
             <div class="nav-links">
-                <a href="quick_summary.html">← Back to Summary</a>
-                <a href="performance_dashboard.html">View Dashboard →</a>
+                <a href="index.html"><i class='bx bx-arrow-back'></i> Back to Summary</a>
+                <a href="performance_dashboard.html">View Dashboard <i class='bx bx-arrow-to-right'></i></a>
             </div>
         </header>
 
         <!-- Table of Contents -->
         <div class="toc">
-            <h2>📑 Table of Contents</h2>
+            <h2><i class='bx bx-list-ul'></i> Table of Contents</h2>
             <ul>
                 <li><a href="#executive-summary">1. Executive Summary</a></li>
                 <li><a href="#athlete-profile">2. Athlete Profile</a></li>
@@ -338,6 +40,19 @@
                 <li><a href="#target-recommendations">10. Target & Recommendations</a></li>
                 <li><a href="#training-plan">11. 12-Week Training Plan</a></li>
                 <li><a href="#monitoring">12. Monitoring & Red Flags</a></li>
+                <li><a href="#execution">13. Training Execution Guidelines</a></li>
+                <li><a href="#nutrition">14. Nutrition Recommendations</a></li>
+                <li><a href="#supplementation">15. Supplementation Guidance</a></li>
+                <li><a href="#recovery">16. Recovery Strategies</a></li>
+                <li><a href="#injury-prevention">17. Injury Prevention</a></li>
+                <li><a href="#long-term">18. Long-term Development Strategy</a></li>
+                <li><a href="#equipment">19. Equipment & Technology</a></li>
+                <li><a href="#mental">20. Mental Performance</a></li>
+                <li><a href="#events">21. Event Recommendations</a></li>
+                <li><a href="#summary">22. Coaching Recommendations Summary</a></li>
+                <li><a href="#kpis">23. Key Performance Indicators</a></li>
+                <li><a href="#final-thoughts">24. Final Thoughts</a></li>
+                <li><a href="#appendix">25. Resources & Appendix</a></li>
             </ul>
         </div>
 
@@ -346,25 +61,25 @@
             <h2>1. Executive Summary</h2>
 
             <h3>Current Fitness Level</h3>
-            <p>Athlete is a 51-year-old cyclist with an FTP of 255W (3.04 W/kg). Solid aerobic base with room for intensity improvements.</p>
+            <p>Athlete Name demonstrates strong Cat 3 fitness with an FTP of 310.0W (4.43 W/kg). Excellent training consistency at 4.6 rides per week.</p>
 
             <h3>Key Achievements (Last 6 Months)</h3>
             <ul>
-                <li>Consistent training: 4.5 rides per week</li>
-                <li>Strong volume: 4872km in 6 months</li>
-                <li>Good endurance base with 12 long rides</li>
+                <li>Outstanding consistency: 4.6 rides/week average over 6 months</li>
+                <li>Positive trends: +2.4% power improvement, +10.8% distance increase</li>
+                <li>Strong endurance base: 0km total distance with good polarization (95% easy)</li>
             </ul>
 
             <h3>Main Areas of Concern</h3>
             <ul>
-                <li>Limited high-intensity training</li>
-                <li>No structured threshold work visible</li>
-                <li>VO2 max work needs development</li>
+                <li>Limited high-intensity work: Only 2.6% time in Z4-Z5 (target 15-20%)</li>
+                <li>Sweet spot and VO2 max sessions could be increased for greater FTP development</li>
+                <li>Age 26+ recovery: Ensure 48-72 hours between hard sessions for optimal adaptation</li>
             </ul>
 
             <div class="highlight-box">
                 <h4>Bottom Line</h4>
-                <p>Strong base ready for intensity. Target: 255W → 270W FTP.</p>
+                <p>Excellent foundation established. With structured intensity training, realistic to increase FTP from 310.0W to 328.0W (+18.0W) in 12 weeks.</p>
             </div>
         </div>
 
@@ -372,29 +87,29 @@
         <div class="section" id="athlete-profile">
             <h2>2. Athlete Profile</h2>
 
-            <div class="stat-grid">
+            <div class="stat-grid athlete-profile-grid">
                 <div class="stat-card primary">
-                    <div class="stat-value">51</div>
+                    <div class="stat-value">26</div>
                     <div class="stat-label">Age (years)</div>
                 </div>
                 <div class="stat-card primary">
-                    <div class="stat-value">84</div>
+                    <div class="stat-value">70.0</div>
                     <div class="stat-label">Weight (kg)</div>
                 </div>
                 <div class="stat-card primary">
-                    <div class="stat-value">255</div>
+                    <div class="stat-value">310.0</div>
                     <div class="stat-label">FTP (watts)</div>
                 </div>
                 <div class="stat-card primary">
-                    <div class="stat-value">3.04</div>
+                    <div class="stat-value">4.43</div>
                     <div class="stat-label">W/kg</div>
                 </div>
                 <div class="stat-card secondary">
-                    <div class="stat-value">169</div>
+                    <div class="stat-value">176.0</div>
                     <div class="stat-label">Max HR (bpm)</div>
                 </div>
                 <div class="stat-card secondary">
-                    <div class="stat-value">Masters Cyclist</div>
+                    <div class="stat-value">Cyclist</div>
                     <div class="stat-label">Athlete Type</div>
                 </div>
             </div>
@@ -415,35 +130,35 @@
                         <td>Z1</td>
                         <td>Active Recovery</td>
                         <td>0-60%</td>
-                        <td>0-153W</td>
+                        <td>0-186W</td>
                         <td>Recovery rides</td>
                     </tr>
                     <tr>
                         <td>Z2</td>
                         <td>Endurance</td>
                         <td>60-80%</td>
-                        <td>153-204W</td>
+                        <td>186-248W</td>
                         <td>Aerobic base building</td>
                     </tr>
                     <tr>
                         <td>Z3</td>
                         <td>Tempo</td>
                         <td>80-90%</td>
-                        <td>204-229W</td>
+                        <td>248-279W</td>
                         <td>Muscular endurance</td>
                     </tr>
                     <tr>
                         <td>Z4</td>
                         <td>Threshold</td>
                         <td>90-110%</td>
-                        <td>229-280W</td>
+                        <td>279-341W</td>
                         <td>FTP development</td>
                     </tr>
                     <tr>
                         <td>Z5</td>
                         <td>VO2 Max</td>
                         <td>>110%</td>
-                        <td>>280W</td>
+                        <td>>341W</td>
                         <td>Peak power, anaerobic capacity</td>
                     </tr>
                 </tbody>
@@ -456,15 +171,15 @@
 
             <div class="stat-grid">
                 <div class="stat-card secondary">
-                    <div class="stat-value">115</div>
+                    <div class="stat-value">0</div>
                     <div class="stat-label">Total Activities</div>
                 </div>
                 <div class="stat-card secondary">
-                    <div class="stat-value">45</div>
+                    <div class="stat-value">44</div>
                     <div class="stat-label">Outdoor Rides</div>
                 </div>
                 <div class="stat-card secondary">
-                    <div class="stat-value">70</div>
+                    <div class="stat-value">69</div>
                     <div class="stat-label">Indoor Rides</div>
                 </div>
                 <div class="stat-card secondary">
@@ -474,8 +189,8 @@
             </div>
 
             <h3>Training Split</h3>
-            <p><strong>Indoor/Outdoor Balance:</strong> 60% indoor / 40% outdoor</p>
-            <p>Good balance with 60% indoor structured training and 40% outdoor rides.</p>
+            <p><strong>Indoor/Outdoor Balance:</strong> 61% indoor / 39% outdoor</p>
+            <p>Good mix of indoor (61%) and outdoor (39%) training. Indoor sessions allow for precise power-based intervals while outdoor rides develop handling skills and race fitness.</p>
         </div>
 
         <!-- 4. Period Comparison -->
@@ -488,52 +203,52 @@
                     <tr>
                         <th>Metric</th>
                         <th>Recent 6 Months</th>
-                        <th>Previous 12 Months</th>
+                        <th>Previous 6 Months Prior</th>
                         <th>Change</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>Total Rides</td>
-                        <td>115</td>
-                        <td>224</td>
-                        <td class="positive">+2.7%</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td class="positive">+0%</td>
                     </tr>
                     <tr>
-                        <td>Total Distance (km)</td>
-                        <td>4872 km</td>
-                        <td>8657 km</td>
-                        <td class="positive">+12.6%</td>
+                        <td>Weekly Distance (km/week)</td>
+                        <td>190.2</td>
+                        <td>171.6</td>
+                        <td class="positive">+10.8%</td>
                     </tr>
                     <tr>
-                        <td>Total Time (hrs)</td>
-                        <td>169 hrs</td>
-                        <td>330 hrs</td>
-                        <td class="positive">+2.6%</td>
+                        <td>Weekly Time (hrs/week)</td>
+                        <td>6.6</td>
+                        <td>6.5</td>
+                        <td class="positive">+0.6%</td>
                     </tr>
                     <tr>
                         <td>Average Power (W)</td>
-                        <td>171 W</td>
-                        <td>166 W</td>
-                        <td class="positive">+2.7%</td>
+                        <td>170W</td>
+                        <td>166W</td>
+                        <td class="positive">+2.4%</td>
                     </tr>
                     <tr>
                         <td>Average HR (bpm)</td>
-                        <td>131 bpm</td>
-                        <td>130 bpm</td>
-                        <td class="negative">+1.0%</td>
+                        <td>130</td>
+                        <td>129</td>
+                        <td class="positive">+0.8%</td>
                     </tr>
                     <tr>
                         <td>Rides per Week</td>
-                        <td>4.5</td>
+                        <td>4.6</td>
                         <td>4.4</td>
-                        <td class="positive">+3.8%</td>
+                        <td class="positive">+4.4%</td>
                     </tr>
                 </tbody>
             </table>
 
             <h3>Analysis</h3>
-            <p>Positive trends across volume and power metrics. Consistency maintained.</p>
+            <p>All key metrics trending positively. The +10.8% increase in weekly distance combined with +2.4% power improvement indicates effective progressive training without overtraining signs.</p>
         </div>
 
         <!-- 5. Training Volume & Consistency -->
@@ -543,34 +258,34 @@
             <h3>Overall Volume</h3>
             <div class="stat-grid">
                 <div class="stat-card tertiary">
-                    <div class="stat-value">4872</div>
+                    <div class="stat-value">0</div>
                     <div class="stat-label">Total Distance (km)</div>
                 </div>
                 <div class="stat-card tertiary">
-                    <div class="stat-value">169</div>
+                    <div class="stat-value">162</div>
                     <div class="stat-label">Total Hours</div>
                 </div>
                 <div class="stat-card tertiary">
-                    <div class="stat-value">42.4</div>
+                    <div class="stat-value">41.6</div>
                     <div class="stat-label">Avg Distance per Ride (km)</div>
                 </div>
                 <div class="stat-card tertiary">
-                    <div class="stat-value">1.5</div>
+                    <div class="stat-value">1.4</div>
                     <div class="stat-label">Avg Duration (hrs)</div>
                 </div>
             </div>
 
             <h3>Consistency Metrics</h3>
             <ul>
-                <li><strong>Average Frequency:</strong> 4.5 rides per week</li>
-                <li><strong>Consistency Score:</strong> 85%</li>
+                <li><strong>Average Frequency:</strong> 4.6 rides per week</li>
+                <li><strong>Consistency Score:</strong> 65%</li>
                 <li><strong>Longest Gap:</strong> 7 days</li>
-                <li><strong>Week-to-Week Variation:</strong> 28.7%</li>
+                <li><strong>Week-to-Week Variation:</strong> 15%</li>
             </ul>
 
             <div class="info-box">
                 <h4>Consistency Analysis</h4>
-                <p>Excellent 4.5 rides/week average with minimal gaps.</p>
+                <p>Exceptional consistency at 4.6 rides per week. This level of regularity is the foundation of cycling performance and demonstrates strong commitment.</p>
             </div>
         </div>
 
@@ -591,52 +306,52 @@
                 <tbody>
                     <tr>
                         <td>Z1 (Active Recovery)</td>
-                        <td>17.7</td>
-                        <td>24.6%</td>
-                        <td>Good</td>
+                        <td>58.9</td>
+                        <td>69.5%</td>
+                        <td>High recovery volume - good for adaptation</td>
                     </tr>
                     <tr>
                         <td>Z2 (Endurance)</td>
-                        <td>43.0</td>
-                        <td>59.7%</td>
-                        <td>Excellent</td>
+                        <td>21.3</td>
+                        <td>25.2%</td>
+                        <td>Need more endurance training</td>
                     </tr>
                     <tr>
                         <td>Z3 (Tempo)</td>
-                        <td>5.8</td>
-                        <td>8.1%</td>
-                        <td>Appropriate</td>
+                        <td>2.3</td>
+                        <td>2.8%</td>
+                        <td>Limited tempo work</td>
                     </tr>
                     <tr>
                         <td>Z4 (Threshold)</td>
-                        <td>3.9</td>
-                        <td>5.4%</td>
-                        <td>⚠️ Too low</td>
+                        <td>1.5</td>
+                        <td>1.8%</td>
+                        <td>Could increase for FTP gains</td>
                     </tr>
                     <tr>
                         <td>Z5 (VO2 Max)</td>
-                        <td>1.6</td>
-                        <td>2.3%</td>
-                        <td>⚠️ Too low</td>
+                        <td>0.6</td>
+                        <td>0.8%</td>
+                        <td>Limited VO2 max work</td>
                     </tr>
                 </tbody>
             </table>
 
             <h3>Polarization Index</h3>
-            <p><strong>Current Distribution:</strong> 84.3% easy (Z1-Z2) / 8.1% moderate (Z3) / 7.6% hard (Z4-Z5)</p>
+            <p><strong>Current Distribution:</strong> 94.7% easy (Z1-Z2) / 2.8% moderate (Z3) / 2.6% hard (Z4-Z5)</p>
             <p><strong>Optimal Distribution:</strong> 75-80% easy / 5-10% moderate / 15-20% hard</p>
 
             <div class="warning-box">
                 <h4>Polarization Assessment</h4>
-                <p>Good base but need 15-20% hard intensity for optimal FTP gains.</p>
+                <p>Polarization needs work. Only 3% time in hard zones (Z4-Z5) - target is 12-20%. Increase threshold and VO2 max sessions while maintaining 95% easy base.</p>
             </div>
 
             <h3>Ride Type Distribution</h3>
             <ul>
-                <li><strong>Endurance Rides:</strong> 12 (10%)</li>
-                <li><strong>Tempo Rides:</strong> 30 (26%)</li>
-                <li><strong>Threshold Rides:</strong> 0 (0%)</li>
-                <li><strong>High Intensity Rides:</strong> 0 (0%)</li>
+                <li><strong>Endurance Rides:</strong> 0 (95%)</li>
+                <li><strong>Tempo Rides:</strong> 0 (3%)</li>
+                <li><strong>Threshold Rides:</strong> 0 (2%)</li>
+                <li><strong>High Intensity Rides:</strong> 0 (1%)</li>
             </ul>
         </div>
 
@@ -646,10 +361,10 @@
 
             <h3>Power Performance</h3>
             <ul>
-                <li><strong>Average Power:</strong> 171W</li>
-                <li><strong>Average Normalized Power:</strong> 179W</li>
-                <li><strong>Peak 5-min Power:</strong> 300+W</li>
-                <li><strong>Peak 20-min Power:</strong> 255W</li>
+                <li><strong>Average Power:</strong> 170W</li>
+                <li><strong>Average Normalized Power:</strong> 180W</li>
+                <li><strong>Peak 5-min Power:</strong> 341W</li>
+                <li><strong>Peak 20-min Power:</strong> 310.0W</li>
             </ul>
 
             <h3>Top 5 Power Performances</h3>
@@ -665,53 +380,53 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Recent</td>
-                        <td>Top Performance</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>170 km</td>
+                        <td>Dec 20, 2024</td>
+                        <td>SSCC Crits #8</td>
+                        <td>236W</td>
+                        <td>263W</td>
+                        <td>16.6km</td>
                     </tr>
                     <tr>
-                        <td>N/A</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
+                        <td>Nov 15, 2024</td>
+                        <td>SSCC Crits #3</td>
+                        <td>222W</td>
+                        <td>249W</td>
+                        <td>16.0km</td>
                     </tr>
                     <tr>
-                        <td>N/A</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
+                        <td>Jan 31, 2025</td>
+                        <td>SSCC Crits 2025/1</td>
+                        <td>215W</td>
+                        <td>249W</td>
+                        <td>15.8km</td>
                     </tr>
                     <tr>
-                        <td>N/A</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
+                        <td>Sep 12, 2025</td>
+                        <td>SSCC Stanny loop</td>
+                        <td>205W</td>
+                        <td>226W</td>
+                        <td>58.3km</td>
                     </tr>
                     <tr>
-                        <td>N/A</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
+                        <td>Oct 1, 2025</td>
+                        <td>TrainingPeaks Virtual</td>
+                        <td>204W</td>
+                        <td>193W</td>
+                        <td>14.2km</td>
                     </tr>
                 </tbody>
             </table>
 
             <h3>Cardiovascular Performance</h3>
             <ul>
-                <li><strong>Average Heart Rate:</strong> 131 bpm (77% of max)</li>
-                <li><strong>Power to HR Efficiency:</strong> 1.30 W/bpm</li>
-                <li><strong>Aerobic Decoupling:</strong> <5%%</li>
+                <li><strong>Average Heart Rate:</strong> 130 bpm (73% of max)</li>
+                <li><strong>Power to HR Efficiency:</strong> 1.31 W/bpm</li>
+                <li><strong>Aerobic Decoupling:</strong> <5%</li>
             </ul>
 
             <div class="info-box">
                 <h4>Efficiency Analysis</h4>
-                <p>Good cardiovascular efficiency with room for improvement through intensity training.</p>
+                <p>Power-to-HR efficiency of 1.31 W/bpm is solid. Low aerobic decoupling suggests good aerobic fitness and efficient fat metabolism during endurance efforts.</p>
             </div>
         </div>
 
@@ -720,28 +435,28 @@
             <h2>8. What Went Well</h2>
 
             <div class="success-box">
-                <h3>1. Training Consistency</h3>
-                <p>Excellent 4.5 rides per week with minimal gaps. This is your superpower.</p>
+                <h3>1. Outstanding Training Consistency</h3>
+                <p>Averaging 4.6 rides per week over 6 months is exceptional. This consistency is the most important factor in cycling performance development.</p>
             </div>
 
             <div class="success-box">
-                <h3>2. Volume Progression</h3>
-                <p>4872km over 6 months shows strong volume.</p>
+                <h3>2. Strong Aerobic Base</h3>
+                <p>With 25% of training time in Z2 endurance zone, you've built an excellent aerobic foundation. This base supports all higher-intensity work.</p>
             </div>
 
             <div class="success-box">
-                <h3>3. Endurance Base</h3>
-                <p>Strong aerobic foundation with multiple long rides completed.</p>
+                <h3>3. Progressive Training Load</h3>
+                <p>The +10.8% increase in weekly distance combined with +2.4% power improvement shows proper progressive overload - challenging but sustainable.</p>
             </div>
 
             <div class="success-box">
-                <h3>4. Indoor/Outdoor Balance</h3>
-                <p>Good mix of 70 indoor and 45 outdoor rides.</p>
+                <h3>4. Good Training Balance</h3>
+                <p>Balanced 61%/39% indoor/outdoor split provides structured intervals plus outdoor skills and group ride experience.</p>
             </div>
 
             <div class="success-box">
-                <h3>5. Recovery Management</h3>
-                <p>At age 51, maintaining consistency without overtraining is key.</p>
+                <h3>5. Competitive Performance at Age 26</h3>
+                <p>Power-to-weight ratio of 4.43 W/kg is strong Cat 3 level, particularly impressive for a 26-year-old athlete.</p>
             </div>
         </div>
 
@@ -750,38 +465,38 @@
             <h2>9. Areas for Improvement</h2>
 
             <div class="warning-box">
-                <h3>1. Insufficient High-Intensity Training</h3>
-                <p><strong>Issue:</strong> Only 7.6% of time in Z4-Z5 zones</p>
-                <p><strong>Impact:</strong> FTP gains will plateau without threshold stimulus</p>
-                <p><strong>Solution:</strong> Add 2x weekly intensity: threshold (2x15-20min @ 229-242W) and VO2max (5x5min @ 280W)</p>
+                <h3>1. Limited High-Intensity Training</h3>
+                <p><strong>Issue:</strong> Only 2.6% of training time spent in Z4-Z5 (threshold and VO2 max zones).</p>
+                <p><strong>Impact:</strong> FTP development is limited without sufficient time at threshold and above. This is the primary limiter to performance gains.</p>
+                <p><strong>Solution:</strong> Increase Z4-Z5 work to 12-15% of total training time through dedicated threshold intervals (2x20min) and VO2 max sessions (5x5min).</p>
             </div>
 
             <div class="warning-box">
-                <h3>2. Limited VO2max Work</h3>
-                <p><strong>Issue:</strong> Only 2.3% in Z5 over 6 months</p>
-                <p><strong>Impact:</strong> Power ceiling artificially capped</p>
-                <p><strong>Solution:</strong> Weekly VO2max session: 4-6x5min @ 110-120% FTP</p>
+                <h3>2. Sweet Spot Under-Utilization</h3>
+                <p><strong>Issue:</strong> Limited time in sweet spot zone (88-93% FTP), which is highly effective for FTP development.</p>
+                <p><strong>Impact:</strong> Missing out on efficient FTP-building training that's less fatiguing than full threshold work.</p>
+                <p><strong>Solution:</strong> Add 1-2 sweet spot sessions weekly (3x15-20min intervals) during build phases.</p>
             </div>
 
             <div class="warning-box">
-                <h3>3. Lack of Periodization</h3>
-                <p><strong>Issue:</strong> No clear build/recovery cycles</p>
-                <p><strong>Impact:</strong> Suboptimal adaptation without structured recovery</p>
-                <p><strong>Solution:</strong> Implement 3:1 training blocks (3 weeks build, 1 week recovery)</p>
+                <h3>3. Power Variability</h3>
+                <p><strong>Issue:</strong> Difference between average (170W) and normalized power (180W) suggests some power inconsistency.</p>
+                <p><strong>Impact:</strong> Variable pacing is less efficient than steady-state efforts for building fitness.</p>
+                <p><strong>Solution:</strong> Practice steady-state efforts using ERG mode on trainer. Focus on even pacing in outdoor rides and races.</p>
             </div>
 
             <div class="warning-box">
-                <h3>4. Sub-Optimal Cadence</h3>
-                <p><strong>Issue:</strong> Average cadence appears low</p>
-                <p><strong>Impact:</strong> Increased muscular fatigue</p>
-                <p><strong>Solution:</strong> Cadence drills: 5x5min @ 95-100rpm in Z2</p>
+                <h3>4. Age-Specific Recovery Management</h3>
+                <p><strong>Issue:</strong> At age 26, recovery takes longer than for younger athletes.</p>
+                <p><strong>Impact:</strong> Insufficient recovery can lead to accumulated fatigue, increased injury risk, and diminished training adaptation.</p>
+                <p><strong>Solution:</strong> Mandatory 48-72 hours between hard sessions. Never schedule back-to-back intensity days. Prioritize sleep (7-9 hours) and nutrition (protein {protein_min}-{protein_max}g/day).</p>
             </div>
 
             <div class="warning-box">
-                <h3>5. Power-to-Weight Optimization</h3>
-                <p><strong>Issue:</strong> Current 3.04 W/kg can be improved</p>
-                <p><strong>Impact:</strong> Performance gains possible</p>
-                <p><strong>Solution:</strong> Focus on FTP gains to 270W first</p>
+                <h3>5. Periodization Structure</h3>
+                <p><strong>Issue:</strong> Training appears consistent month-to-month without clear build/recovery cycles.</p>
+                <p><strong>Impact:</strong> Without periodization, peak performance may be limited and overtraining risk increases.</p>
+                <p><strong>Solution:</strong> Implement 3-week build, 1-week recovery structure with defined Foundation, Build, and Peak phases targeting specific events.</p>
             </div>
         </div>
 
@@ -789,49 +504,49 @@
         <div class="section" id="target-recommendations">
             <h2>10. Target & Recommendations</h2>
 
-            <h3>Performance Target (Next 12 weeks)</h3>
+            <h3>Performance Target (Next 12 Weeks)</h3>
             <div class="highlight-box">
                 <h4>Primary Goal</h4>
-                <p><strong>FTP:</strong> 255W → 270W (+15W, +5.9%)</p>
-                <p><strong>Timeline:</strong> 12 weeks</p>
-                <p><strong>Rationale:</strong> Based on 51yr age and strong base, 15W gain is realistic with structured intensity.</p>
+                <p><strong>FTP:</strong> 310.0W → 328.0W (+18.0W, +5.8%)</p>
+                <p><strong>Timeline:</strong> 12 Weeks</p>
+                <p><strong>Rationale:</strong> Based on current consistency and aerobic base, a 18.0W increase is realistic with structured intensity training. This represents proper progressive overload.</p>
             </div>
 
             <h3>5 Key Recommendations</h3>
 
             <div class="info-box">
-                <h4>1. Add Structured Threshold Work</h4>
-                <p><strong>Action:</strong> Weekly: 2x15-20min @ 229-242W</p>
-                <p><strong>Rationale:</strong> Most effective FTP stimulus</p>
-                <p><strong>Expected Outcome:</strong> 8-12W FTP gain expected</p>
+                <h4>1. Increase Threshold and VO2 Max Training</h4>
+                <p><strong>Action:</strong> Add 1-2 dedicated high-intensity sessions per week: Threshold intervals (2x15-20min @ Z4) and VO2 max work (5x5min @ Z5).</p>
+                <p><strong>Rationale:</strong> Currently only 2.6% time in hard zones. Increasing to 12-15% will significantly boost FTP.</p>
+                <p><strong>Expected Outcome:</strong> Expected FTP gain of 18.0W over 12 weeks, improved race performance, better ability to sustain hard efforts.</p>
             </div>
 
             <div class="info-box">
-                <h4>2. Implement Weekly VO2max</h4>
-                <p><strong>Action:</strong> Weekly: 4-6x5min @ 293W</p>
-                <p><strong>Rationale:</strong> Raises power ceiling</p>
-                <p><strong>Expected Outcome:</strong> 5-8W additional FTP gain</p>
+                <h4>2. Implement Sweet Spot Training</h4>
+                <p><strong>Action:</strong> Include 2-3x15-20min sweet spot intervals (88-93% FTP) weekly during build phases.</p>
+                <p><strong>Rationale:</strong> Sweet spot is highly effective for FTP development with less fatigue than full threshold work.</p>
+                <p><strong>Expected Outcome:</strong> More efficient FTP development, improved muscular endurance, better training load management.</p>
             </div>
 
             <div class="info-box">
-                <h4>3. Maintain Endurance Base</h4>
-                <p><strong>Action:</strong> Continue 1-2 long Z2 rides weekly</p>
-                <p><strong>Rationale:</strong> Foundation supports intensity work</p>
-                <p><strong>Expected Outcome:</strong> Sustained aerobic capacity</p>
+                <h4>3. Structured Periodization</h4>
+                <p><strong>Action:</strong> Follow 12-week plan with Foundation (weeks 1-3), Build (weeks 5-7), and Peak (weeks 9-12) phases, with recovery weeks 4 and 8.</p>
+                <p><strong>Rationale:</strong> Periodization allows for progressive overload while managing fatigue and preventing overtraining.</p>
+                <p><strong>Expected Outcome:</strong> Peak performance for target events, reduced injury risk, sustainable long-term development.</p>
             </div>
 
             <div class="info-box">
-                <h4>4. Implement Periodization</h4>
-                <p><strong>Action:</strong> 3 weeks hard + 1 week recovery</p>
-                <p><strong>Rationale:</strong> Age 51 requires strategic recovery</p>
-                <p><strong>Expected Outcome:</strong> Better adaptation and sustainability</p>
+                <h4>4. Age 26+ Recovery Protocol</h4>
+                <p><strong>Action:</strong> Mandatory 48-72 hours between hard sessions. Prioritize sleep (7-9 hrs), protein ({protein_min}-{protein_max}g/day), and active recovery.</p>
+                <p><strong>Rationale:</strong> Recovery takes longer after 50. Adaptation occurs during rest, not during training.</p>
+                <p><strong>Expected Outcome:</strong> Better training adaptation, reduced injury risk, sustainable long-term performance.</p>
             </div>
 
             <div class="info-box">
-                <h4>5. Optimize Recovery</h4>
-                <p><strong>Action:</strong> 48-72hrs between intensity, 134-168g protein/day</p>
-                <p><strong>Rationale:</strong> Recovery enables hard training</p>
-                <p><strong>Expected Outcome:</strong> Consistent quality sessions</p>
+                <h4>5. Add Strength Training</h4>
+                <p><strong>Action:</strong> Include 1-2 strength sessions per week focusing on legs, core, and upper body (squats, deadlifts, planks).</p>
+                <p><strong>Rationale:</strong> After 50, muscle mass naturally declines. Strength training maintains power output and prevents injury.</p>
+                <p><strong>Expected Outcome:</strong> Maintained/improved power output, injury prevention, better bike handling and control.</p>
             </div>
         </div>
 
@@ -841,15 +556,15 @@
 
             <div class="highlight-box">
                 <h3>Plan Overview</h3>
-                <p><strong>Goal:</strong> 255W → 270W</p>
+                <p><strong>Goal:</strong> 310.0W → 328.0W</p>
                 <p><strong>Training Days:</strong> 5 days per week</p>
-                <p><strong>Age Group:</strong> 50+</p>
-                <p><strong>Recovery Requirement:</strong> 48-72 hours between hard sessions</p>
+                <p><strong>Age Group:</strong> Age 26</p>
+                <p><strong>Recovery Requirement:</strong> 36-48 hours between hard sessions, never back-to-back intensity</p>
             </div>
 
             <div class="training-plan">
                 <h3>Phase 1: Foundation (Weeks 1-3)</h3>
-                <p><strong>Focus:</strong> Build base + introduce threshold</p>
+                <p><strong>Focus:</strong> Build aerobic base with Z2 endurance work, introduce threshold intervals</p>
 
                 <div class="workout-week">
                     <h4>Weekly Structure</h4>
@@ -857,35 +572,35 @@
                         <strong>Monday:</strong> Rest
                     </div>
                     <div class="workout-day">
-                        <strong>Tuesday:</strong> Threshold: 2x15min @ 229-242W
+                        <strong>Tuesday:</strong> Threshold Intervals - 10min warm-up + 2x15-20min @ 279-294W + cool-down
                     </div>
                     <div class="workout-day">
-                        <strong>Wednesday:</strong> Endurance: 90min Z2 (153-204W)
+                        <strong>Wednesday:</strong> Endurance Ride - 60min Z2 (easy, conversational pace)
                     </div>
                     <div class="workout-day">
-                        <strong>Thursday:</strong> Tempo: 3x12min @ 216W
+                        <strong>Thursday:</strong> Tempo Intervals - 10min warm-up + 3x15min @ 248-279W + cool-down
                     </div>
                     <div class="workout-day">
-                        <strong>Friday:</strong> Rest or 30min Z1
+                        <strong>Friday:</strong> Rest
                     </div>
                     <div class="workout-day">
-                        <strong>Saturday:</strong> Long ride: 3-4hrs Z2
+                        <strong>Saturday:</strong> Long Endurance - 3-4 hours Z2 with 3x5min tempo bursts
                     </div>
                     <div class="workout-day">
-                        <strong>Sunday:</strong> Recovery: 60-90min easy
+                        <strong>Sunday:</strong> Recovery Ride - 60min Z1-Z2 very easy spinning
                     </div>
                 </div>
             </div>
 
             <div class="training-plan">
                 <h3>Week 4: Recovery</h3>
-                <p><strong>Focus:</strong> Adaptation</p>
-                <p>40% volume reduction, Z1-Z2 only</p>
+                <p><strong>Focus:</strong> Recovery and adaptation</p>
+                <p>Reduce volume 40%. Easy Z1-Z2 rides only. Allow body to adapt from foundation phase. You should feel refreshed and eager to train by end of week.</p>
             </div>
 
             <div class="training-plan">
                 <h3>Phase 2: Build (Weeks 5-7)</h3>
-                <p><strong>Focus:</strong> Add VO2max + increase threshold</p>
+                <p><strong>Focus:</strong> Develop threshold power and introduce VO2 max work</p>
 
                 <div class="workout-week">
                     <h4>Weekly Structure</h4>
@@ -893,35 +608,35 @@
                         <strong>Monday:</strong> Rest
                     </div>
                     <div class="workout-day">
-                        <strong>Tuesday:</strong> Threshold: 2x20min @ 229-242W
+                        <strong>Tuesday:</strong> Threshold Intervals - 10min warm-up + 2x20min @ 279-294W + cool-down
                     </div>
                     <div class="workout-day">
-                        <strong>Wednesday:</strong> Endurance + cadence drills
+                        <strong>Wednesday:</strong> Endurance + Tempo - 75min mostly Z2 with 2x10min @ 248-279W
                     </div>
                     <div class="workout-day">
-                        <strong>Thursday:</strong> VO2max: 5x5min @ 280W
+                        <strong>Thursday:</strong> VO2 Max - 15min warm-up + 5x5min @ 341-356W, 5min recovery + cool-down
                     </div>
                     <div class="workout-day">
                         <strong>Friday:</strong> Rest
                     </div>
                     <div class="workout-day">
-                        <strong>Saturday:</strong> Long ride: 3.5-4hrs Z2
+                        <strong>Saturday:</strong> Long Endurance - 3.5-4 hours Z2 + 3x10min tempo or 3x5min threshold
                     </div>
                     <div class="workout-day">
-                        <strong>Sunday:</strong> Sweet spot: 3x12min
+                        <strong>Sunday:</strong> Sweet Spot - 15min warm-up + 3x15min @ 272-288W + cool-down
                     </div>
                 </div>
             </div>
 
             <div class="training-plan">
                 <h3>Week 8: Recovery</h3>
-                <p><strong>Focus:</strong> Mid-cycle recovery</p>
-                <p>40% volume, prepare for peak</p>
+                <p><strong>Focus:</strong> Recovery and preparation for peak phase</p>
+                <p>Second recovery week. Reduce volume and intensity. Prepare body for final peak phase. Consolidate fitness gains.</p>
             </div>
 
             <div class="training-plan">
                 <h3>Phase 3: Peak (Weeks 9-12)</h3>
-                <p><strong>Focus:</strong> Race prep + high intensity</p>
+                <p><strong>Focus:</strong> Race simulation and peak performance</p>
 
                 <div class="workout-week">
                     <h4>Weekly Structure</h4>
@@ -929,22 +644,22 @@
                         <strong>Monday:</strong> Rest
                     </div>
                     <div class="workout-day">
-                        <strong>Tuesday:</strong> Threshold: 2x20min @ 242W
+                        <strong>Tuesday:</strong> High-End Threshold - 10min warm-up + 2x20min @ 311-328.0W + cool-down
                     </div>
                     <div class="workout-day">
-                        <strong>Wednesday:</strong> Endurance + bursts
+                        <strong>Wednesday:</strong> Endurance + Bursts - 90min Z2 with 5x3min @ threshold (311-328.0W)
                     </div>
                     <div class="workout-day">
-                        <strong>Thursday:</strong> VO2max: 6x5min @ 280W
+                        <strong>Thursday:</strong> High Intensity VO2 - 15min warm-up + 6x5min @ 344-360W, 4min recovery + cool-down
                     </div>
                     <div class="workout-day">
-                        <strong>Friday:</strong> Rest
+                        <strong>Friday:</strong> Rest - Prepare for weekend
                     </div>
                     <div class="workout-day">
-                        <strong>Saturday:</strong> Race simulation
+                        <strong>Saturday:</strong> Race Simulation - 2.5 hours with race-like efforts: 3x15min @ threshold
                     </div>
                     <div class="workout-day">
-                        <strong>Sunday:</strong> Active recovery
+                        <strong>Sunday:</strong> Active Recovery - 90min Z1-Z2 very easy
                     </div>
                 </div>
             </div>
@@ -980,12 +695,12 @@
                 <p><strong>Action:</strong> Take 2-3 days complete rest, then reassess. If symptoms persist beyond 5 days, consult with coach or physician.</p>
             </div>
 
-            <h3>Age 51+ Specific Considerations</h3>
+            <h3>Age 26+ Specific Considerations</h3>
             <div class="highlight-box">
                 <ul>
-                    <li><strong>Recovery Time:</strong> 48-72 hours between intensity sessions</li>
+                    <li><strong>Recovery Time:</strong> 36-48 hours between intensity sessions</li>
                     <li><strong>Sleep:</strong> 7-9 hours non-negotiable</li>
-                    <li><strong>Nutrition:</strong> Protein 134-168g/day (1.6-2.0g/kg)</li>
+                    <li><strong>Nutrition:</strong> Protein 112-140g/day (1.6-2.0g/kg)</li>
                     <li><strong>Hydration:</strong> Monitor urine color (pale yellow = well hydrated)</li>
                     <li><strong>Flexibility:</strong> Add 10-15 min stretching post-ride</li>
                     <li><strong>Consistency Over Intensity:</strong> Missing workouts worse than slightly lower power</li>
@@ -998,16 +713,977 @@
             <p><strong>Week 12:</strong> Final FTP test. Celebrate gains and plan next training block.</p>
         </div>
 
+        <!-- 13. Training Execution Guidelines -->
+        <div class="section" id="execution">
+            <h2>13. Training Execution Guidelines</h2>
+
+            <h3>How to Execute Intervals</h3>
+
+            <h4>Threshold Intervals (Z4)</h4>
+            <div class="info-box">
+                <p>Should feel 'comfortably hard' - you can maintain power but conversation is difficult. Focus on steady breathing rhythm. Last 5 minutes should be challenging but sustainable. If you can't complete the full interval, reduce power by 5-10W.</p>
+            </div>
+
+            <h4>VO2 Max Intervals (Z5)</h4>
+            <div class="info-box">
+                <p>Very hard effort - breathing is labored. Focus on maintaining power for the full 5 minutes. Recovery between intervals is crucial - spin very easy. It's normal for power to drop slightly in later intervals.</p>
+            </div>
+
+            <h4>Sweet Spot</h4>
+            <div class="info-box">
+                <p>Should feel moderately hard but sustainable. You should be able to hold the power for 15-20 minutes consistently. Great 'bang for buck' training - builds FTP without excessive fatigue.</p>
+            </div>
+
+            <h4>Tempo (Z3)</h4>
+            <div class="info-box">
+                <p>Moderately hard but conversational with effort. Should feel like a 'solid pace' but not exhausting. Good for race preparation and long-ride preparation.</p>
+            </div>
+
+            <h3>Indoor vs Outdoor Execution</h3>
+
+            <h4>Best Done Indoors</h4>
+            <ul>
+                <li>Threshold intervals (2x20)</li>
+                <li>VO2 max intervals</li>
+                <li>Sweet spot intervals</li>
+                <li>Any session requiring precise power control</li>
+            </ul>
+
+            <h4>Can Be Done Outdoors</h4>
+            <ul>
+                <li>Long endurance rides</li>
+                <li>Recovery rides</li>
+                <li>Tempo work on suitable roads</li>
+                <li>Race simulation (if you have good roads/routes)</li>
+            </ul>
+
+            <h4>Outdoor Execution Tips</h4>
+            <div class="highlight-box">
+                <ul>
+                    <li>Find consistent gradients for threshold work (3-5% climbs ideal)</li>
+                    <li>Use relatively flat routes for tempo/endurance</li>
+                    <li>Avoid heavily trafficked roads for hard intervals</li>
+                    <li>Use perceived exertion + heart rate if power is variable</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 14. Nutrition Recommendations -->
+        <div class="section" id="nutrition">
+            <h2>14. Nutrition Recommendations</h2>
+
+            <h3>Daily Nutrition for 70.0kg Cyclist</h3>
+
+            <div class="stat-grid">
+                <div class="stat-card tertiary">
+                    <div class="stat-value">350-490g</div>
+                    <div class="stat-label">Carbs (g) - Training Days</div>
+                </div>
+                <div class="stat-card tertiary">
+                    <div class="stat-value">210-350g</div>
+                    <div class="stat-label">Carbs (g) - Rest Days</div>
+                </div>
+                <div class="stat-card tertiary">
+                    <div class="stat-value">112-140g</div>
+                    <div class="stat-label">Protein (g/day)</div>
+                </div>
+                <div class="stat-card tertiary">
+                    <div class="stat-value">70g</div>
+                    <div class="stat-label">Fats (g/day)</div>
+                </div>
+            </div>
+
+            <h3>Macronutrient Breakdown</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nutrient</th>
+                        <th>Daily Target</th>
+                        <th>Food Sources</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Carbohydrates</td>
+                        <td>350-490g (training) / 210-350g (rest)</td>
+                        <td>Whole grains, fruits, vegetables, rice, pasta, potatoes</td>
+                        <td>Primary fuel for training</td>
+                    </tr>
+                    <tr>
+                        <td>Protein</td>
+                        <td>112-140g</td>
+                        <td>Lean meats, fish, eggs, dairy, legumes</td>
+                        <td>Recovery and muscle maintenance</td>
+                    </tr>
+                    <tr>
+                        <td>Fats</td>
+                        <td>70g</td>
+                        <td>Nuts, olive oil, avocado, fatty fish</td>
+                        <td>Hormone health, inflammation control</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Workout Nutrition</h3>
+
+            <h4>Before Training (1-2 hours before)</h4>
+            <ul>
+                <li><strong>Easy/Recovery Rides:</strong> Normal meal, no special fueling needed</li>
+                <li><strong>Hard Intervals:</strong> 50-100g carbs (oatmeal, banana, toast)</li>
+                <li><strong>Long Rides:</strong> 100-150g carbs + protein</li>
+            </ul>
+
+            <h4>During Training</h4>
+            <ul>
+                <li><strong>&lt;60 minutes:</strong> Water only</li>
+                <li><strong>60-90 minutes:</strong> 30-60g carbs per hour (sports drink, gels)</li>
+                <li><strong>&gt;90 minutes:</strong> 60-90g carbs per hour + electrolytes</li>
+                <li><strong>&gt;3 hours:</strong> Add protein (4:1 carb:protein ratio)</li>
+            </ul>
+
+            <h4>After Training (within 30-60 minutes)</h4>
+            <div class="success-box">
+                <p><strong>All rides:</strong> Protein + carbs</p>
+                <p><strong>Target:</strong> 20-30g protein + 60-100g carbs</p>
+                <p><strong>Examples:</strong> Protein shake with banana, chicken with rice, recovery drink</p>
+            </div>
+
+            <h3>Hydration</h3>
+            <ul>
+                <li><strong>Daily Baseline:</strong> 2-3 liters water minimum</li>
+                <li><strong>During Training:</strong> 500-750ml per hour</li>
+                <li><strong>Add electrolytes for:</strong> &gt;90min rides</li>
+                <li><strong>Hot weather:</strong> increase to 750-1000ml/hour</li>
+            </ul>
+        </div>
+
+        <!-- 15. Supplementation Guidance -->
+        <div class="section" id="supplementation">
+            <h2>15. Supplementation Guidance</h2>
+
+            <h3>Recommended Supplements</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Supplement</th>
+                        <th>Dose</th>
+                        <th>Purpose</th>
+                        <th>Priority</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Vitamin D3</strong></td>
+                        <td>2000-4000 IU daily</td>
+                        <td>Bone health, immune function, testosterone production</td>
+                        <td>HIGH</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Omega-3 (Fish Oil)</strong></td>
+                        <td>2-3g EPA+DHA daily</td>
+                        <td>Anti-inflammatory, cardiovascular health, recovery</td>
+                        <td>HIGH</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Creatine Monohydrate</strong></td>
+                        <td>5g daily</td>
+                        <td>Power output, muscle mass, cognitive function</td>
+                        <td>HIGH</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Protein Powder</strong></td>
+                        <td>As needed</td>
+                        <td>Convenient protein source post-workout</td>
+                        <td>MEDIUM</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Magnesium</strong></td>
+                        <td>300-400mg before bed</td>
+                        <td>Recovery, sleep quality, muscle function</td>
+                        <td>MEDIUM</td>
+                    </tr>
+                    <tr>
+                        <td><strong>B-Complex Vitamin</strong></td>
+                        <td>Per label</td>
+                        <td>Energy metabolism</td>
+                        <td>MEDIUM</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Performance Supplements (Optional)</h3>
+
+            <h4>Caffeine</h4>
+            <div class="info-box">
+                <p><strong>Dose:</strong> 3-6mg per kg body weight = 210-420mg</p>
+                <p><strong>Timing:</strong> 30-60 minutes before hard efforts</p>
+                <p><strong>Benefits:</strong> Power output, endurance, mental focus</p>
+                <p><strong>Note:</strong> Regular users may need higher doses</p>
+            </div>
+
+            <h4>Beta-Alanine</h4>
+            <div class="info-box">
+                <p><strong>Dose:</strong> 3-5g daily (split into 2 doses)</p>
+                <p><strong>Purpose:</strong> Buffer lactic acid, improve high-intensity performance</p>
+                <p><strong>Note:</strong> Takes 4-6 weeks to show effects</p>
+            </div>
+
+            <h4>Sodium Bicarbonate (Baking Soda)</h4>
+            <div class="warning-box">
+                <p><strong>Dose:</strong> 0.3g per kg = ~21g</p>
+                <p><strong>Timing:</strong> 60-90 minutes before hard efforts</p>
+                <p><strong>Purpose:</strong> Buffer lactic acid</p>
+                <p><strong>Warning:</strong> Can cause GI distress - test in training first</p>
+            </div>
+        </div>
+
+        <!-- 16. Recovery Strategies -->
+        <div class="section" id="recovery">
+            <h2>16. Recovery Strategies</h2>
+
+            <h3>Recovery Considerations for Age 26</h3>
+            <div class="highlight-box">
+                <p>At 26, recovery is important but your body still adapts quickly. Focus on consistent sleep and nutrition to maximize training gains.</p>
+            </div>
+
+            <h3>Recovery Hierarchy (Most to Least Important)</h3>
+
+            <div class="success-box">
+                <h4>1. Sleep (Priority #1)</h4>
+                <ul>
+                    <li><strong>Target:</strong> 7-9 hours per night</li>
+                    <li><strong>Quality matters:</strong> dark room, cool temperature, consistent schedule</li>
+                    <li><strong>Naps:</strong> 20-30 minute power naps can enhance recovery</li>
+                    <li>Sleep is when growth hormone is released - critical for adaptation</li>
+                </ul>
+            </div>
+
+            <div class="success-box">
+                <h4>2. Nutrition</h4>
+                <ul>
+                    <li>Post-workout meal within 60 minutes</li>
+                    <li>Adequate daily protein (112-140g)</li>
+                    <li>Sufficient carbs to replenish glycogen</li>
+                    <li>Anti-inflammatory foods: berries, fatty fish, leafy greens</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h4>3. Stress Management</h4>
+                <ul>
+                    <li>Training is stress - life stress impacts recovery</li>
+                    <li>Practice: meditation, deep breathing, gentle yoga</li>
+                    <li>Work-life balance affects training performance</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h4>4. Active Recovery</h4>
+                <ul>
+                    <li>Easy spinning (Z1) promotes blood flow and recovery</li>
+                    <li>Better than complete rest for most athletes</li>
+                    <li>30-60 minutes very easy</li>
+                </ul>
+            </div>
+
+            <h3>Additional Recovery Modalities</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Modality</th>
+                        <th>Frequency</th>
+                        <th>Benefits</th>
+                        <th>Priority</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Foam Rolling / Self-Massage</td>
+                        <td>10-15 min daily</td>
+                        <td>Improves tissue quality, reduces soreness</td>
+                        <td>MEDIUM</td>
+                    </tr>
+                    <tr>
+                        <td>Stretching / Mobility</td>
+                        <td>15-20 min post-ride</td>
+                        <td>Counteracts cycling tightness</td>
+                        <td>MEDIUM</td>
+                    </tr>
+                    <tr>
+                        <td>Sports Massage</td>
+                        <td>1-2x per month</td>
+                        <td>Enhances recovery, finds problem areas</td>
+                        <td>MEDIUM</td>
+                    </tr>
+                    <tr>
+                        <td>Compression Garments</td>
+                        <td>2-4 hours post-hard training</td>
+                        <td>May reduce inflammation</td>
+                        <td>LOW</td>
+                    </tr>
+                    <tr>
+                        <td>Ice Baths / Cold Therapy</td>
+                        <td>Sparingly</td>
+                        <td>Acute recovery (may blunt adaptation)</td>
+                        <td>LOW</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 17. Injury Prevention -->
+        <div class="section" id="injury-prevention">
+            <h2>17. Injury Prevention</h2>
+
+            <h3>Common Cycling Injuries and Prevention</h3>
+
+            <div class="warning-box">
+                <h4>1. Knee Pain</h4>
+                <p><strong>Causes:</strong> Improper bike fit, too much volume too soon, weak glutes</p>
+                <p><strong>Prevention:</strong></p>
+                <ul>
+                    <li>Professional bike fit</li>
+                    <li>Gradual volume increases</li>
+                    <li>Strength training (squats, lunges)</li>
+                    <li>Proper cleat position</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h4>2. Lower Back Pain</h4>
+                <p><strong>Causes:</strong> Core weakness, poor bike fit, inflexibility</p>
+                <p><strong>Prevention:</strong></p>
+                <ul>
+                    <li>Core strengthening exercises</li>
+                    <li>Hip flexor stretching</li>
+                    <li>Proper saddle height and handlebar position</li>
+                    <li>Break up long rides with standing/stretching</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h4>3. Neck/Shoulder Pain</h4>
+                <p><strong>Causes:</strong> Aggressive position, tension, weak upper body</p>
+                <p><strong>Prevention:</strong></p>
+                <ul>
+                    <li>Upper body strength work</li>
+                    <li>Handlebar height adjustment</li>
+                    <li>Regular position changes on bike</li>
+                    <li>Shoulder stretches</li>
+                </ul>
+            </div>
+
+            <h3>Strength Training for Injury Prevention</h3>
+            <p><strong>Recommended:</strong> 1-2 sessions per week</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Exercise Category</th>
+                        <th>Exercises</th>
+                        <th>Sets x Reps</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Lower Body</strong></td>
+                        <td>
+                            <ul>
+                                <li>Squats (bodyweight, goblet, barbell)</li>
+                                <li>Single-leg deadlifts</li>
+                                <li>Bulgarian split squats</li>
+                                <li>Calf raises</li>
+                            </ul>
+                        </td>
+                        <td>3x8-12</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Core</strong></td>
+                        <td>
+                            <ul>
+                                <li>Planks</li>
+                                <li>Side planks</li>
+                                <li>Dead bugs</li>
+                                <li>Bird dogs</li>
+                            </ul>
+                        </td>
+                        <td>3x30-60s or 3x10</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Upper Body</strong></td>
+                        <td>
+                            <ul>
+                                <li>Push-ups</li>
+                                <li>Rows (bodyweight or dumbbell)</li>
+                                <li>Shoulder press</li>
+                                <li>Face pulls</li>
+                            </ul>
+                        </td>
+                        <td>3x10-15</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Timing</h4>
+            <ul>
+                <li>Do strength work after easy rides or on rest days</li>
+                <li>Never before hard intervals</li>
+                <li>Off-season: 2x per week</li>
+                <li>In-season: 1x per week maintenance</li>
+            </ul>
+        </div>
+
+        <!-- 18. Long-term Development Strategy -->
+        <div class="section" id="long-term">
+            <h2>18. Long-term Development Strategy</h2>
+
+            <h3>FTP Progression Goals</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Timeline</th>
+                        <th>Target FTP</th>
+                        <th>Target W/kg</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Current</strong></td>
+                        <td>310.0W</td>
+                        <td>4.43</td>
+                        <td>Baseline</td>
+                    </tr>
+                    <tr>
+                        <td><strong>12-Week Target</strong></td>
+                        <td>328.0W</td>
+                        <td>4.69</td>
+                        <td>Realistic with this plan</td>
+                    </tr>
+                    <tr>
+                        <td><strong>6-Month Target</strong></td>
+                        <td>334W</td>
+                        <td>4.78</td>
+                        <td>With continued structured training</td>
+                    </tr>
+                    <tr>
+                        <td><strong>12-Month Target</strong></td>
+                        <td>347W</td>
+                        <td>4.96</td>
+                        <td>Aggressive but achievable</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Pathway to Category 2 Performance</h3>
+            <div class="highlight-box">
+                <p>To reach Cat 2 level (3.5 W/kg), you would need:</p>
+                <ul>
+                    <li><strong>Option 1:</strong> Increase FTP to 245W (at current weight of 70.0kg)</li>
+                    <li><strong>Option 2:</strong> Reduce weight to 88.6kg (maintaining 341W FTP)</li>
+                    <li><strong>Option 3:</strong> Combination: 347W FTP + 67.5kg weight</li>
+                </ul>
+                <p><strong>Most Realistic Approach:</strong> Modest weight loss (2-3kg) + FTP improvement (25-30W) over 12-18 months</p>
+            </div>
+
+            <h3>Annual Periodization Plan</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Period</th>
+                        <th>Volume</th>
+                        <th>Focus</th>
+                        <th>Rides</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>November-January (Off-Season)</strong></td>
+                        <td>Low-Moderate</td>
+                        <td>Base building, strength training, recovery</td>
+                        <td>Mostly Z2, social rides, cross-training</td>
+                    </tr>
+                    <tr>
+                        <td><strong>February-April (Build)</strong></td>
+                        <td>Moderate-High</td>
+                        <td>FTP development, threshold work, sweet spot</td>
+                        <td>Structured intervals, increasing volume</td>
+                    </tr>
+                    <tr>
+                        <td><strong>May-August (Peak)</strong></td>
+                        <td>High</td>
+                        <td>Race-specific fitness, events, performance</td>
+                        <td>Race simulation, group rides, events</td>
+                    </tr>
+                    <tr>
+                        <td><strong>September-October (Transition)</strong></td>
+                        <td>Moderate</td>
+                        <td>Maintenance, fun riding, skill development</td>
+                        <td>Varied, less structured, enjoy cycling</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 19. Equipment & Technology -->
+        <div class="section" id="equipment">
+            <h2>19. Equipment & Technology Recommendations</h2>
+
+            <h3>Current Setup Assessment</h3>
+            <p>Based on data, you use:</p>
+            <ul>
+                <li>✓ Power meter (essential - already owned)</li>
+                <li>✓ Indoor trainer (TrainerRoad, Zwift, TrainingPeaks Virtual)</li>
+                <li>✓ Heart rate monitor</li>
+                <li>✓ Strava for activity tracking</li>
+            </ul>
+
+            <h3>Recommended Additions</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Priority</th>
+                        <th>Cost (AUD)</th>
+                        <th>Benefit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Professional Bike Fit</strong></td>
+                        <td>HIGH</td>
+                        <td>$200-400</td>
+                        <td>Prevents injury, improves power transfer</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pedal-Based Power Meter</strong></td>
+                        <td>MEDIUM</td>
+                        <td>$600-1200</td>
+                        <td>Left/right balance data, identifies imbalances</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Training Platform Subscription</strong></td>
+                        <td>HIGH</td>
+                        <td>~$20/month</td>
+                        <td>Structured workouts, excellent value</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Foam Roller</strong></td>
+                        <td>MEDIUM</td>
+                        <td>$30-50</td>
+                        <td>Daily recovery and tissue maintenance</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Massage Gun</strong></td>
+                        <td>MEDIUM</td>
+                        <td>$200-400</td>
+                        <td>Enhanced recovery, muscle release</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Aero Helmet</strong></td>
+                        <td>LOW</td>
+                        <td>$300-500</td>
+                        <td>Save 20-30 seconds per 40km</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Aero Wheels</strong></td>
+                        <td>LOW</td>
+                        <td>$1500-3000</td>
+                        <td>Save 30-60 seconds per 40km</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 20. Mental Performance -->
+        <div class="section" id="mental">
+            <h2>20. Mental Performance</h2>
+
+            <h3>Goal Setting</h3>
+
+            <div class="success-box">
+                <h4>SMART Goals for Next 12 Weeks</h4>
+                <ul>
+                    <li><strong>Specific:</strong> Increase FTP from 310.0W to 328.0W</li>
+                    <li><strong>Measurable:</strong> FTP test at week 0 and week 12</li>
+                    <li><strong>Achievable:</strong> 5.8% improvement is realistic</li>
+                    <li><strong>Relevant:</strong> Aligns with competitive cycling goals</li>
+                    <li><strong>Time-bound:</strong> 12-week plan with clear timeline</li>
+                </ul>
+            </div>
+
+            <h3>Process Goals (Focus on these weekly)</h3>
+            <ul>
+                <li>Complete 95% of scheduled workouts</li>
+                <li>Hit power targets within ±5W on intervals</li>
+                <li>Get 7+ hours sleep per night</li>
+                <li>Consume post-workout nutrition within 60 minutes</li>
+                <li>Track resting heart rate daily</li>
+            </ul>
+
+            <h3>Dealing with Setbacks</h3>
+
+            <h4>Missing Workouts</h4>
+            <ul>
+                <li><strong>1 missed workout:</strong> No makeup needed, continue plan</li>
+                <li><strong>2+ missed workouts in a week:</strong> Repeat that week</li>
+                <li><strong>Week+ missed:</strong> Restart from recovery week, adjust timeline</li>
+            </ul>
+
+            <h4>Illness</h4>
+            <ul>
+                <li><strong>Minor cold (above neck):</strong> Easy riding OK</li>
+                <li><strong>Fever, chest cold, body aches:</strong> Complete rest</li>
+                <li><strong>Return:</strong> Start with 50% volume, gradually increase</li>
+            </ul>
+
+            <h4>Motivation Dips</h4>
+            <div class="info-box">
+                <ul>
+                    <li>Normal to have low days</li>
+                    <li>Focus on process, not outcomes</li>
+                    <li>Join group rides for social motivation</li>
+                    <li>Remember why you started cycling</li>
+                </ul>
+            </div>
+
+            <h3>Race Day Psychology</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Phase</th>
+                        <th>Mental Strategy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Pre-Race</strong></td>
+                        <td>
+                            <ul>
+                                <li>Trust your training - you've done the work</li>
+                                <li>Focus on controllables: nutrition, warm-up, pacing</li>
+                                <li>Visualize executing your race plan</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>During Race</strong></td>
+                        <td>
+                            <ul>
+                                <li>Start conservatively - always easier to speed up</li>
+                                <li>Monitor power, don't get drawn into early surges</li>
+                                <li>Stay present - focus on current effort, not outcome</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Post-Race</strong></td>
+                        <td>
+                            <ul>
+                                <li>Reflect on what went well</li>
+                                <li>Identify 1-2 areas for improvement</li>
+                                <li>Celebrate effort regardless of result</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 21. Event Recommendations -->
+        <div class="section" id="events">
+            <h2>21. Event Recommendations</h2>
+
+            <h3>Suitable Events for Your Profile</h3>
+            <p>Based on current fitness (310.0W FTP, strong endurance), you are well-suited for:</p>
+
+            <div class="success-box">
+                <h4>1. Criterium Racing</h4>
+                <ul>
+                    <li>Already participating in SSCC crits</li>
+                    <li>Power profile shows strong race fitness</li>
+                    <li>Continue developing: sprint power, cornering, tactics</li>
+                </ul>
+            </div>
+
+            <div class="success-box">
+                <h4>2. Sportives / Gran Fondos</h4>
+                <ul>
+                    <li>Excellent endurance capability</li>
+                    <li>Strong climbing ability</li>
+                    <li><strong>Target events:</strong> Amy's Gran Fondo, Bowral Classic, L'Étape Australia, Peak Challenge</li>
+                </ul>
+            </div>
+
+            <div class="success-box">
+                <h4>3. Time Trials</h4>
+                <ul>
+                    <li>Good for masters cyclists</li>
+                    <li>Rewards power, pacing, discipline</li>
+                    <li>Less chaotic than crits</li>
+                    <li><strong>Consider:</strong> SSCC TT series</li>
+                </ul>
+            </div>
+
+            <div class="success-box">
+                <h4>4. Hill Climbs</h4>
+                <ul>
+                    <li>Power-to-weight of 4.43 W/kg is competitive</li>
+                    <li>With weight loss potential, could excel</li>
+                    <li><strong>Events:</strong> Nasho Hill Climb, Mt. Keira</li>
+                </ul>
+            </div>
+
+            <div class="success-box">
+                <h4>5. Masters Racing</h4>
+                <ul>
+                    <li>Age 50+ category</li>
+                    <li>Competitive field</li>
+                    <li>Strategic racing rewards experience</li>
+                </ul>
+            </div>
+
+            <h3>2025-2026 Event Calendar Suggestion</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Period</th>
+                        <th>Events</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>January-February</strong></td>
+                        <td>Base building, no priority events</td>
+                    </tr>
+                    <tr>
+                        <td><strong>March-April</strong></td>
+                        <td>Early season crits, local sportives</td>
+                    </tr>
+                    <tr>
+                        <td><strong>May</strong></td>
+                        <td>Major sportive (Mudgee Classics, Amy's Gran Fondo)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>June-July</strong></td>
+                        <td>Peak racing - SSCC crit series</td>
+                    </tr>
+                    <tr>
+                        <td><strong>August</strong></td>
+                        <td>Gran fondo or time trial</td>
+                    </tr>
+                    <tr>
+                        <td><strong>September-October</strong></td>
+                        <td>End of season racing, enjoy rides</td>
+                    </tr>
+                    <tr>
+                        <td><strong>November</strong></td>
+                        <td>Recovery, off-season begins</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 22. Coaching Recommendations Summary -->
+        <div class="section" id="summary">
+            <h2>22. Coaching Recommendations Summary</h2>
+
+            <h3>Immediate Actions (Next 4 Weeks)</h3>
+            <div class="highlight-box">
+                <ol>
+                    <li><strong>Begin 12-week training plan</strong> as outlined above</li>
+                    <li><strong>Track resting heart rate</strong> every morning</li>
+                    <li><strong>Schedule professional bike fit</strong> if not done in last 12 months</li>
+                    <li><strong>Add strength training</strong> - 1 session per week minimum</li>
+                    <li><strong>Optimize nutrition</strong> - ensure 112-140g protein daily</li>
+                    <li><strong>Prioritize sleep</strong> - target 7-9 hours per night</li>
+                </ol>
+            </div>
+
+            <h3>3-Month Goals</h3>
+            <div class="success-box">
+                <ol>
+                    <li><strong>FTP Test:</strong> Achieve 322-328.0W (current 310.0W)</li>
+                    <li><strong>Training Consistency:</strong> Complete 90%+ of scheduled workouts</li>
+                    <li><strong>Body Composition:</strong> Consider 1-2kg weight loss if desired</li>
+                    <li><strong>Race Performance:</strong> Improve criterium placing or power output</li>
+                    <li><strong>Recovery Management:</strong> No injury or overtraining</li>
+                </ol>
+            </div>
+
+            <h3>12-Month Vision</h3>
+            <div class="info-box">
+                <ol>
+                    <li><strong>FTP:</strong> 334-347W (4.78-4.96 W/kg)</li>
+                    <li><strong>Body Weight:</strong> 68.0-70.0kg (optimal for performance)</li>
+                    <li><strong>Event Success:</strong> Podium in age group at target sportive</li>
+                    <li><strong>Consistency:</strong> Maintain 4-5 rides per week year-round</li>
+                    <li><strong>Enjoyment:</strong> Sustain love of cycling, avoid burnout</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- 23. Key Performance Indicators -->
+        <div class="section" id="kpis">
+            <h2>23. Key Performance Indicators (KPIs)</h2>
+
+            <p>Track these metrics monthly:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>KPI</th>
+                        <th>Current</th>
+                        <th>3-Month Target</th>
+                        <th>12-Month Target</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>FTP (watts)</strong></td>
+                        <td>310.0</td>
+                        <td>328.0</td>
+                        <td>347</td>
+                    </tr>
+                    <tr>
+                        <td><strong>W/kg</strong></td>
+                        <td>4.43</td>
+                        <td>4.69</td>
+                        <td>4.96</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Avg Weekly Hours</strong></td>
+                        <td>6.2</td>
+                        <td>6.9</td>
+                        <td>7.2</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Monthly Distance (km)</strong></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Body Weight (kg)</strong></td>
+                        <td>70.0</td>
+                        <td>69.0</td>
+                        <td>68.0</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Resting HR (bpm)</strong></td>
+                        <td>Monitor</td>
+                        <td>&lt;60</td>
+                        <td>&lt;58</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Z4-Z5 Time %</strong></td>
+                        <td>2.6%</td>
+                        <td>12%</td>
+                        <td>15%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 24. Final Thoughts -->
+        <div class="section" id="final-thoughts">
+            <h2>24. Final Thoughts</h2>
+
+            <div class="success-box">
+                <h3>Your Current Performance is Excellent</h3>
+                <p>Athlete Name, your current performance and training habits are exceptional. The consistency you've shown - 4.6 rides per week over 6 months, progressive volume increases, and balanced training distribution - demonstrates the discipline of a serious cyclist.</p>
+            </div>
+
+            <h3>Your Key Strengths</h3>
+            <ul>
+                <li>Outstanding training consistency</li>
+                <li>Solid power-to-weight ratio for your age</li>
+                <li>Strong endurance capacity</li>
+                <li>Competitive mindset</li>
+                <li>Smart training progression</li>
+            </ul>
+
+            <h3>Areas for Improvement Are Specific and Actionable</h3>
+            <ul>
+                <li>Increase threshold/VO2 max training volume</li>
+                <li>Add strength training for longevity</li>
+                <li>Optimize nutrition and recovery</li>
+                <li>Refine periodization for peak performance</li>
+            </ul>
+
+            <div class="highlight-box">
+                <h3>Most Importantly</h3>
+                <p>At 26, you are performing at a level that many younger cyclists aspire to. With the structured 12-week plan provided, you have the potential to reach 328.0W FTP and move closer to Category 2 performance levels.</p>
+
+                <p><strong>The key to long-term cycling success at your age is balancing progression with recovery.</strong> Train hard when planned, but prioritize sleep, nutrition, and recovery to sustain this performance for years to come.</p>
+            </div>
+        </div>
+
+        <!-- 25. Resources & Appendix -->
+        <div class="section" id="appendix">
+            <h2>25. Resources & Appendix</h2>
+
+            <h3>Recommended Reading</h3>
+            <ul>
+                <li><em>The Time-Crunched Cyclist</em> by Chris Carmichael</li>
+                <li><em>Training and Racing with a Power Meter</em> by Hunter Allen</li>
+                <li><em>The Cyclist's Training Bible</em> by Joe Friel</li>
+                <li><em>Fast After 50</em> by Joe Friel (age-specific training)</li>
+            </ul>
+
+            <h3>Useful Websites</h3>
+            <ul>
+                <li><strong>TrainingPeaks.com</strong> - Training planning and analysis</li>
+                <li><strong>TrainerRoad.com</strong> - Structured indoor workouts</li>
+                <li><strong>Zwift.com</strong> - Virtual training platform</li>
+                <li><strong>CyclingTips.com</strong> - News, training, equipment reviews</li>
+                <li><strong>Strava.com</strong> - Activity tracking and social motivation</li>
+            </ul>
+
+            <h3>Sydney Cycling Resources</h3>
+            <ul>
+                <li><strong>SSCC (Sydney Southern Cross Cycling)</strong> - Current club</li>
+                <li><strong>Cycling NSW</strong> - Racing license and events</li>
+                <li><strong>BikeExchange.com.au</strong> - Equipment</li>
+                <li><strong>Sydney Olympic Park</strong> - Safe training venue</li>
+                <li><strong>Centennial Park</strong> - Group rides and training</li>
+            </ul>
+
+            <h3>Apps & Tools</h3>
+            <ul>
+                <li><strong>TrainingPeaks</strong> - Workout planning and analysis</li>
+                <li><strong>Intervals.icu</strong> - Free power analysis tool</li>
+                <li><strong>Golden Cheetah</strong> - Free desktop analysis software</li>
+                <li><strong>MyFitnessPal</strong> - Nutrition tracking</li>
+                <li><strong>Strava</strong> - Activity tracking and segments</li>
+            </ul>
+
+            <div class="info-box">
+                <h4>Next Review</h4>
+                <p><strong>Date:</strong> January 2026</p>
+                <p><strong>Purpose:</strong> Post 12-week plan assessment, FTP retest, adjust zones and training plan</p>
+            </div>
+
+            <div class="warning-box">
+                <h4>Medical Disclaimer</h4>
+                <p><em>This analysis is based on your Strava data, profile information, and current fitness levels. Individual results may vary. Consult with a medical professional before beginning any new training program, especially if you have pre-existing health conditions.</em></p>
+            </div>
+        </div>
+
         <!-- Footer -->
         <footer>
             <div style="margin-bottom: 20px;">
-                <a href="quick_summary.html" style="color: #4a9eff; text-decoration: none; margin: 0 15px;">← Back to Summary</a>
-                <a href="performance_dashboard.html" style="color: #4a9eff; text-decoration: none; margin: 0 15px;">View Dashboard →</a>
+                <a href="index.html" style="color: #696cff; text-decoration: none; margin: 0 15px; font-weight: 500;"><i class='bx bx-arrow-back'></i> Back to Summary</a>
+                <a href="performance_dashboard.html" style="color: #696cff; text-decoration: none; margin: 0 15px; font-weight: 500;">View Dashboard <i class='bx bx-arrow-to-right'></i></a>
             </div>
             <p><strong>Claude Code Performance Analyzer</strong></p>
-            <p>Report Generated: October 16, 2025</p>
+            <p>Report Generated: October 20, 2025</p>
             <p>Analysis Period: April 2025 - October 2025</p>
-            <p style="margin-top: 20px; font-size: 0.9em;">Next Review: January 14, 2026</p>
+            <p style="margin-top: 20px; font-size: 0.9em;">Next Review: January 2026</p>
         </footer>
     </div>
 </body>

@@ -3,301 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Athlete - Performance Summary</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e1e2e 0%, #2d2d44 100%);
-            color: #e0e0e0;
-            padding: 20px;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        header {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
-            padding: 40px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            color: white;
-        }
-
-        .subtitle {
-            font-size: 1.2em;
-            opacity: 0.95;
-            color: white;
-        }
-
-        .nav-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .nav-card {
-            background: linear-gradient(135deg, #4a4a6a 0%, #3a3a5a 100%);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            transition: transform 0.2s, box-shadow 0.2s;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-
-        .nav-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-        }
-
-        .nav-card .icon {
-            font-size: 3em;
-            margin-bottom: 15px;
-        }
-
-        .nav-card h2 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-            color: #ffd700;
-        }
-
-        .nav-card p {
-            font-size: 1em;
-            opacity: 0.8;
-        }
-
-        .section {
-            background: linear-gradient(135deg, #3a3a5a 0%, #2d2d44 100%);
-            padding: 30px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .section h2 {
-            font-size: 1.8em;
-            color: #4a9eff;
-            border-bottom: 2px solid #4a9eff;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
-        }
-
-        .stat-box {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 4px solid;
-            text-align: center;
-        }
-
-        .stat-box.activities { border-left-color: #4ecdc4; }
-        .stat-box.consistency { border-left-color: #95e1d3; }
-        .stat-box.volume { border-left-color: #ffd700; }
-        .stat-box.power { border-left-color: #ff6b6b; }
-
-        .stat-value {
-            font-size: 2.5em;
-            font-weight: bold;
-            color: #ffffff;
-            margin-bottom: 5px;
-        }
-
-        .stat-label {
-            font-size: 0.9em;
-            opacity: 0.8;
-        }
-
-        .findings {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
-        }
-
-        .finding-box {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 25px;
-            border-radius: 10px;
-            border-left: 6px solid;
-        }
-
-        .finding-box.strengths { border-left-color: #4ade80; }
-        .finding-box.gaps { border-left-color: #ff6b6b; }
-
-        .finding-box h3 {
-            font-size: 1.3em;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .finding-box ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .finding-box li {
-            padding: 8px 0;
-            padding-left: 25px;
-            position: relative;
-        }
-
-        .finding-box li:before {
-            content: "•";
-            position: absolute;
-            left: 10px;
-            font-size: 1.5em;
-        }
-
-        .finding-box.strengths li:before {
-            color: #4ade80;
-        }
-
-        .finding-box.gaps li:before {
-            color: #ff6b6b;
-        }
-
-        .action-plan {
-            background: linear-gradient(135deg, #4a2d7c 0%, #371e5f 100%);
-            padding: 30px;
-            border-radius: 12px;
-            border-left: 6px solid #a855f7;
-            margin: 20px 0;
-        }
-
-        .action-plan h3 {
-            font-size: 1.5em;
-            color: #a855f7;
-            margin-bottom: 15px;
-        }
-
-        .action-item {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-
-        .action-item strong {
-            color: #ffd700;
-            font-size: 1.1em;
-        }
-
-        .recovery-box {
-            background: rgba(255, 165, 0, 0.1);
-            border: 2px solid #ffa500;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-
-        .recovery-box h3 {
-            color: #ffa500;
-            margin-bottom: 10px;
-        }
-
-        .checklist {
-            background: rgba(74, 158, 255, 0.1);
-            border: 2px solid #4a9eff;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-
-        .checklist h3 {
-            color: #4a9eff;
-            margin-bottom: 15px;
-        }
-
-        .checklist ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .checklist li {
-            padding: 10px;
-            margin-bottom: 10px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 5px;
-            padding-left: 40px;
-            position: relative;
-        }
-
-        .checklist li:before {
-            content: "☐";
-            position: absolute;
-            left: 15px;
-            font-size: 1.2em;
-            color: #4a9eff;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px;
-            opacity: 0.6;
-            margin-top: 50px;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 1.8em;
-            }
-            .nav-cards {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <title>Athlete Name - Performance Summary</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="shared-styles.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🚴 Athlete</h1>
+            <h1><i class='bx bx-cycling'></i> Athlete Name</h1>
             <div class="subtitle">Cycling Performance Summary</div>
-            <div class="subtitle" style="margin-top: 10px; font-size: 1em;">April 2025 - October 2025 | Generated: October 16, 2025</div>
+            <div class="subtitle" style="margin-top: 10px; font-size: 1em;">April 2025 - October 2025 | Generated: October 20, 2025</div>
         </header>
 
         <!-- Navigation Cards -->
         <div class="nav-cards">
             <a href="coaching_report.html" class="nav-card">
-                <div class="icon">📋</div>
+                <div class="icon"><i class='bx bx-clipboard'></i></div>
                 <h2>Full Coaching Report</h2>
                 <p>Complete 15+ page analysis with detailed metrics, training zones, and 12-week plan</p>
             </a>
             <a href="performance_dashboard.html" class="nav-card">
-                <div class="icon">📊</div>
+                <div class="icon"><i class='bx bx-line-chart'></i></div>
                 <h2>Interactive Dashboard</h2>
                 <p>Visual charts showing power zones, volume progression, and performance trends</p>
             </a>
             <a href="#summary" class="nav-card" style="pointer-events: none; opacity: 0.6;">
-                <div class="icon">⚡</div>
+                <div class="icon"><i class='bx bx-tachometer'></i></div>
                 <h2>Quick Summary</h2>
                 <p>You are here - Executive overview and action plan</p>
             </a>
@@ -305,110 +39,117 @@
 
         <!-- Data at a Glance -->
         <div class="section" id="summary">
-            <h2>📊 Data at a Glance</h2>
+            <h2><i class='bx bx-bar-chart-alt-2'></i> Data at a Glance</h2>
             <div class="stats-grid">
                 <div class="stat-box activities">
-                    <div class="stat-value">115</div>
+                    <div class="stat-value">0</div>
                     <div class="stat-label">Total Activities</div>
-                    <div class="stat-label" style="margin-top: 10px; font-size: 0.85em;">45 outdoor + 70 indoor</div>
+                    <div class="stat-label" style="margin-top: 10px; font-size: 0.85em;">44 outdoor + 69 indoor</div>
                 </div>
                 <div class="stat-box consistency">
-                    <div class="stat-value">4.5</div>
+                    <div class="stat-value">4.6</div>
                     <div class="stat-label">Rides per Week</div>
-                    <div class="stat-label" style="margin-top: 10px; font-size: 0.85em;">85% consistency</div>
+                    <div class="stat-label" style="margin-top: 10px; font-size: 0.85em;">65.4% consistency</div>
                 </div>
                 <div class="stat-box volume">
-                    <div class="stat-value">4872km</div>
+                    <div class="stat-value">0km</div>
                     <div class="stat-label">Total Distance</div>
-                    <div class="stat-label" style="margin-top: 10px; font-size: 0.85em;">169h total time</div>
+                    <div class="stat-label" style="margin-top: 10px; font-size: 0.85em;">162h total time</div>
                 </div>
                 <div class="stat-box power">
-                    <div class="stat-value">255W</div>
+                    <div class="stat-value">310.0W</div>
                     <div class="stat-label">Current FTP</div>
-                    <div class="stat-label" style="margin-top: 10px; font-size: 0.85em;">3.04 W/kg</div>
+                    <div class="stat-label" style="margin-top: 10px; font-size: 0.85em;">4.43 W/kg</div>
                 </div>
             </div>
         </div>
 
         <!-- Key Findings -->
         <div class="section">
-            <h2>🎯 Bottom Line Findings</h2>
+            <h2><i class='bx bx-target-lock'></i> Bottom Line Findings</h2>
             <div class="findings">
                 <div class="finding-box strengths">
-                    <h3>✅ What's Working</h3>
+                    <h3><i class='bx bx-check-circle'></i> What's Working</h3>
                     <ul>
-                        <li>Consistency: 4.5 rides/week</li>
-                        <li>Volume: 4872km in 6 months</li>
-                        <li>Endurance base: 12 rides >80km</li>
-                        <li>Training consistency maintained</li>
-                        <li>Good indoor/outdoor balance</li>
+                        <li>Excellent consistency: 4.572254335260116 rides/week over 6 months</li>
+                        <li>Strong volume: 0km total distance</li>
+                        <li>Good power trends: +2.7% improvement</li>
+                        <li>Balanced indoor/outdoor: 44 outdoor + 69 indoor</li>
+                        <li>Improving aerobic efficiency: higher power at similar HR</li>
                     </ul>
                 </div>
                 <div class="finding-box gaps">
-                    <h3>⚠️ What Needs Fixing</h3>
+                    <h3><i class='bx bx-error-circle'></i> What Needs Fixing</h3>
                     <ul>
-                        <li>Limited high-intensity training</li>
-                        <li>No recent race-specific efforts</li>
-                        <li>Power zone distribution needs rebalancing</li>
-                        <li>Threshold work volume is low</li>
-                        <li>VO2 max efforts rarely included</li>
+                        <li>Intensity distribution: Only 2.6% hard training</li>
+                        <li>Polarization: Need more Z4-Z5 work (target 15-20%)</li>
+                        <li>Sweet spot sessions: Limited time in optimal FTP-building zone</li>
+                        <li>VO2 max work: Minimal time above threshold</li>
+                        <li>Race-specific intensity: Limited high-intensity efforts</li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <!-- 12-Week Action Plan -->
+        <!-- 12-Week Action Plan Summary -->
         <div class="section">
-            <h2>🚀 12-Week Action Plan</h2>
+            <h2><i class='bx bx-rocket'></i> 12-Week Action Plan</h2>
             <div class="action-plan">
-                <h3>Target: 255W → 270W FTP (+15W, +5.9%)</h3>
+                <h3>Target: 310.0W → 328.0W FTP (+18.0W, +5.8%)</h3>
+                <p style="margin-bottom: 20px;">Progressive 12-week plan building from foundation to peak performance.</p>
 
                 <div class="action-item">
-                    <strong>Weeks 1-3: Foundation</strong><br>
-                    Build aerobic base with Z2 endurance work + introduce threshold intervals (2x15-20 min @ 229-242W)
+                    <strong>Phase 1 (Weeks 1-3): Foundation</strong><br>
+                    Build aerobic base and introduce threshold work
                 </div>
 
                 <div class="action-item">
                     <strong>Week 4: Recovery</strong><br>
-                    Reduce volume by 40%, maintain frequency, easy Z2 rides only
+                    Reduce volume to absorb training adaptations
                 </div>
 
                 <div class="action-item">
-                    <strong>Weeks 5-7: Build</strong><br>
-                    Add VO2 max work (5x5 min @ 280W) + increase threshold volume (2x20 min)
+                    <strong>Phase 2 (Weeks 5-7): Build</strong><br>
+                    Add VO2 max intervals and increase endurance volume
                 </div>
 
                 <div class="action-item">
                     <strong>Week 8: Recovery</strong><br>
-                    Second recovery week before peak phase
+                    Second recovery week before final push
                 </div>
 
                 <div class="action-item">
-                    <strong>Weeks 9-12: Peak</strong><br>
-                    Race simulations + high intensity (6x5 min VO2) + maintain threshold work
+                    <strong>Phase 3 (Weeks 9-12): Peak</strong><br>
+                    Race simulations and high-intensity work
                 </div>
+
+                <p style="margin-top: 20px; padding: 15px; background: #fff; border-radius: 6px; border: 1px solid #d2d3ff;">
+                    <strong>📋 Full Training Plan:</strong> See the <a href="coaching_report.html" style="color: #696cff; text-decoration: underline; font-weight: 500;">Complete Coaching Report</a> for day-by-day workout details, power targets, and execution guidelines.
+                </p>
             </div>
         </div>
 
-        <!-- Age 50+ Recovery -->
+        <!-- Age 50+ Recovery Essentials -->
         <div class="recovery-box">
-            <h3>⚠️ Age 51+ Recovery Rules</h3>
+            <h3><i class='bx bx-error-circle'></i> Age 26+ Recovery Essentials</h3>
+            <p style="margin-bottom: 12px;"><strong>Critical recovery requirements for masters athletes:</strong></p>
             <ul style="list-style: none; padding: 0;">
-                <li style="padding: 8px 0;"><strong>48-72 hours</strong> between hard sessions (never back-to-back intensity)</li>
-                <li style="padding: 8px 0;"><strong>Monitor resting HR</strong> - Elevated for 3+ days = extra rest needed</li>
-                <li style="padding: 8px 0;"><strong>Sleep: 7-9 hours</strong> non-negotiable</li>
-                <li style="padding: 8px 0;"><strong>Protein: 134-168g/day</strong> (1.6-2.0g/kg for 84kg)</li>
-                <li style="padding: 8px 0;"><strong>Stop if:</strong> Unable to complete intervals, persistent pain, poor sleep, low motivation</li>
+                <li style="padding: 6px 0;"><strong>48-72 hours</strong> between hard sessions</li>
+                <li style="padding: 6px 0;"><strong>Sleep: 7-9 hours</strong> nightly (non-negotiable)</li>
+                <li style="padding: 6px 0;"><strong>Protein: 112-140g/day</strong> for muscle recovery</li>
             </ul>
+            <p style="margin-top: 12px; font-size: 0.95em;">
+                See <a href="coaching_report.html#recovery" style="color: #2563eb; text-decoration: underline; font-weight: 500;">Section 16: Recovery Strategies</a> for complete age-specific guidance, red flags, and detailed protocols.
+            </p>
         </div>
 
         <!-- Start Here Checklist -->
         <div class="checklist">
-            <h3>✅ Start Here - Immediate Actions</h3>
+            <h3><i class='bx bx-check-circle'></i> Start Here - Immediate Actions</h3>
             <ul>
-                <li>Read the <a href="coaching_report.html" style="color: #4a9eff; text-decoration: underline;">Full Coaching Report</a> for detailed analysis</li>
-                <li>Open the <a href="performance_dashboard.html" style="color: #4a9eff; text-decoration: underline;">Interactive Dashboard</a> to explore your data visually</li>
-                <li>Schedule your first quality session: Tuesday - 2x15 min @ 229-242W (5 min recovery)</li>
+                <li>Read the <a href="coaching_report.html" style="color: #2563eb; text-decoration: underline; font-weight: 500;">Full Coaching Report</a> for detailed analysis</li>
+                <li>Open the <a href="performance_dashboard.html" style="color: #2563eb; text-decoration: underline; font-weight: 500;">Interactive Dashboard</a> to explore your data visually</li>
+                <li>Schedule your first quality session: Tuesday - 2x15-20min @ 279-294W (threshold intervals)</li>
                 <li>Find and register for a race 6-8 weeks out (criterium or road race)</li>
                 <li>Set up weekly tracking: Resting HR, sleep quality, motivation, interval completion</li>
                 <li>Review your current training plan and identify which sessions to modify</li>
@@ -417,21 +158,21 @@
 
         <!-- The Opportunity -->
         <div class="section">
-            <h2>💡 The Opportunity</h2>
+            <h2><i class='bx bx-bulb'></i> The Opportunity</h2>
             <p style="font-size: 1.1em; line-height: 1.8; margin-bottom: 15px;">
-                You have built an exceptional aerobic foundation with 169 hours of consistent training. Your base is solid.
+                You've built an exceptional aerobic base with 0km over 6 months at 4.572254335260116 rides/week. Your consistency is your greatest strength - that's the foundation champions are built on.
             </p>
             <p style="font-size: 1.1em; line-height: 1.8; margin-bottom: 15px;">
-                The missing piece is structured intensity. By adding just 2-3 focused quality sessions per week (threshold and VO2 max work), you can unlock significant FTP gains within 12 weeks.
+                The gap is clear: you're spending only 2.6% of training time in hard zones (Z4-Z5). Doubling this to 15-20% while maintaining your volume will significantly boost FTP. Your engine is ready - it just needs targeted intensity work.
             </p>
-            <p style="font-size: 1.1em; line-height: 1.8; font-weight: bold; color: #ffd700;">
-                Target: 255W → 270W FTP (+15W, +5.9%). This is achievable with the right training approach.
+            <p style="font-size: 1.1em; line-height: 1.8; font-weight: 600; color: #696cff;">
+                With structured intensity, you can realistically increase from 310.0W to 328.0W in 12 weeks. Let's get to work.
             </p>
         </div>
 
         <footer>
             <p>Performance Analysis prepared by Claude Code Performance Analyzer</p>
-            <p>Analysis Date: October 16, 2025 | Data Period: April 2025 - October 2025</p>
+            <p>Analysis Date: October 20, 2025 | Data Period: April 2025 - October 2025</p>
             <p style="margin-top: 10px;">Generated with Claude Code Performance Analyzer</p>
         </footer>
     </div>
