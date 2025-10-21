@@ -9,31 +9,37 @@
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="shared-styles.css">
+    <script src="glossary-tooltips.js"></script>
 </head>
 <body>
     <div class="container">
         <header>
             <h1><i class='bx bx-cycling'></i> Eduardo Rodrigues</h1>
             <div class="subtitle">Cycling Performance Summary</div>
-            <div class="subtitle" style="margin-top: 10px; font-size: 1em;">April 2025 - October 2025 | Generated: October 20, 2025</div>
+            <div class="subtitle" style="margin-top: 10px; font-size: 1em;">April 2025 - October 2025 | Generated: October 21, 2025</div>
         </header>
 
         <!-- Navigation Cards -->
         <div class="nav-cards">
             <a href="coaching_report.html" class="nav-card">
                 <div class="icon"><i class='bx bx-clipboard'></i></div>
-                <h2>Full Coaching Report</h2>
-                <p>Complete 15+ page analysis with detailed metrics, training zones, and 12-week plan</p>
+                <h2>Coaching Report</h2>
+                <p>Performance analysis, training zones, and 12-week structured plan</p>
+            </a>
+            <a href="athlete_guide.html" class="nav-card">
+                <div class="icon"><i class='bx bx-run'></i></div>
+                <h2>Athlete Guide</h2>
+                <p>Nutrition, recovery, supplementation, equipment, mental performance, and event recommendations</p>
             </a>
             <a href="performance_dashboard.html" class="nav-card">
                 <div class="icon"><i class='bx bx-line-chart'></i></div>
                 <h2>Interactive Dashboard</h2>
                 <p>Visual charts showing power zones, volume progression, and performance trends</p>
             </a>
-            <a href="#summary" class="nav-card" style="pointer-events: none; opacity: 0.6;">
-                <div class="icon"><i class='bx bx-tachometer'></i></div>
-                <h2>Quick Summary</h2>
-                <p>You are here - Executive overview and action plan</p>
+            <a href="glossary.html" class="nav-card">
+                <div class="icon"><i class='bx bx-book-open'></i></div>
+                <h2>Glossary</h2>
+                <p>Understand all training metrics, zones, and concepts - FTP, TSS, CTL, polarized training, and more</p>
             </a>
         </div>
 
@@ -71,7 +77,7 @@
                 <div class="finding-box strengths">
                     <h3><i class='bx bx-check-circle'></i> What's Working</h3>
                     <ul>
-                        <li>Excellent consistency: 4.572254335260116 rides/week over 6 months</li>
+                        <li>Excellent consistency: 4.5 rides/week over 6 months</li>
                         <li>Strong volume: 4,701km total distance</li>
                         <li>Good power trends: +2.7% improvement</li>
                         <li>Balanced indoor/outdoor: 44 outdoor + 69 indoor</li>
@@ -81,7 +87,7 @@
                 <div class="finding-box gaps">
                     <h3><i class='bx bx-error-circle'></i> What Needs Fixing</h3>
                     <ul>
-                        <li>Intensity distribution: Only 8.0% hard training</li>
+                        <li>Intensity distribution: Only 7.4% hard training</li>
                         <li>Polarization: Need more Z4-Z5 work (target 15-20%)</li>
                         <li>Sweet spot sessions: Limited time in optimal FTP-building zone</li>
                         <li>VO2 max work: Minimal time above threshold</li>
@@ -129,17 +135,17 @@
             </div>
         </div>
 
-        <!-- Age 50+ Recovery Essentials -->
+        <!-- Recovery Essentials -->
         <div class="recovery-box">
-            <h3><i class='bx bx-error-circle'></i> Age 51+ Recovery Essentials</h3>
-            <p style="margin-bottom: 12px;"><strong>Critical recovery requirements for masters athletes:</strong></p>
+            <h3><i class='bx bx-error-circle'></i> Recovery Essentials</h3>
+            <p style="margin-bottom: 12px;"><strong>Critical recovery requirements:</strong></p>
             <ul style="list-style: none; padding: 0;">
                 <li style="padding: 6px 0;"><strong>48-72 hours</strong> between hard sessions</li>
                 <li style="padding: 6px 0;"><strong>Sleep: 7-9 hours</strong> nightly (non-negotiable)</li>
                 <li style="padding: 6px 0;"><strong>Protein: 134-168g/day</strong> for muscle recovery</li>
             </ul>
             <p style="margin-top: 12px; font-size: 0.95em;">
-                See <a href="coaching_report.html#recovery" style="color: #2563eb; text-decoration: underline; font-weight: 500;">Section 16: Recovery Strategies</a> for complete age-specific guidance, red flags, and detailed protocols.
+                See <a href="coaching_report.html#recovery" style="color: #2563eb; text-decoration: underline; font-weight: 500;">Section 16: Recovery Strategies</a> for complete guidance, red flags, and detailed protocols.
             </p>
         </div>
 
@@ -147,7 +153,8 @@
         <div class="checklist">
             <h3><i class='bx bx-check-circle'></i> Start Here - Immediate Actions</h3>
             <ul>
-                <li>Read the <a href="coaching_report.html" style="color: #2563eb; text-decoration: underline; font-weight: 500;">Full Coaching Report</a> for detailed analysis</li>
+                <li>Read the <a href="coaching_report.html" style="color: #2563eb; text-decoration: underline; font-weight: 500;">Coaching Report</a> for detailed performance analysis and training plan</li>
+                <li>Review the <a href="athlete_guide.html" style="color: #2563eb; text-decoration: underline; font-weight: 500;">Athlete Guide</a> for nutrition, recovery, and lifestyle optimization</li>
                 <li>Open the <a href="performance_dashboard.html" style="color: #2563eb; text-decoration: underline; font-weight: 500;">Interactive Dashboard</a> to explore your data visually</li>
                 <li>Schedule your first quality session: Tuesday - 2x15-20min @ 229-242W (threshold intervals)</li>
                 <li>Find and register for a race 6-8 weeks out (criterium or road race)</li>
@@ -163,7 +170,7 @@
                 You've built an exceptional aerobic base with 4,701km over 6 months at 4.572254335260116 rides/week. Your consistency is your greatest strength - that's the foundation champions are built on.
             </p>
             <p style="font-size: 1.1em; line-height: 1.8; margin-bottom: 15px;">
-                The gap is clear: you're spending only 8.0% of training time in hard zones (Z4-Z5). Doubling this to 15-20% while maintaining your volume will significantly boost FTP. Your engine is ready - it just needs targeted intensity work.
+                The gap is clear: you're spending only 7.4% of training time in hard zones (Z4-Z5). Doubling this to 15-20% while maintaining your volume will significantly boost FTP. Your engine is ready - it just needs targeted intensity work.
             </p>
             <p style="font-size: 1.1em; line-height: 1.8; font-weight: 600; color: #696cff;">
                 With structured intensity, you can realistically increase from 255.0W to 270W in 12 weeks. Let's get to work.
@@ -171,8 +178,8 @@
         </div>
 
         <footer>
-            <p>Performance Analysis prepared by Professional Cycling Coach</p>
-            <p>Analysis Date: October 20, 2025 | Data Period: April 2025 - October 2025</p>
+            <p>Performance Analysis prepared by Claude Code Performance Analyzer</p>
+            <p>Analysis Date: October 21, 2025 | Data Period: April 2025 - October 2025</p>
             <p style="margin-top: 10px;">Generated with Claude Code Performance Analyzer</p>
         </footer>
     </div>

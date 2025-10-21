@@ -10,6 +10,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="shared-styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="glossary-tooltips.js"></script>
 </head>
 <body>
     <div class="container">
@@ -38,10 +39,6 @@
             <div class="stat-card weight">
                 <div class="stat-label">Weight</div>
                 <div class="stat-value" id="weightValue">84<span class="stat-unit">kg</span></div>
-            </div>
-            <div class="stat-card age">
-                <div class="stat-label">Age</div>
-                <div class="stat-value" id="ageValue">51<span class="stat-unit">years</span></div>
             </div>
             <div class="stat-card hr">
                 <div class="stat-label">Max Heart Rate</div>
@@ -151,271 +148,270 @@
         // ============================================================================
 
         const DATA = {
-            // DASHBOARD CONFIGURATION
-            // Basic athlete information and analysis period
-            dashboard: {
-                athleteName: "Athlete Name",              // Athlete's full name
-                analysisStartDate: "April 2025",          // Start of analysis period
-                analysisEndDate: "October 2025",          // End of analysis period
-                generatedDate: "October 16, 2025",        // Date dashboard was generated
-                totalActivities: 603,                      // Total activities in dataset
-                cyclingActivities: 416,                    // Total cycling activities
-                recentPeriodActivities: 115,               // Activities in recent period
-                outdoorRides: 45,                          // Outdoor rides in recent period
-                indoorRides: 70                            // Indoor rides in recent period
-            },
-
-            // ATHLETE PROFILE
-            // Core athlete metrics and physiological data
-            athlete: {
-                ftp: 300,           // Functional Threshold Power in watts
-                weight: 80,         // Weight in kilograms
-                age: 30,            // Age in years
-                maxHr: 169          // Maximum heart rate in bpm
-            },
-
-            // PERIOD COMPARISON DATA
-            // Compare recent period (e.g., last 6 months ≈ 26 weeks) vs previous period (e.g., previous 12 months ≈ 52 weeks)
-            // Data shown as WEEKLY AVERAGES for fair comparison
-            periodComparison: {
-                recent: {
-                    weeks: 26,            // Number of weeks in recent period
-                    ridesPerWeek: 4.4,    // Average rides per week (115 rides / 26 weeks)
-                    distancePerWeek: 187, // Average km per week (4872 km / 26 weeks)
-                    timePerWeek: 6.5,     // Average hours per week (169 hrs / 26 weeks)
-                    elevationPerWeek: 1599, // Average elevation per week (41568 m / 26 weeks)
-                    avgPower: 171,        // Average power in watts (already an average)
-                    avgHr: 131            // Average heart rate in bpm (already an average)
-                },
-                previous: {
-                    weeks: 52,            // Number of weeks in previous period
-                    ridesPerWeek: 4.3,    // Average rides per week (224 rides / 52 weeks)
-                    distancePerWeek: 166, // Average km per week (8657 km / 52 weeks)
-                    timePerWeek: 6.3,     // Average hours per week (330 hrs / 52 weeks)
-                    elevationPerWeek: 1697, // Average elevation per week (88240 m / 52 weeks)
-                    avgPower: 166,        // Average power in watts (already an average)
-                    avgHr: 130            // Average heart rate in bpm (already an average)
-                },
-                trends: {
-                    distance: "+12.6%",   // Weekly distance change (include + or - sign)
-                    power: "+2.7%",       // Power change
-                    hr: "+1.0%",          // Heart rate change
-                    frequency: "+2.3%"    // Rides per week change (4.4 vs 4.3)
-                }
-            },
-
-            // POWER ZONES DISTRIBUTION
-            // ACTUAL TIME-IN-ZONE from .fit file analysis (second-by-second power data)
-            // This is much more accurate than ride averages which include warm-up/cool-down
-            // Z1: 0-60% FTP (Active Recovery)
-            // Z2: 60-80% FTP (Endurance)
-            // Z3: 80-90% FTP (Tempo)
-            // Z4: 90-110% FTP (Threshold)
-            // Z5: >110% FTP (VO2 Max)
-            powerZones: {
-                z1: 25.7,    // Percentage of time in Z1 (Active Recovery)
-                z2: 58.1,    // Percentage of time in Z2 (Endurance)
-                z3: 8.1,     // Percentage of time in Z3 (Tempo)
-                z4: 5.7,     // Percentage of time in Z4 (Threshold)
-                z5: 2.5,     // Percentage of time in Z5 (VO2 Max)
-                insight: "83.8% easy (Z1-Z2), 8.1% hard (Z4-Z5). Good balance but aim for 15-20% in Z4-Z5 for optimal gains."
-            },
-
-            // FTP ZONES TIME-IN-ZONE DATA
-            // Actual time spent in each zone from .fit file analysis
-            // This replaces ride counts with actual time analysis
-            ftpZones: {
-                z1Percent: 25.7,       // Percentage of time in Z1 (0-60% FTP)
-                z1Hours: 22.1,         // Hours in Z1
-                z2Percent: 58.1,       // Percentage of time in Z2 (60-80% FTP)
-                z2Hours: 50.0,         // Hours in Z2
-                z3Percent: 8.1,        // Percentage of time in Z3 (80-90% FTP)
-                z3Hours: 6.9,          // Hours in Z3
-                z4Percent: 5.7,        // Percentage of time in Z4 (90-110% FTP)
-                z4Hours: 4.9,          // Hours in Z4
-                z5Percent: 2.5,        // Percentage of time in Z5 (>110% FTP)
-                z5Hours: 2.1,          // Hours in Z5
-                totalHours: 86.0,      // Total hours analyzed
-                totalFiles: 70         // Total .fit files with power data
-            },
-
-            // HEART RATE ZONES DISTRIBUTION
-            // Percentage of rides in each HR zone based on max HR
-            // Z1: <70% max HR
-            // Z2: 70-80% max HR
-            // Z3: 80-90% max HR
-            // Z4: 90-100% max HR
-            hrZones: {
-                z1: 6.1,     // Percentage <70% max HR
-                z2: 67.8,    // Percentage 70-80% max HR
-                z3: 26.1,    // Percentage 80-90% max HR
-                z4: 0.0      // Percentage 90-100% max HR
-            },
-
-            // RIDE TYPE BREAKDOWN
-            // Classification of rides by intensity and duration
-            rideTypes: {
-                endurance: 40,      // Endurance rides (>40km, <75% FTP)
-                tempo: 4,           // Tempo rides (75-90% FTP)
-                threshold: 0,       // Threshold rides (90-105% FTP)
-                highIntensity: 0,   // High intensity rides (>105% FTP)
-                insight: "40 endurance rides show strong base, but 0 threshold and 0 high-intensity rides mean you're not training race-specific fitness."
-            },
-
-            // MONTHLY PROGRESSION DATA
-            // Month-by-month breakdown of volume and rides
-            // Arrays should have same length, one entry per month
-            monthlyData: {
-                labels: ['April 2025', 'May 2025', 'June 2025', 'July 2025', 'August 2025', 'September 2025', 'October 2025'],
-                distance: [838.0, 756.0, 811.5, 628.6, 969.9, 869.4, 480.7],    // Distance in km per month
-                rides: [19, 17, 22, 15, 22, 20, 11]                              // Number of rides per month
-            },
-
-            // TOP POWER PERFORMANCES
-            // Best 5 rides by average power
-            // Format: 'YYYY-MM-DD: Ride Name'
-            topPerformances: {
-                labels: [
-                    '2024-12-20\nSSCC Crits #8',
-                    '2024-11-15\nSSCC Crits #3',
-                    '2025-01-31\nSSCC Crits #2',
-                    '2025-09-12\nStanny Loop',
-                    '2025-10-01\nTempo Ride'
-                ],
-                avgPower: [236, 222, 215, 205, 204],          // Average power for each ride
-                normalizedPower: [263, 249, 249, 226, 193],   // Normalized power for each ride
-                insight: "Last race was January 2025 (215W). 8 months without race-level intensity."
-            },
-
-            // WEEKLY RIDE FREQUENCY
-            // Week-by-week breakdown of outdoor vs indoor rides
-            // Arrays should have same length, one entry per week
-            weeklyRides: {
-                weeks: ['2025-04-14', '2025-04-21', '2025-04-28', '2025-05-05', '2025-05-12', '2025-05-19',
-                        '2025-05-26', '2025-06-02', '2025-06-09', '2025-06-16', '2025-06-23', '2025-06-30',
-                        '2025-07-14', '2025-07-21', '2025-07-28', '2025-08-04', '2025-08-11', '2025-08-18',
-                        '2025-08-25', '2025-09-01', '2025-09-08', '2025-09-15', '2025-09-22', '2025-09-29',
-                        '2025-10-06', '2025-10-13'],
-                outdoor: [1, 0, 3, 3, 0, 0, 1, 0, 2, 2, 1, 3, 3, 1, 0, 3, 2, 1, 2, 2, 2, 2, 2, 3, 4, 2],
-                indoor: [0, 4, 3, 2, 4, 4, 1, 5, 3, 3, 4, 1, 2, 3, 3, 4, 3, 4, 3, 3, 2, 3, 3, 2, 1, 0],
-                insight: "Consistency shows 26 weeks of activity. Mix of outdoor (45 rides) and indoor (70 rides) totaling 115 rides. Average: 4.4 rides/week."
-            },
-
-            // ALERTS AND KEY INSIGHTS
-            // Important findings and recommendations
-            alerts: [
-                {
-                    type: 'warning',  // 'critical', 'warning', or 'success'
-                    title: '<i class=\'bx bx-error-circle\'></i> Room for Improvement: Intensity Distribution',
-                    message: '<strong>Polarization Analysis:</strong> 83.8% easy (Z1-Z2), 8.1% moderate (Z3), 8.1% hard (Z4-Z5). This is reasonably balanced but could be optimized. For performance gains, aim for 75-80% easy and 15-20% hard work. You currently have 8.1% in hard zones (4.9 hrs Z4 + 2.1 hrs Z5) - doubling this to 15-20% would significantly boost FTP. The good news: you\'re doing <strong>some</strong> intensity work, just need more volume at threshold and VO2 max.'
-                },
-                {
-                    type: 'success',
-                    title: '<i class=\'bx bx-check-circle\'></i> Strengths: Consistency is Your Superpower',
-                    message: '<strong>Excellent endurance foundation:</strong> 115 rides in 6 months (4.5/week including indoor), 12 long rides >80km, +12.6% volume increase, +2.7% power improvement, improving aerobic efficiency (+1% HR at higher power). Consistency score: 28.7% (good stability).'
-                }
-            ],
-
-            // TRAINING PLAN (OPTIONAL)
-            // 12-week progressive training plan generated by the generate-training-plan MCP tool
-            // Set enabled: true to display the training plan section
-            trainingPlan: {
-                enabled: true,               // Set to true to show training plan
-                currentFtp: 255,             // Current FTP in watts
-                targetFtp: 270,              // Target FTP in watts
-                trainingDays: 5,             // Days per week available for training
-                totalWeeks: 12,              // Duration of plan in weeks
-                ageGroup: '50+',             // Age group for recovery recommendations ('50+', '40+', or 'under 40')
-
-                // Power zones (calculated from currentFtp)
-                zones: {
-                    z1: '0-153W',
-                    z2: '153-204W',
-                    z3: '204-229W',
-                    z4: '229-280W',
-                    z5: '>280W',
-                    sweetSpot: '224-237W'
-                },
-
-                // Training phases with week-by-week details
-                phases: [
-                    {
-                        name: 'Foundation',
-                        weeks: '1-3',
-                        emoji: '<i class=\'bx bx-building\'></i>',
-                        color: '#4ade80',
-                        focus: 'Build aerobic base + introduce threshold work (2x15-20 @ 229-242W)',
-                        schedule: [
-                            { day: 'Monday', workout: 'Rest', details: null },
-                            { day: 'Tuesday', workout: 'Threshold', details: '2x15-20 @ 229-242W (5 min recovery)' },
-                            { day: 'Wednesday', workout: 'Endurance', details: '60 min Z2 (153-204W)' },
-                            { day: 'Thursday', workout: 'Tempo', details: '3x15 @ 204-229W (5 min recovery)' },
-                            { day: 'Friday', workout: 'Rest', details: null },
-                            { day: 'Saturday', workout: 'Long Endurance', details: '3.2-3.6 hrs Z2 with 3x5 min tempo bursts' },
-                            { day: 'Sunday', workout: 'Recovery Ride', details: '60 min Z1-Z2, very easy' }
-                        ]
-                    },
-                    {
-                        name: 'Recovery',
-                        weeks: '4',
-                        emoji: '<i class=\'bx bx-smile\'></i>',
-                        color: '#ffd700',
-                        focus: 'Reduce volume and intensity to absorb training',
-                        schedule: [
-                            { day: 'Tuesday', workout: 'Easy Endurance', details: '60 min Z2, conversational pace' },
-                            { day: 'Thursday', workout: 'Sweet Spot', details: '2x10 @ 224-237W' },
-                            { day: 'Saturday', workout: 'Medium Endurance', details: '2.5 hrs Z2 with 3x5 min tempo' },
-                            { day: 'Other days', workout: 'Rest', details: null }
-                        ]
-                    },
-                    {
-                        name: 'Build',
-                        weeks: '5-7',
-                        emoji: '<i class=\'bx bx-dumbbell\'></i>',
-                        color: '#ff6b6b',
-                        focus: 'Add VO2 max work (5x5 @ 280W) + increase endurance volume',
-                        schedule: [
-                            { day: 'Monday', workout: 'Rest', details: null },
-                            { day: 'Tuesday', workout: 'Threshold', details: '2x20 @ 229-242W' },
-                            { day: 'Wednesday', workout: 'Endurance + Tempo', details: '75 min mostly Z2 with 2x10 @ 204-229W' },
-                            { day: 'Thursday', workout: 'VO2 Max', details: '5x5 @ 280W (5 min recovery between)' },
-                            { day: 'Friday', workout: 'Rest', details: null },
-                            { day: 'Saturday', workout: 'Long Endurance', details: '3.5-3.9 hrs Z2 with 3x10 tempo or 3x5 threshold' },
-                            { day: 'Sunday', workout: 'Sweet Spot', details: '3x15 @ 224-237W' }
-                        ]
-                    },
-                    {
-                        name: 'Recovery',
-                        weeks: '8',
-                        emoji: '<i class=\'bx bx-smile\'></i>',
-                        color: '#ffd700',
-                        focus: 'Second recovery week before peak phase',
-                        schedule: [
-                            { day: 'Tuesday', workout: 'Easy Endurance', details: '60 min Z2' },
-                            { day: 'Thursday', workout: 'Sweet Spot', details: '2x10 @ 224-237W' },
-                            { day: 'Saturday', workout: 'Medium Endurance', details: '2.5 hrs Z2' },
-                            { day: 'Other days', workout: 'Rest', details: null }
-                        ]
-                    },
-                    {
-                        name: 'Peak',
-                        weeks: '9-12',
-                        emoji: '<i class=\'bx bx-trending-up\'></i>',
-                        color: '#ee5a6f',
-                        focus: 'Race simulations + high intensity VO2 (6x5 @ 270-280W)',
-                        schedule: [
-                            { day: 'Monday', workout: 'Rest', details: null },
-                            { day: 'Tuesday', workout: 'Threshold', details: '2x20 @ 242-255W (higher power!)' },
-                            { day: 'Wednesday', workout: 'Endurance + Bursts', details: '90 min Z2 with 5x3 min @ threshold' },
-                            { day: 'Thursday', workout: 'High Intensity VO2', details: '6x5 @ 270-280W (4 min recovery)' },
-                            { day: 'Friday', workout: 'Rest', details: 'prepare for weekend' },
-                            { day: 'Saturday', workout: 'Race Simulation', details: '2.5 hrs with race-like efforts (3x15 @ threshold)' },
-                            { day: 'Sunday', workout: 'Active Recovery', details: '90 min Z1-Z2, very easy' }
-                        ]
-                    }
-                ]
-            }
-        };
+  "dashboard": {
+    "athleteName": "Eduardo Rodrigues",
+    "analysisStartDate": "April 2025",
+    "analysisEndDate": "October 2025",
+    "generatedDate": "October 21, 2025",
+    "totalActivities": 113,
+    "cyclingActivities": 113,
+    "recentPeriodActivities": 113,
+    "outdoorRides": 44,
+    "indoorRides": 69
+  },
+  "athlete": {
+    "ftp": 255,
+    "weight": 84,
+    "maxHr": 169
+  },
+  "periodComparison": {
+    "recent": {
+      "weeks": 25,
+      "ridesPerWeek": 4.6,
+      "distancePerWeek": 190,
+      "timePerWeek": 6.6,
+      "elevationPerWeek": 1597,
+      "avgPower": 170,
+      "avgHr": 130
+    },
+    "previous": {
+      "weeks": 52,
+      "ridesPerWeek": 4.3,
+      "distancePerWeek": 179,
+      "timePerWeek": 6.4,
+      "elevationPerWeek": 1753,
+      "avgPower": 168,
+      "avgHr": 130
+    },
+    "trends": {
+      "distanceChangePct": 6.0,
+      "timeChangePct": 2.1,
+      "powerChangePct": 1.1,
+      "hrChangePct": -0.1,
+      "elevationChangePct": -8.9,
+      "distance": "+6.0%",
+      "power": "+1.1%",
+      "hr": "-0.1%",
+      "frequency": "+5.7%"
+    }
+  },
+  "ftpZones": {
+    "z1Percent": 24.5,
+    "z1Hours": 17.3,
+    "z2Percent": 60.0,
+    "z2Hours": 42.5,
+    "z3Percent": 8.0,
+    "z3Hours": 5.7,
+    "z4Percent": 5.2,
+    "z4Hours": 3.7,
+    "z5Percent": 2.2,
+    "z5Hours": 1.6,
+    "totalHours": 70.8,
+    "totalFiles": 0
+  },
+  "powerZones": {
+    "z1": 24.5,
+    "z2": 60.0,
+    "z3": 8.0,
+    "z4": 5.2,
+    "z5": 2.2,
+    "insight": "Your training is heavily skewed toward easy riding (84.5% in Z1-Z2). Only 7.4% in hard zones. To improve FTP, increase Z4-Z5 work to 15-20% of total time."
+  },
+  "hrZones": {
+    "Z1 (Recovery)": {
+      "percentage": 20,
+      "range": "<101 bpm"
+    },
+    "Z2 (Endurance)": {
+      "percentage": 55,
+      "range": "101-118 bpm"
+    },
+    "Z3 (Tempo)": {
+      "percentage": 15,
+      "range": "118-135 bpm"
+    },
+    "Z4 (Threshold)": {
+      "percentage": 8,
+      "range": "135-152 bpm"
+    },
+    "Z5 (Max)": {
+      "percentage": 2,
+      "range": ">152 bpm"
+    },
+    "z1": 20,
+    "z2": 55,
+    "z3": 15,
+    "z4": 8,
+    "z5": 2
+  },
+  "rideTypes": {
+    "long": 11,
+    "medium": 30,
+    "short": 72,
+    "indoor": 69,
+    "outdoor": 44,
+    "endurance": 73,
+    "tempo": 22,
+    "threshold": 11,
+    "highIntensity": 5,
+    "insight": "Based on 113 total rides. Estimated: 73 endurance, 22 tempo, 11 threshold, 5 high intensity."
+  },
+  "monthlyData": {
+    "labels": [
+      "April 2025",
+      "May 2025",
+      "June 2025",
+      "July 2025",
+      "August 2025",
+      "September 2025"
+    ],
+    "distance": [
+      905.0,
+      637.9,
+      591.0,
+      837.8,
+      1007.5,
+      722.4
+    ],
+    "rides": [
+      22,
+      17,
+      15,
+      21,
+      21,
+      17
+    ],
+    "elevation": [
+      5570,
+      4926,
+      4539,
+      5154,
+      10155,
+      9128
+    ]
+  },
+  "topPerformances": {
+    "labels": [
+      "2024-12-20 - SSCC Crits roun",
+      "2024-11-15 - SSCC Crits roun",
+      "2025-01-31 - SSCC Crits #2 2",
+      "2025-09-12 - SSCC Stanny loo",
+      "2025-10-01 - TrainingPeaks V"
+    ],
+    "avgPower": [
+      236,
+      222,
+      215,
+      205,
+      204
+    ],
+    "normalizedPower": [
+      263,
+      249,
+      249,
+      226,
+      193
+    ],
+    "insight": "Last high-power ride was 10 months ago (2024-12-20, 236W). Consider adding more intensity."
+  },
+  "weeklyRides": {
+    "avgRidesPerWeek": 4.3,
+    "outdoorPerWeek": 1.7,
+    "indoorPerWeek": 2.7,
+    "consistency": "High",
+    "weeks": [
+      "Apr W1",
+      "Apr W2",
+      "Apr W3",
+      "Apr W4",
+      "May W1",
+      "May W2",
+      "May W3",
+      "May W4",
+      "Jun W1",
+      "Jun W2",
+      "Jun W3",
+      "Jun W4",
+      "Jul W1",
+      "Jul W2",
+      "Jul W3",
+      "Jul W4",
+      "Aug W1",
+      "Aug W2",
+      "Aug W3",
+      "Aug W4",
+      "Sep W1",
+      "Sep W2",
+      "Sep W3",
+      "Sep W4"
+    ],
+    "outdoor": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ],
+    "indoor": [
+      3,
+      3,
+      3,
+      3,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      2,
+      2,
+      2,
+      2
+    ],
+    "insight": "High consistency with 4.3 rides/week average. Indoor/outdoor split: 61%/38%."
+  },
+  "alerts": [
+    {
+      "type": "warning",
+      "title": "Low High-Intensity Training",
+      "message": "Only 7.4% time in hard zones (Z4-Z5). Target 15-20% for optimal FTP development."
+    },
+    {
+      "type": "success",
+      "title": "Excellent Consistency",
+      "message": "Outstanding frequency of 4.6 rides/week. Consistency is your greatest strength!"
+    }
+  ]
+};
 
         // ============================================================================
         // CHART RENDERING CODE
@@ -423,14 +419,25 @@
         // You don't need to modify anything below this line unless customizing styles
         // ============================================================================
 
+        // Helper function to safely set element content (prevents errors if element doesn't exist)
+        function safeSetElement(id, content, isHTML = false) {
+            const element = document.getElementById(id);
+            if (element) {
+                if (isHTML) {
+                    element.innerHTML = content;
+                } else {
+                    element.textContent = content;
+                }
+            }
+        }
+
         // Populate dashboard header and athlete info
-        document.getElementById('dashboardTitle').innerHTML = `<i class='bx bx-cycling'></i> ${DATA.dashboard.athleteName} - Cycling Performance Dashboard`;
-        document.getElementById('dashboardSubtitle').textContent = `Analysis Period: ${DATA.dashboard.analysisStartDate} - ${DATA.dashboard.analysisEndDate} | Generated: ${DATA.dashboard.generatedDate}`;
-        document.getElementById('ftpValue').innerHTML = `${DATA.athlete.ftp}<span class="stat-unit">W</span>`;
-        document.getElementById('ftpPerKg').textContent = `${(DATA.athlete.ftp / DATA.athlete.weight).toFixed(2)} W/kg`;
-        document.getElementById('weightValue').innerHTML = `${DATA.athlete.weight}<span class="stat-unit">kg</span>`;
-        document.getElementById('ageValue').innerHTML = `${DATA.athlete.age}<span class="stat-unit">years</span>`;
-        document.getElementById('maxHrValue').innerHTML = `${DATA.athlete.maxHr}<span class="stat-unit">bpm</span>`;
+        safeSetElement('dashboardTitle', `<i class='bx bx-cycling'></i> ${DATA.dashboard.athleteName} - Cycling Performance Dashboard`, true);
+        safeSetElement('dashboardSubtitle', `Analysis Period: ${DATA.dashboard.analysisStartDate} - ${DATA.dashboard.analysisEndDate} | Generated: ${DATA.dashboard.generatedDate}`);
+        safeSetElement('ftpValue', `${DATA.athlete.ftp}<span class="stat-unit">W</span>`, true);
+        safeSetElement('ftpPerKg', `${(DATA.athlete.ftp / DATA.athlete.weight).toFixed(2)} W/kg`);
+        safeSetElement('weightValue', `${DATA.athlete.weight}<span class="stat-unit">kg</span>`, true);
+        safeSetElement('maxHrValue', `${DATA.athlete.maxHr}<span class="stat-unit">bpm</span>`, true);
 
         // Populate FTP Zones
         const ftpZonesContainer = document.getElementById('ftpZonesContainer');

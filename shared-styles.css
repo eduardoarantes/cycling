@@ -478,6 +478,207 @@ li {
 }
 
 /* ============================================================================
+   TRAINING CALENDAR STYLES
+   ============================================================================ */
+.training-calendar {
+    display: grid;
+    grid-template-columns: 80px repeat(7, 1fr);
+    gap: 8px;
+    margin: 20px 0;
+    background: #ffffff;
+    padding: 16px;
+    border-radius: 6px;
+    border: 1px solid #e4e6e8;
+}
+
+.calendar-header {
+    font-weight: 600;
+    text-align: center;
+    padding: 12px 8px;
+    background: #e7e7ff;
+    color: #384551;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.calendar-week-label {
+    font-weight: 600;
+    padding: 12px 8px;
+    background: #f9fafb;
+    color: #384551;
+    text-align: center;
+    border-radius: 4px;
+    font-size: 0.85em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-left: 4px solid #696cff;
+}
+
+.calendar-week-label .phase-badge {
+    font-size: 0.75em;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-top: 4px;
+    font-weight: 500;
+}
+
+.calendar-week-label .phase-foundation {
+    background: #e7e7ff;
+    color: #5f61e6;
+}
+
+.calendar-week-label .phase-build {
+    background: #fff2d6;
+    color: #cc8800;
+}
+
+.calendar-week-label .phase-recovery {
+    background: #e8fadf;
+    color: #16a34a;
+}
+
+.calendar-week-label .phase-peak {
+    background: #ffe0db;
+    color: #ff3e1d;
+}
+
+.calendar-day {
+    padding: 10px;
+    background: #f9fafb;
+    border-radius: 4px;
+    border: 1px solid #e4e6e8;
+    min-height: 80px;
+    font-size: 0.85em;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.calendar-day:hover {
+    transform: translateY(-2px);
+    box-shadow: rgba(105, 108, 255, 0.2) 0px 4px 8px 0px;
+    border-color: #696cff;
+}
+
+.calendar-day.rest {
+    background: #ffffff;
+    border-style: dashed;
+}
+
+.calendar-day.intensity-low {
+    border-left: 4px solid #03c3ec;
+}
+
+.calendar-day.intensity-medium {
+    border-left: 4px solid #ffab00;
+}
+
+.calendar-day.intensity-high {
+    border-left: 4px solid #ff3e1d;
+}
+
+.calendar-day.intensity-peak {
+    border-left: 4px solid #991b1b;
+}
+
+.calendar-day-type {
+    font-weight: 600;
+    color: #384551;
+    margin-bottom: 4px;
+    font-size: 0.9em;
+}
+
+.calendar-day-details {
+    color: #646e78;
+    font-size: 0.85em;
+    line-height: 1.4;
+}
+
+.calendar-legend {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 15px 0;
+    padding: 15px;
+    background: #f9fafb;
+    border-radius: 6px;
+    font-size: 0.85em;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    border: 1px solid #e4e6e8;
+}
+
+.legend-color.rest {
+    background: #ffffff;
+    border-style: dashed;
+}
+
+.legend-color.low {
+    background: #f9fafb;
+    border-left: 4px solid #03c3ec;
+}
+
+.legend-color.medium {
+    background: #f9fafb;
+    border-left: 4px solid #ffab00;
+}
+
+.legend-color.high {
+    background: #f9fafb;
+    border-left: 4px solid #ff3e1d;
+}
+
+.legend-color.peak {
+    background: #f9fafb;
+    border-left: 4px solid #991b1b;
+}
+
+/* Responsive calendar */
+@media (max-width: 1200px) {
+    .training-calendar {
+        font-size: 0.9em;
+    }
+
+    .calendar-day {
+        min-height: 70px;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 768px) {
+    .training-calendar {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .calendar-header {
+        display: none;
+    }
+
+    .calendar-week-label {
+        border-left: none;
+        border-top: 4px solid #696cff;
+        padding: 10px;
+    }
+
+    .calendar-day {
+        min-height: auto;
+    }
+}
+
+/* ============================================================================
    CHECKLISTS
    ============================================================================ */
 .checklist {
@@ -787,5 +988,130 @@ footer {
 
     .toc ul {
         grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================================================
+   GLOSSARY TOOLTIPS
+   ============================================================================ */
+.glossary-tooltip {
+    position: relative;
+    display: inline;
+}
+
+.glossary-term {
+    /* Term text appears normally in the content */
+    display: inline;
+}
+
+.glossary-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    margin-left: 2px;
+    background: #696cff;
+    color: white;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 600;
+    cursor: help;
+    vertical-align: super;
+    line-height: 1;
+    transition: all 0.2s;
+}
+
+.glossary-icon:hover {
+    background: #5f61e6;
+    transform: scale(1.1);
+}
+
+.glossary-popup {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 8px;
+    min-width: 280px;
+    max-width: 350px;
+    padding: 15px;
+    background: white;
+    border: 2px solid #696cff;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(105, 108, 255, 0.3);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
+    pointer-events: none;
+}
+
+.glossary-popup::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 8px solid transparent;
+    border-top-color: #696cff;
+}
+
+.glossary-popup.active,
+.glossary-popup.hover {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(-5px);
+}
+
+.glossary-popup strong {
+    display: block;
+    color: #696cff;
+    font-size: 0.95em;
+    margin-bottom: 8px;
+}
+
+.glossary-popup p {
+    margin: 0 0 10px 0;
+    font-size: 0.9em;
+    line-height: 1.5;
+    color: #646e78;
+}
+
+.glossary-link {
+    display: inline-block;
+    color: #696cff;
+    text-decoration: none;
+    font-size: 0.85em;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.glossary-link:hover {
+    color: #5f61e6;
+    text-decoration: underline;
+}
+
+/* Mobile adjustments for tooltips */
+@media (max-width: 768px) {
+    .glossary-popup {
+        position: fixed;
+        bottom: auto;
+        left: 10px;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        min-width: auto;
+        max-width: none;
+    }
+
+    .glossary-popup.active,
+    .glossary-popup.hover {
+        transform: translateY(-50%);
+    }
+
+    .glossary-popup::after {
+        display: none;
     }
 }
