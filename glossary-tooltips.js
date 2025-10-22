@@ -88,6 +88,11 @@
             return;
         }
 
+        // Skip calendar day elements
+        if (element.classList && element.classList.contains('calendar-day')) {
+            return;
+        }
+
         // Process text nodes
         const walker = document.createTreeWalker(
             element,
@@ -96,6 +101,10 @@
                 acceptNode: function(node) {
                     // Skip if parent is a skip tag
                     if (skipTags.includes(node.parentNode.tagName)) {
+                        return NodeFilter.FILTER_REJECT;
+                    }
+                    // Skip if inside a calendar-day element
+                    if (node.parentNode.closest && node.parentNode.closest('.calendar-day')) {
                         return NodeFilter.FILTER_REJECT;
                     }
                     // Only accept text nodes with actual content
