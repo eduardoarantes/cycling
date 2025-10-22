@@ -1,0 +1,1676 @@
+/*
+ * Shared Styles for Cycling Performance Reports
+ * Used by: index.html, performance_dashboard.html, coaching_report.html
+ */
+
+/* ============================================================================
+   RESET & BASE STYLES
+   ============================================================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: #f5f5f9;
+    color: #646e78;
+    padding: 20px;
+    line-height: 1.7;
+    font-size: 15px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ============================================================================
+   HEADER STYLES
+   ============================================================================ */
+header {
+    background: linear-gradient(135deg, #696cff 0%, #5f61e6 100%);
+    padding: 40px;
+    border-radius: 6px;
+    margin-bottom: 30px;
+    box-shadow: rgba(105, 108, 255, 0.4) 0px 4px 8px 0px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: white;
+    font-weight: 600;
+}
+
+.subtitle {
+    font-size: 1.1em;
+    opacity: 0.95;
+    color: white;
+    font-weight: 400;
+}
+
+.header-meta {
+    font-size: 0.95em;
+    opacity: 0.95;
+    color: white;
+    margin-bottom: 5px;
+    font-weight: 400;
+}
+
+/* ============================================================================
+   NAVIGATION
+   ============================================================================ */
+.nav-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.nav-card {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 6px;
+    box-shadow: rgba(34, 48, 62, 0.1) 0px 3px 8px 0px;
+    border: 1px solid #e4e6e8;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    text-decoration: none;
+    color: #384551;
+    display: block;
+}
+
+.nav-card:hover {
+    transform: translateY(-4px);
+    box-shadow: rgba(105, 108, 255, 0.2) 0px 8px 16px 0px;
+    border-color: #696cff;
+}
+
+.nav-card .icon {
+    font-size: 3em;
+    margin-bottom: 15px;
+    color: #696cff;
+}
+
+.nav-card h2 {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    color: #384551;
+    font-weight: 600;
+}
+
+.nav-card p {
+    font-size: 0.95em;
+    color: #646e78;
+    line-height: 1.5;
+}
+
+.nav-links {
+    display: flex;
+    gap: 12px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.nav-links a {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 16px;
+    border-radius: 4px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-size: 0.95em;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+}
+
+/* ============================================================================
+   SECTION STYLES
+   ============================================================================ */
+.section {
+    background: #ffffff;
+    padding: 25px 30px;
+    border-radius: 6px;
+    margin-bottom: 25px;
+    box-shadow: rgba(34, 48, 62, 0.1) 0px 3px 8px 0px;
+    border: 1px solid #e4e6e8;
+}
+
+h2 {
+    font-size: 1.7em;
+    color: #384551;
+    border-bottom: 2px solid #696cff;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+h3 {
+    font-size: 1.35em;
+    color: #696cff;
+    margin-top: 20px;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+h4 {
+    font-size: 1.1em;
+    color: #384551;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+p {
+    margin-bottom: 12px;
+    font-size: 1.02em;
+}
+
+ul, ol {
+    margin-left: 25px;
+    margin-bottom: 12px;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+/* ============================================================================
+   STAT CARDS & GRIDS
+   ============================================================================ */
+.stats-grid, .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+/* Force 6 columns for athlete profile */
+.athlete-profile-grid {
+    grid-template-columns: repeat(6, 1fr) !important;
+    gap: 15px !important;
+}
+
+.athlete-profile-grid .stat-card {
+    padding: 18px 12px !important;
+}
+
+.stat-box, .stat-card {
+    background: #f9fafb;
+    padding: 24px;
+    border-radius: 6px;
+    border-left: 4px solid;
+    text-align: center;
+    box-shadow: rgba(34, 48, 62, 0.08) 0px 2px 6px 0px;
+}
+
+.stat-box.activities, .stat-card.activities { border-left-color: #03c3ec; }
+.stat-box.consistency, .stat-card.consistency { border-left-color: #16a34a; }
+.stat-box.volume, .stat-card.volume { border-left-color: #ffab00; }
+.stat-box.power, .stat-card.power { border-left-color: #696cff; }
+
+.stat-card.primary { border-left-color: #696cff; }
+.stat-card.secondary { border-left-color: #03c3ec; }
+.stat-card.tertiary { border-left-color: #ffab00; }
+
+.stat-card.ftp { border-left-color: #696cff; }
+.stat-card.weight { border-left-color: #03c3ec; }
+.stat-card.age { border-left-color: #16a34a; }
+.stat-card.hr { border-left-color: #ff3e1d; }
+
+.stat-value {
+    font-size: 2.2em;
+    font-weight: 600;
+    color: #384551;
+    margin-bottom: 8px;
+}
+
+.stat-label {
+    font-size: 0.9em;
+    color: #646e78;
+    font-weight: 400;
+}
+
+.stat-unit {
+    font-size: 0.7em;
+    color: #646e78;
+    margin-left: 4px;
+    font-weight: 400;
+}
+
+/* ============================================================================
+   ATHLETE STATS (Dashboard specific)
+   ============================================================================ */
+.athlete-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+/* ============================================================================
+   ALERT & INFO BOXES
+   ============================================================================ */
+.highlight-box {
+    background: #fff2d6;
+    border-left: 4px solid #ffab00;
+    padding: 16px 20px;
+    border-radius: 6px;
+    margin: 15px 0;
+    box-shadow: rgba(255, 171, 0, 0.2) 0px 3px 8px 0px;
+}
+
+.success-box {
+    background: #e8fadf;
+    border-left: 4px solid #16a34a;
+    padding: 16px 20px;
+    border-radius: 6px;
+    margin: 15px 0;
+    box-shadow: rgba(22, 163, 74, 0.2) 0px 3px 8px 0px;
+}
+
+.warning-box {
+    background: #ffe0db;
+    border-left: 4px solid #ff3e1d;
+    padding: 16px 20px;
+    border-radius: 6px;
+    margin: 15px 0;
+    box-shadow: rgba(255, 62, 29, 0.2) 0px 3px 8px 0px;
+}
+
+.info-box {
+    background: #e7e7ff;
+    border-left: 4px solid #696cff;
+    padding: 16px 20px;
+    border-radius: 6px;
+    margin: 15px 0;
+    box-shadow: rgba(105, 108, 255, 0.2) 0px 3px 8px 0px;
+}
+
+.recovery-box {
+    background: #fff2d6;
+    border: 2px solid #ffab00;
+    padding: 24px;
+    border-radius: 6px;
+    margin: 20px 0;
+    box-shadow: rgba(255, 171, 0, 0.2) 0px 3px 8px 0px;
+}
+
+.recovery-box h3 {
+    color: #664400;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.alert-box {
+    padding: 28px;
+    border-radius: 6px;
+    margin-bottom: 30px;
+    border-left: 4px solid;
+    box-shadow: rgba(34, 48, 62, 0.15) 0px 4px 12px 0px;
+}
+
+.alert-critical {
+    background: #ffe0db;
+    border-left-color: #ff3e1d;
+}
+
+.alert-warning {
+    background: #fff2d6;
+    border-left-color: #ffab00;
+}
+
+.alert-success {
+    background: #e8fadf;
+    border-left-color: #16a34a;
+}
+
+.alert-title {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #384551;
+}
+
+/* ============================================================================
+   FINDINGS & RESULTS
+   ============================================================================ */
+.findings {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.finding-box {
+    background: #f9fafb;
+    padding: 24px;
+    border-radius: 6px;
+    border-left: 4px solid;
+    box-shadow: rgba(34, 48, 62, 0.08) 0px 2px 6px 0px;
+}
+
+.finding-box.strengths {
+    border-left-color: #16a34a;
+    background: #e8fadf;
+}
+
+.finding-box.gaps {
+    border-left-color: #ff3e1d;
+    background: #ffe0db;
+}
+
+.finding-box h3 {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #384551;
+    font-weight: 600;
+}
+
+.finding-box ul {
+    list-style: none;
+    padding: 0;
+}
+
+.finding-box li {
+    padding: 8px 0;
+    padding-left: 25px;
+    position: relative;
+}
+
+.finding-box li:before {
+    content: "•";
+    position: absolute;
+    left: 10px;
+    font-size: 1.5em;
+}
+
+.finding-box.strengths li:before {
+    color: #16a34a;
+}
+
+.finding-box.gaps li:before {
+    color: #ff3e1d;
+}
+
+/* ============================================================================
+   ACTION PLANS & TRAINING
+   ============================================================================ */
+.action-plan {
+    background: #e7e7ff;
+    padding: 30px;
+    border-radius: 6px;
+    border: 2px solid #696cff;
+    margin: 20px 0;
+    box-shadow: rgba(105, 108, 255, 0.2) 0px 4px 8px 0px;
+}
+
+.action-plan h3 {
+    font-size: 1.4em;
+    color: #384551;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.action-item {
+    background: #ffffff;
+    padding: 16px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    border: 1px solid #d2d3ff;
+    box-shadow: rgba(34, 48, 62, 0.06) 0px 1px 3px 0px;
+}
+
+.action-item strong {
+    color: #696cff;
+    font-size: 1.05em;
+    font-weight: 600;
+}
+
+.training-plan {
+    background: #e7e7ff;
+    padding: 20px;
+    border-radius: 6px;
+    margin: 15px 0;
+    border: 2px solid #696cff;
+    box-shadow: rgba(105, 108, 255, 0.2) 0px 3px 8px 0px;
+}
+
+.training-plan h3, .training-plan h4 {
+    color: #384551;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.workout-week {
+    background: #ffffff;
+    padding: 14px;
+    border-radius: 6px;
+    margin: 12px 0;
+    border: 1px solid #d2d3ff;
+}
+
+.workout-day {
+    padding: 8px 12px;
+    margin: 6px 0;
+    background: #f9fafb;
+    border-radius: 6px;
+    border-left: 3px solid #696cff;
+}
+
+.workout-day strong {
+    color: #696cff;
+    font-weight: 600;
+}
+
+/* ============================================================================
+   TRAINING CALENDAR STYLES
+   ============================================================================ */
+.training-calendar {
+    display: grid;
+    grid-template-columns: 80px repeat(7, 1fr);
+    gap: 8px;
+    margin: 20px 0;
+    background: #ffffff;
+    padding: 16px;
+    border-radius: 6px;
+    border: 1px solid #e4e6e8;
+}
+
+.calendar-header {
+    font-weight: 600;
+    text-align: center;
+    padding: 12px 8px;
+    background: #e7e7ff;
+    color: #384551;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.calendar-week-label {
+    font-weight: 600;
+    padding: 12px 8px;
+    background: #f9fafb;
+    color: #384551;
+    text-align: center;
+    border-radius: 4px;
+    font-size: 0.85em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-left: 4px solid #696cff;
+}
+
+.calendar-week-label .phase-badge {
+    font-size: 0.75em;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-top: 4px;
+    font-weight: 500;
+}
+
+.calendar-week-label .phase-foundation {
+    background: #e7e7ff;
+    color: #5f61e6;
+}
+
+.calendar-week-label .phase-build {
+    background: #fff2d6;
+    color: #cc8800;
+}
+
+.calendar-week-label .phase-recovery {
+    background: #e8fadf;
+    color: #16a34a;
+}
+
+.calendar-week-label .phase-peak {
+    background: #ffe0db;
+    color: #ff3e1d;
+}
+
+.calendar-day {
+    padding: 10px;
+    background: #f9fafb;
+    border-radius: 4px;
+    border: 1px solid #e4e6e8;
+    min-height: 80px;
+    font-size: 0.85em;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.calendar-day:hover {
+    transform: translateY(-2px);
+    box-shadow: rgba(105, 108, 255, 0.2) 0px 4px 8px 0px;
+    border-color: #696cff;
+}
+
+.calendar-day.rest {
+    background: #ffffff;
+    border-style: dashed;
+}
+
+.calendar-day.intensity-low {
+    border-left: 4px solid #03c3ec;
+}
+
+.calendar-day.intensity-medium {
+    border-left: 4px solid #ffab00;
+}
+
+.calendar-day.intensity-high {
+    border-left: 4px solid #ff3e1d;
+}
+
+.calendar-day.intensity-peak {
+    border-left: 4px solid #991b1b;
+}
+
+.calendar-day-type {
+    font-weight: 600;
+    color: #384551;
+    margin-bottom: 4px;
+    font-size: 0.9em;
+}
+
+.calendar-day-details {
+    color: #646e78;
+    font-size: 0.85em;
+    line-height: 1.4;
+}
+
+/* Training Legend */
+.training-legend {
+    background: white;
+    padding: 20px;
+    border-radius: 6px;
+    margin: 15px 0;
+    box-shadow: rgba(34, 48, 62, 0.1) 0px 2px 4px 0px;
+    border: 1px solid #e4e6e8;
+}
+
+.training-legend h4 {
+    margin-bottom: 15px;
+    color: #384551;
+    font-size: 1.1em;
+}
+
+.legend-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.legend-color {
+    width: 40px;
+    height: 20px;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+/* Phase Colors */
+.legend-color.phase-foundation {
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+}
+
+.legend-color.phase-build {
+    background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+}
+
+.legend-color.phase-recovery {
+    background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+}
+
+.legend-color.phase-peak {
+    background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+}
+
+/* Intensity Colors (shown as bars) */
+.legend-color.intensity-low {
+    background: #10B981;
+    height: 3px;
+}
+
+.legend-color.intensity-medium {
+    background: #F59E0B;
+    height: 3px;
+}
+
+.legend-color.intensity-high {
+    background: #EF4444;
+    height: 3px;
+}
+
+.legend-color.intensity-peak {
+    background: #DC2626;
+    height: 3px;
+}
+
+/* Responsive calendar */
+@media (max-width: 1200px) {
+    .training-calendar {
+        font-size: 0.9em;
+    }
+
+    .calendar-day {
+        min-height: 70px;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 768px) {
+    .training-calendar {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .calendar-header {
+        display: none;
+    }
+
+    .calendar-week-label {
+        border-left: none;
+        border-top: 4px solid #696cff;
+        padding: 10px;
+    }
+
+    .calendar-day {
+        min-height: auto;
+    }
+}
+
+/* ============================================================================
+   CHECKLISTS
+   ============================================================================ */
+.checklist {
+    background: #e7e7ff;
+    border: 2px solid #696cff;
+    padding: 24px;
+    border-radius: 6px;
+    margin: 20px 0;
+    box-shadow: rgba(105, 108, 255, 0.2) 0px 3px 8px 0px;
+}
+
+.checklist h3 {
+    color: #384551;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.checklist ul {
+    list-style: none;
+    padding: 0;
+}
+
+.checklist li {
+    padding: 12px;
+    margin-bottom: 10px;
+    background: #ffffff;
+    border-radius: 6px;
+    padding-left: 40px;
+    position: relative;
+    border: 1px solid #d2d3ff;
+}
+
+.checklist li:before {
+    content: "☐";
+    position: absolute;
+    left: 15px;
+    font-size: 1.2em;
+    color: #696cff;
+}
+
+/* ============================================================================
+   TABLES
+   ============================================================================ */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: #ffffff;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #e4e6e8;
+}
+
+th {
+    background: #e7e7ff;
+    padding: 16px;
+    text-align: left;
+    font-weight: 600;
+    color: #384551;
+    font-size: 0.95em;
+}
+
+td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #e4e6e8;
+    color: #646e78;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+.comparison-table td:nth-child(2),
+.comparison-table td:nth-child(3) {
+    text-align: center;
+}
+
+.positive {
+    color: #16a34a;
+    font-weight: 600;
+}
+
+.negative {
+    color: #ff3e1d;
+    font-weight: 600;
+}
+
+/* ============================================================================
+   TABLE OF CONTENTS
+   ============================================================================ */
+.toc {
+    background: #ffffff;
+    padding: 20px 30px;
+    border-radius: 6px;
+    margin-bottom: 30px;
+    box-shadow: rgba(34, 48, 62, 0.1) 0px 3px 8px 0px;
+    border: 1px solid #e4e6e8;
+}
+
+.toc h2 {
+    color: #384551;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #696cff;
+    padding-bottom: 10px;
+    font-weight: 600;
+}
+
+.toc ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px 20px;
+}
+
+.toc li {
+    padding: 3px 0;
+}
+
+.toc a {
+    color: #696cff;
+    text-decoration: none;
+    transition: color 0.2s;
+    font-weight: 500;
+    font-size: 0.95em;
+}
+
+.toc a:hover {
+    color: #5f61e6;
+    text-decoration: underline;
+}
+
+/* ============================================================================
+   ZONES & CHARTS
+   ============================================================================ */
+.ftp-zones {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+    padding: 28px;
+    background: #ffffff;
+    border-radius: 6px;
+    box-shadow: rgba(34, 48, 62, 0.1) 0px 3px 8px 0px;
+    border: 1px solid #e4e6e8;
+}
+
+.ftp-zone-title {
+    grid-column: 1 / -1;
+    font-size: 1.3em;
+    font-weight: 600;
+    color: #384551;
+    border-bottom: 2px solid #696cff;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+}
+
+.ftp-zone-subtitle {
+    grid-column: 1 / -1;
+    font-size: 0.9em;
+    color: #646e78;
+    margin-bottom: 18px;
+    line-height: 1.6;
+}
+
+.zone-card {
+    background: #f9fafb;
+    padding: 22px;
+    border-radius: 6px;
+    border-left: 4px solid;
+    text-align: center;
+    transition: all 0.2s;
+    border: 1px solid #e4e6e8;
+}
+
+.zone-card:hover {
+    transform: translateY(-3px);
+    box-shadow: rgba(34, 48, 62, 0.15) 0px 4px 12px 0px;
+}
+
+.zone-card.z1 { border-left-color: #03c3ec; }
+.zone-card.z2 { border-left-color: #0891b2; }
+.zone-card.z3 { border-left-color: #ffab00; }
+.zone-card.z4 { border-left-color: #ff3e1d; }
+.zone-card.z5 { border-left-color: #991b1b; }
+
+.zone-name {
+    font-size: 1em;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #384551;
+}
+
+.zone-range {
+    font-size: 0.8em;
+    color: #646e78;
+    margin-bottom: 12px;
+}
+
+.zone-count {
+    font-size: 2.2em;
+    font-weight: 600;
+    color: #384551;
+    margin-bottom: 6px;
+}
+
+.zone-label {
+    font-size: 0.85em;
+    color: #646e78;
+}
+
+.chart-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.chart-container {
+    background: #ffffff;
+    padding: 28px;
+    border-radius: 6px;
+    box-shadow: rgba(34, 48, 62, 0.1) 0px 3px 8px 0px;
+    border: 1px solid #e4e6e8;
+}
+
+.chart-title {
+    font-size: 1.2em;
+    margin-bottom: 22px;
+    color: #384551;
+    border-bottom: 2px solid #696cff;
+    padding-bottom: 12px;
+    font-weight: 600;
+}
+
+.metric-comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 18px 0;
+    padding: 18px;
+    background: #f9fafb;
+    border-radius: 6px;
+    border: 1px solid #e4e6e8;
+}
+
+.metric-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    color: #646e78;
+}
+
+.metric-change {
+    font-weight: 600;
+}
+
+.metric-change.positive { color: #16a34a; }
+.metric-change.negative { color: #ff3e1d; }
+
+/* ============================================================================
+   FOOTER
+   ============================================================================ */
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #646e78;
+    margin-top: 50px;
+}
+
+/* ============================================================================
+   PRINT STYLES
+   ============================================================================ */
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+    .section {
+        page-break-inside: avoid;
+    }
+}
+
+/* ============================================================================
+   RESPONSIVE STYLES
+   ============================================================================ */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.8em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    .nav-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-grid, .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .chart-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .toc ul {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================================================
+   GLOSSARY TOOLTIPS
+   ============================================================================ */
+.glossary-tooltip {
+    position: relative;
+    display: inline;
+}
+
+.glossary-term {
+    /* Term text appears normally in the content */
+    display: inline;
+}
+
+.glossary-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    margin-left: 2px;
+    background: #696cff;
+    color: white;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 600;
+    cursor: help;
+    vertical-align: super;
+    line-height: 1;
+    transition: all 0.2s;
+}
+
+.glossary-icon:hover {
+    background: #5f61e6;
+    transform: scale(1.1);
+}
+
+.glossary-popup {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 8px;
+    min-width: 280px;
+    max-width: 350px;
+    padding: 15px;
+    background: white;
+    border: 2px solid #696cff;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(105, 108, 255, 0.3);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
+    pointer-events: none;
+}
+
+.glossary-popup::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 8px solid transparent;
+    border-top-color: #696cff;
+}
+
+.glossary-popup.active,
+.glossary-popup.hover {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(-5px);
+}
+
+.glossary-popup strong {
+    display: block;
+    color: #696cff;
+    font-size: 0.95em;
+    margin-bottom: 8px;
+}
+
+.glossary-popup p {
+    margin: 0 0 10px 0;
+    font-size: 0.9em;
+    line-height: 1.5;
+    color: #646e78;
+}
+
+.glossary-link {
+    display: inline-block;
+    color: #696cff;
+    text-decoration: none;
+    font-size: 0.85em;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.glossary-link:hover {
+    color: #5f61e6;
+    text-decoration: underline;
+}
+
+/* Mobile adjustments for tooltips */
+@media (max-width: 768px) {
+    .glossary-popup {
+        position: fixed;
+        bottom: auto;
+        left: 10px;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        min-width: auto;
+        max-width: none;
+    }
+
+    .glossary-popup.active,
+    .glossary-popup.hover {
+        transform: translateY(-50%);
+    }
+
+    .glossary-popup::after {
+        display: none;
+    }
+}
+
+/* ============================================
+   ENHANCED WORKOUT CALENDAR
+   ============================================ */
+
+/* Training Calendar - Standard Layout with Weekdays on Top */
+.training-calendar-enhanced {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e4e6e8;
+    box-shadow: rgba(34, 48, 62, 0.08) 0px 2px 4px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+}
+
+/* Calendar Header with Weekday Names */
+.calendar-header {
+    display: grid;
+    grid-template-columns: 120px repeat(7, 1fr);
+    background: linear-gradient(135deg, #696cff 0%, #5a5fc7 100%);
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    border-bottom: 2px solid #5a5fc7;
+    border-radius: 6px;
+}
+
+.week-label-header {
+    padding: 12px 15px;
+    background: rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    border-top-left-radius: 6px;
+}
+
+.day-header {
+    padding: 12px 8px;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.day-header:last-child {
+    border-right: none;
+    border-top-right-radius: 6px;
+}
+
+/* Week Row */
+.week-row {
+    display: grid;
+    grid-template-columns: 120px repeat(7, 1fr);
+    border: 1px solid #e4e6e8;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.week-row:last-child {
+    margin-bottom: 0;
+}
+
+/* Week Label (Left Column) */
+.week-label {
+    background: #f9fafb;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    border-right: 2px solid #e4e6e8;
+    text-align: center;
+}
+
+.week-number {
+    font-size: 1.1em;
+    font-weight: 700;
+    color: #1F2937;
+}
+
+.phase-name {
+    font-size: 0.75em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    color: white;
+}
+
+/* Phase color coding */
+.week-label.phase-foundation .phase-name {
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+}
+
+.week-label.phase-build .phase-name {
+    background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+}
+
+.week-label.phase-peak .phase-name {
+    background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+}
+
+.week-label.phase-recovery .phase-name {
+    background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+}
+
+/* Day Cells */
+.day-cell {
+    background: white;
+    padding: 10px 8px;
+    min-height: 85px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-right: 1px solid #e4e6e8;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.day-cell:last-child {
+    border-right: none;
+}
+
+.day-cell:hover {
+    background: #f9fafb;
+    transform: scale(1.02);
+    box-shadow: inset 0 0 0 2px #696cff;
+    z-index: 1;
+}
+
+.day-cell.rest {
+    background: #fafafa;
+    cursor: default;
+    opacity: 0.7;
+}
+
+.day-cell.rest:hover {
+    transform: none;
+    box-shadow: none;
+    background: #fafafa;
+}
+
+/* Intensity border indicators */
+.day-cell.intensity-low {
+    border-top: 3px solid #10B981;
+}
+
+.day-cell.intensity-medium {
+    border-top: 3px solid #F59E0B;
+}
+
+.day-cell.intensity-high {
+    border-top: 3px solid #EF4444;
+}
+
+.day-cell.intensity-peak {
+    border-top: 3px solid #DC2626;
+}
+
+.workout-name {
+    font-size: 0.85em;
+    font-weight: 600;
+    color: #1F2937;
+    margin-bottom: 4px;
+    line-height: 1.3;
+}
+
+.workout-duration {
+    font-size: 0.75em;
+    color: #9CA3AF;
+    font-weight: 500;
+}
+
+/* View Details Hint */
+.view-details-hint {
+    font-size: 0.75em;
+    color: #696cff;
+    margin-top: 4px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.day-card:hover .view-details-hint {
+    opacity: 1;
+}
+
+/* Modal Styles */
+.workout-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 10000;
+    overflow-y: auto;
+    padding: 20px;
+    animation: fadeIn 0.2s ease-out;
+}
+
+.workout-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background: white;
+    border-radius: 12px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 60px;
+    animation: slideUp 0.3s ease-out;
+    position: relative;
+}
+
+/* Modal Header */
+.modal-header {
+    background: linear-gradient(135deg, #696cff 0%, #5f61e6 100%);
+    color: white;
+    padding: 24px 30px;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.modal-header-content {
+    flex: 1;
+}
+
+.modal-header h3 {
+    font-size: 1.5em;
+    margin-bottom: 0;
+    font-weight: 600;
+    color: white;
+}
+
+.close-modal {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    font-size: 1.8em;
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.close-modal:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Modal Body */
+.modal-body {
+    padding: 30px;
+}
+
+/* Key Metrics */
+.key-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.metric-card {
+    background: linear-gradient(135deg, #f9fafb 0%, #f0f1f5 100%);
+    padding: 12px 16px;
+    border-radius: 6px;
+    border: 1px solid #e4e6e8;
+}
+
+.metric-label {
+    font-size: 0.75em;
+    color: #646e78;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+.metric-value {
+    font-size: 1.4em;
+    font-weight: 700;
+    color: #1F2937;
+}
+
+.workout-description {
+    background: #f9fafb;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 18px;
+    border-left: 4px solid #696cff;
+}
+
+.workout-description h4 {
+    color: #384551;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+}
+
+.workout-description p {
+    color: #646e78;
+    line-height: 1.6;
+}
+
+/* Workout Visualization */
+.workout-visualization {
+    margin-bottom: 18px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e4e6e8;
+}
+
+.workout-visualization h4 {
+    color: #384551;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.workout-visualization svg {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Workout Structure */
+.workout-structure {
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #e4e6e8;
+}
+
+.workout-structure h4 {
+    color: #384551;
+    padding: 20px 20px 15px 20px;
+    font-size: 1.1em;
+    border-bottom: 1px solid #e4e6e8;
+}
+
+.segments-list {
+    padding: 15px;
+}
+
+.segment {
+    display: grid;
+    grid-template-columns: 80px 120px 1fr;
+    gap: 15px;
+    padding: 15px;
+    background: #f9fafb;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    align-items: center;
+    border-left: 4px solid #e4e6e8;
+    transition: all 0.2s;
+}
+
+.segment:hover {
+    background: #f0f1f5;
+    transform: translateX(4px);
+}
+
+.segment:last-child {
+    margin-bottom: 0;
+}
+
+/* Segment Type Colors */
+.segment.warmup {
+    border-left-color: #10B981;
+}
+
+.segment.interval,
+.segment.work {
+    border-left-color: #EF4444;
+}
+
+.segment.recovery {
+    border-left-color: #3B82F6;
+}
+
+.segment.cooldown {
+    border-left-color: #10B981;
+}
+
+.segment.tempo {
+    border-left-color: #F59E0B;
+}
+
+.segment-duration {
+    font-weight: 700;
+    color: #1F2937;
+    font-size: 1.1em;
+}
+
+.segment-power {
+    font-weight: 600;
+    color: #696cff;
+    font-size: 1em;
+}
+
+.segment-desc {
+    color: #4B5563;
+    font-size: 0.95em;
+}
+
+/* Repeat Set Styles */
+.repeat-set {
+    background: #f0f4ff;
+    border: 2px dashed #696cff;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.repeat-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #d0d7ff;
+}
+
+.repeat-badge {
+    background: linear-gradient(135deg, #696cff 0%, #5f61e6 100%);
+    color: white;
+    font-weight: 700;
+    font-size: 1.1em;
+    padding: 6px 14px;
+    border-radius: 6px;
+    box-shadow: rgba(105, 108, 255, 0.3) 0px 2px 6px;
+}
+
+.repeat-label {
+    color: #5f61e6;
+    font-weight: 600;
+    font-size: 0.95em;
+}
+
+.repeat-segments {
+    padding-left: 10px;
+}
+
+.repeat-segments .segment {
+    margin-bottom: 8px;
+}
+
+.repeat-segments .segment:last-child {
+    margin-bottom: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .calendar-header,
+    .week-row {
+        grid-template-columns: 100px repeat(7, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .training-calendar-enhanced {
+        overflow-x: auto;
+    }
+
+    .calendar-header,
+    .week-row {
+        grid-template-columns: 90px repeat(7, minmax(80px, 1fr));
+        min-width: 700px;
+    }
+
+    .modal-content {
+        margin: 0;
+        border-radius: 0;
+        max-height: 100vh;
+    }
+
+    .modal-header {
+        border-radius: 0;
+    }
+
+    .segment {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .key-metrics {
+        grid-template-columns: 1fr;
+    }
+
+    .workout-visualization svg {
+        max-width: 100%;
+    }
+}

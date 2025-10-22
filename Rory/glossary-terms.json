@@ -1,0 +1,179 @@
+{
+  "terms": {
+    "FTP": {
+      "full_name": "Functional Threshold Power",
+      "short_definition": "The maximum power you can sustain for approximately 60 minutes. Measured in watts (W).",
+      "category": "power"
+    },
+    "W/kg": {
+      "full_name": "Watts per Kilogram",
+      "short_definition": "Your power output divided by body weight. Critical for climbing performance.",
+      "category": "power"
+    },
+    "NP": {
+      "full_name": "Normalized Power",
+      "short_definition": "Weighted average power that accounts for the physiological cost of power variability.",
+      "category": "power"
+    },
+    "VI": {
+      "full_name": "Variability Index",
+      "short_definition": "Ratio of Normalized Power to Average Power (NP ÷ AP). Measures pacing consistency.",
+      "category": "power"
+    },
+    "TSS": {
+      "full_name": "Training Stress Score",
+      "short_definition": "Quantifies training stress from a workout based on intensity and duration. 100 TSS = 1 hour at FTP.",
+      "category": "load"
+    },
+    "CTL": {
+      "full_name": "Chronic Training Load",
+      "short_definition": "Your fitness level, calculated as a 42-day rolling average of daily TSS. Also called 'fitness'.",
+      "category": "load"
+    },
+    "ATL": {
+      "full_name": "Acute Training Load",
+      "short_definition": "Your fatigue level, calculated as a 7-day rolling average of daily TSS. Also called 'fatigue'.",
+      "category": "load"
+    },
+    "TSB": {
+      "full_name": "Training Stress Balance",
+      "short_definition": "Your freshness/readiness level (CTL - ATL). Optimal for racing: -5 to +5.",
+      "category": "load"
+    },
+    "ACWR": {
+      "full_name": "Acute:Chronic Workload Ratio",
+      "short_definition": "Ratio of recent training (7 days) to long-term training (28 days). Optimal: 0.8-1.3.",
+      "category": "load"
+    },
+    "Zone 1": {
+      "full_name": "Active Recovery Zone",
+      "short_definition": "0-60% FTP. Very easy spinning, conversational pace. Promotes recovery without fatigue.",
+      "category": "zones"
+    },
+    "Z1": {
+      "full_name": "Active Recovery Zone",
+      "short_definition": "0-60% FTP. Very easy spinning, conversational pace. Promotes recovery without fatigue.",
+      "category": "zones"
+    },
+    "Zone 2": {
+      "full_name": "Endurance Zone",
+      "short_definition": "60-80% FTP. Foundation of aerobic fitness. Builds mitochondrial density and fat oxidation.",
+      "category": "zones"
+    },
+    "Z2": {
+      "full_name": "Endurance Zone",
+      "short_definition": "60-80% FTP. Foundation of aerobic fitness. Builds mitochondrial density and fat oxidation.",
+      "category": "zones"
+    },
+    "Zone 3": {
+      "full_name": "Tempo Zone",
+      "short_definition": "80-90% FTP. Moderately hard, steady effort. Improves lactate clearance and muscular endurance.",
+      "category": "zones"
+    },
+    "Z3": {
+      "full_name": "Tempo Zone",
+      "short_definition": "80-90% FTP. Moderately hard, steady effort. Improves lactate clearance and muscular endurance.",
+      "category": "zones"
+    },
+    "Zone 4": {
+      "full_name": "Threshold Zone",
+      "short_definition": "90-110% FTP. Sustained hard effort near lactate threshold. Your 'race pace' for 20-60 min efforts.",
+      "category": "zones"
+    },
+    "Z4": {
+      "full_name": "Threshold Zone",
+      "short_definition": "90-110% FTP. Sustained hard effort near lactate threshold. Your 'race pace' for 20-60 min efforts.",
+      "category": "zones"
+    },
+    "Zone 5": {
+      "full_name": "VO2 Max Zone",
+      "short_definition": ">110% FTP. Very hard intervals (2-8 min). Expands aerobic ceiling and maximum oxygen uptake.",
+      "category": "zones"
+    },
+    "Z5": {
+      "full_name": "VO2 Max Zone",
+      "short_definition": ">110% FTP. Very hard intervals (2-8 min). Expands aerobic ceiling and maximum oxygen uptake.",
+      "category": "zones"
+    },
+    "EF": {
+      "full_name": "Efficiency Factor",
+      "short_definition": "Ratio of Normalized Power to average heart rate (NP ÷ HR). Rising EF indicates improving aerobic efficiency.",
+      "category": "efficiency"
+    },
+    "Pa:HR": {
+      "full_name": "Power-to-Heart Rate Decoupling",
+      "short_definition": "Compares power/HR ratio in first vs. second half of ride. <5% indicates strong aerobic base.",
+      "category": "efficiency"
+    },
+    "TTE": {
+      "full_name": "Time to Exhaustion at FTP",
+      "short_definition": "How long you can sustain FTP before failure. Well-trained: 35-50 minutes.",
+      "category": "efficiency"
+    },
+    "VO2 Max": {
+      "full_name": "Maximum Oxygen Uptake",
+      "short_definition": "Maximum rate your body can consume oxygen during maximal exercise (ml/kg/min). Sets your aerobic ceiling.",
+      "category": "performance"
+    },
+    "Lactate Threshold": {
+      "full_name": "Lactate Threshold",
+      "short_definition": "Exercise intensity where lactate accumulates faster than it can be cleared. Closely related to FTP.",
+      "category": "performance"
+    },
+    "Polarized Training": {
+      "full_name": "Polarized Training",
+      "short_definition": "~80% training time easy (Z1-Z2), ~20% hard (Z4-Z5+), minimal Z3. Used by elite endurance athletes.",
+      "category": "concepts"
+    },
+    "Pyramidal Training": {
+      "full_name": "Pyramidal Training",
+      "short_definition": "Most time in Z2, moderate in Z3/Z4, small amount in Z5. Common among masters/time-limited athletes.",
+      "category": "concepts"
+    },
+    "Threshold Training": {
+      "full_name": "Threshold Training",
+      "short_definition": "Heavy focus on Z3-Z4 work (40-50% training time). Rapidly improves FTP but high burnout risk.",
+      "category": "concepts"
+    },
+    "Periodization": {
+      "full_name": "Periodization",
+      "short_definition": "Systematic planning of training into phases: Base → Build → Peak → Recovery → Race.",
+      "category": "concepts"
+    },
+    "Deload Week": {
+      "full_name": "Deload Week",
+      "short_definition": "Planned recovery week with 40-60% volume reduction every 3-4 weeks. Allows body to absorb training stress.",
+      "category": "concepts"
+    },
+    "Progressive Overload": {
+      "full_name": "Progressive Overload",
+      "short_definition": "Gradually increasing training stress over time. Typically 5-10% weekly TSS increase when building.",
+      "category": "concepts"
+    },
+    "Durability": {
+      "full_name": "Durability",
+      "short_definition": "Ability to maintain power late in long rides. Measured by comparing final hour vs. first hour power.",
+      "category": "efficiency"
+    },
+    "Sweet Spot": {
+      "full_name": "Sweet Spot Training",
+      "short_definition": "Upper Zone 3 (~88-93% FTP). Substantial stimulus without excessive fatigue. Efficient for time-limited athletes.",
+      "category": "zones"
+    },
+    "Cadence": {
+      "full_name": "Cadence",
+      "short_definition": "Pedal revolutions per minute (rpm). Typically 85-95 rpm for endurance, 95-105 for climbing.",
+      "category": "performance"
+    },
+    "Power-Duration Curve": {
+      "full_name": "Power-Duration Curve",
+      "short_definition": "Graph showing best power outputs across durations (5s, 1min, 5min, 20min, 60min). Reveals your phenotype.",
+      "category": "power"
+    },
+    "Consistency Score": {
+      "full_name": "Consistency Score",
+      "short_definition": "Percentage of planned sessions completed. High consistency: >85% sessions, low weekly variation.",
+      "category": "performance"
+    }
+  }
+}

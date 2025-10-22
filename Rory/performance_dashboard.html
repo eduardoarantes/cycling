@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cycling Performance Dashboard - Template</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="shared-styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="glossary-tooltips.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 id="dashboardTitle"><i class='bx bx-cycling'></i> Cycling Performance Dashboard</h1>
+            <div class="subtitle" id="dashboardSubtitle">Analysis Period</div>
+        </header>
+
+        <!-- Navigation Links -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding: 18px; background: #ffffff; border-radius: 6px; box-shadow: rgba(34, 48, 62, 0.1) 0px 3px 8px 0px; border: 1px solid #e4e6e8;">
+            <a href="index.html" style="color: #696cff; text-decoration: none; font-size: 1em; display: flex; align-items: center; gap: 8px; font-weight: 500; transition: color 0.2s;">
+                <i class='bx bx-arrow-back'></i> Back to Summary
+            </a>
+            <a href="coaching_report.html" style="color: #696cff; text-decoration: none; font-size: 1em; display: flex; align-items: center; gap: 8px; font-weight: 500; transition: color 0.2s;">
+                View Coaching Report <i class='bx bx-arrow-to-right'></i>
+            </a>
+        </div>
+
+        <!-- Athlete Statistics -->
+        <div class="athlete-stats">
+            <div class="stat-card ftp">
+                <div class="stat-label">Functional Threshold Power</div>
+                <div class="stat-value" id="ftpValue">255<span class="stat-unit">W</span></div>
+                <div class="stat-label" id="ftpPerKg">3.04 W/kg</div>
+            </div>
+            <div class="stat-card weight">
+                <div class="stat-label">Weight</div>
+                <div class="stat-value" id="weightValue">84<span class="stat-unit">kg</span></div>
+            </div>
+            <div class="stat-card age">
+                <div class="stat-label">Age</div>
+                <div class="stat-value" id="ageValue">51<span class="stat-unit">years</span></div>
+            </div>
+            <div class="stat-card hr">
+                <div class="stat-label">Max Heart Rate</div>
+                <div class="stat-value" id="maxHrValue">169<span class="stat-unit">bpm</span></div>
+            </div>
+        </div>
+
+        <!-- FTP Zones Distribution -->
+        <div class="ftp-zones" id="ftpZonesContainer">
+            <div class="ftp-zone-title"><i class='bx bx-bolt'></i> Training Intensity Zones (Last 6 Months)</div>
+            <div class="ftp-zone-subtitle" id="ftpZonesSubtitle"></div>
+            <!-- Zone cards will be populated by JavaScript -->
+        </div>
+
+        <!-- Alerts Section -->
+        <div id="alertsContainer"></div>
+
+        <!-- Performance Comparison -->
+        <div class="chart-grid">
+            <div class="chart-container">
+                <div class="chart-title"><i class='bx bx-bar-chart-alt-2'></i> Period Comparison: Last 6M vs Previous 12M (Weekly Averages)</div>
+                <canvas id="periodComparisonChart"></canvas>
+                <div class="metric-comparison" id="metricComparison"></div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title"><i class='bx bx-bolt'></i> Power Zones Distribution (Actual Time-in-Zone)</div>
+                <canvas id="powerZonesChart"></canvas>
+                <div id="powerZonesInsight" style="margin-top: 15px; padding: 15px; background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border-radius: 8px; border-left: 3px solid #d97706;"></div>
+            </div>
+        </div>
+
+        <div class="chart-grid">
+            <div class="chart-container">
+                <div class="chart-title"><i class='bx bx-heart'></i> Heart Rate Zones Distribution</div>
+                <canvas id="hrZonesChart"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title"><i class='bx bx-cycling'></i> Ride Type Breakdown</div>
+                <canvas id="rideTypesChart"></canvas>
+                <div id="rideTypesInsight" style="margin-top: 15px; font-size: 0.95em; line-height: 1.6;"></div>
+            </div>
+        </div>
+
+        <div class="chart-grid">
+            <div class="chart-container">
+                <div class="chart-title"><i class='bx bx-calendar'></i> Monthly Volume Progression</div>
+                <canvas id="monthlyVolumeChart"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title"><i class='bx bx-line-chart'></i> Top 5 Power Performances</div>
+                <canvas id="topPowerChart"></canvas>
+                <div id="topPowerInsight" style="margin-top: 15px; font-size: 0.9em; opacity: 0.8;"></div>
+            </div>
+        </div>
+
+        <!-- Weekly Rides Chart -->
+        <div style="margin-bottom: 30px;">
+            <div class="chart-container">
+                <div class="chart-title"><i class='bx bx-bar-chart-alt-2'></i> Weekly Ride Frequency - Outdoor vs Indoor</div>
+                <canvas id="weeklyRidesChart" style="max-height: 400px;"></canvas>
+                <div id="weeklyRidesInsight" style="margin-top: 15px; padding: 15px; background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-radius: 8px; border-left: 3px solid #2563eb;"></div>
+            </div>
+        </div>
+
+        <!-- Training Plan Reference -->
+        <div style="margin-bottom: 30px;">
+            <div class="chart-container">
+                <div class="chart-title"><i class='bx bx-clipboard'></i> 12-Week Progressive Training Plan</div>
+                <div style="padding: 30px; text-align: center; background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-radius: 8px; border: 2px solid #2563eb;">
+                    <h3 style="color: #1e40af; margin-bottom: 15px;">Complete Training Plan Available</h3>
+                    <p style="font-size: 1.1em; line-height: 1.7; margin-bottom: 20px; color: #384551;">
+                        Your personalized 12-week training plan with day-by-day workouts, power targets, and recovery guidelines is available in the full coaching report.
+                    </p>
+                    <a href="coaching_report.html#training-plan" style="display: inline-block; background: #2563eb; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 600; transition: background 0.2s;">
+                        View Full Training Plan →
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <footer id="dashboardFooter">
+            <p>Dashboard generated from performance data</p>
+        </footer>
+    </div>
+
+    <script>
+        // ============================================================================
+        // DATA CONFIGURATION
+        // ============================================================================
+        //
+        // INSTRUCTIONS FOR POPULATING THIS TEMPLATE:
+        //
+        // 1. Update the DASHBOARD_CONFIG section with athlete profile and metadata
+        // 2. Update the PERIOD_COMPARISON section with recent vs previous period stats
+        // 3. Update the POWER_ZONES section with zone distribution percentages
+        // 4. Update the HR_ZONES section with heart rate zone distribution
+        // 5. Update the RIDE_TYPES section with ride classification counts
+        // 6. Update the MONTHLY_DATA section with month-by-month progression
+        // 7. Update the TOP_PERFORMANCES section with best power rides
+        // 8. Update the WEEKLY_RIDES section with weekly frequency data
+        // 9. Update the ALERTS section with key insights and recommendations
+        //
+        // All data should come from your cycling performance analysis tools.
+        // ============================================================================
+
+        const DATA = {
+  "dashboard": {
+    "athleteName": "",
+    "analysisStartDate": "April 2025",
+    "analysisEndDate": "October 2025",
+    "generatedDate": "October 23, 2025",
+    "totalActivities": 20,
+    "cyclingActivities": 20,
+    "recentPeriodActivities": 20,
+    "outdoorRides": 15,
+    "indoorRides": 5
+  },
+  "athlete": {
+    "ftp": 170,
+    "weight": 82,
+    "age": 36,
+    "maxHr": 185
+  },
+  "periodComparison": {
+    "recent": {
+      "weeks": 25,
+      "ridesPerWeek": 1.6,
+      "distancePerWeek": 38,
+      "timePerWeek": 1.7,
+      "elevationPerWeek": 305,
+      "avgPower": 107,
+      "avgHr": 133
+    },
+    "previous": {
+      "weeks": 52,
+      "ridesPerWeek": 1.2,
+      "distancePerWeek": 29,
+      "timePerWeek": 1.3,
+      "elevationPerWeek": 283,
+      "avgPower": 139,
+      "avgHr": 137
+    },
+    "trends": {
+      "distanceChangePct": 31.4,
+      "timeChangePct": 27.8,
+      "powerChangePct": -23.1,
+      "hrChangePct": -2.8,
+      "elevationChangePct": 7.7,
+      "distance": "+31.4%",
+      "power": "-23.1%",
+      "hr": "-2.8%",
+      "frequency": "+33.8%"
+    }
+  },
+  "ftpZones": {
+    "z1Percent": 42.4,
+    "z1Hours": 7.6,
+    "z2Percent": 21.7,
+    "z2Hours": 3.9,
+    "z3Percent": 8.5,
+    "z3Hours": 1.5,
+    "z4Percent": 13.4,
+    "z4Hours": 2.4,
+    "z5Percent": 14.0,
+    "z5Hours": 2.5,
+    "totalHours": 18.0,
+    "totalFiles": 20
+  },
+  "powerZones": {
+    "z1": 42.4,
+    "z2": 21.7,
+    "z3": 8.5,
+    "z4": 13.4,
+    "z5": 14.0,
+    "insight": "High intensity training volume (27.4% in Z4-Z5). This is sustainable short-term but may lead to burnout. Ensure adequate recovery and Z1-Z2 time (64.2%)."
+  },
+  "hrZones": {
+    "Z1 (Recovery)": {
+      "percentage": 20,
+      "range": "<111 bpm"
+    },
+    "Z2 (Endurance)": {
+      "percentage": 55,
+      "range": "111-129 bpm"
+    },
+    "Z3 (Tempo)": {
+      "percentage": 15,
+      "range": "129-148 bpm"
+    },
+    "Z4 (Threshold)": {
+      "percentage": 8,
+      "range": "148-166 bpm"
+    },
+    "Z5 (Max)": {
+      "percentage": 2,
+      "range": ">166 bpm"
+    },
+    "z1": 20,
+    "z2": 55,
+    "z3": 15,
+    "z4": 8,
+    "z5": 2
+  },
+  "rideTypes": {
+    "long": 0,
+    "medium": 3,
+    "short": 17,
+    "indoor": 5,
+    "outdoor": 15,
+    "endurance": 13,
+    "tempo": 4,
+    "threshold": 2,
+    "highIntensity": 1,
+    "insight": "Based on 20 total rides. Estimated: 13 endurance, 4 tempo, 2 threshold, 1 high intensity."
+  },
+  "monthlyData": {
+    "labels": [
+      "April 2025",
+      "May 2025",
+      "June 2025",
+      "July 2025",
+      "August 2025",
+      "September 2025"
+    ],
+    "distance": [
+      0.0,
+      0.0,
+      40.3,
+      82.2,
+      215.1,
+      154.4
+    ],
+    "rides": [
+      0,
+      0,
+      2,
+      4,
+      9,
+      5
+    ],
+    "elevation": [
+      0,
+      0,
+      371,
+      436,
+      1889,
+      1183
+    ]
+  },
+  "topPerformances": {
+    "labels": [
+      "2025-01-29 - Virtual Ride - ",
+      "2025-01-20 - Virtual Ride - ",
+      "2025-02-03 - Virtual Ride - ",
+      "2025-03-07 - Virtual Ride - ",
+      "2025-01-17 - Virtual Ride - "
+    ],
+    "avgPower": [
+      165,
+      161,
+      155,
+      146,
+      137
+    ],
+    "normalizedPower": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "insight": "Last high-power ride was 9 months ago (2025-01-29, 165W). Consider adding more intensity."
+  },
+  "weeklyRides": {
+    "avgRidesPerWeek": 0.8,
+    "outdoorPerWeek": 0.6,
+    "indoorPerWeek": 0.2,
+    "consistency": "Low",
+    "weeks": [
+      "Apr W1",
+      "Apr W2",
+      "Apr W3",
+      "Apr W4",
+      "May W1",
+      "May W2",
+      "May W3",
+      "May W4",
+      "Jun W1",
+      "Jun W2",
+      "Jun W3",
+      "Jun W4",
+      "Jul W1",
+      "Jul W2",
+      "Jul W3",
+      "Jul W4",
+      "Aug W1",
+      "Aug W2",
+      "Aug W3",
+      "Aug W4",
+      "Sep W1",
+      "Sep W2",
+      "Sep W3",
+      "Sep W4"
+    ],
+    "outdoor": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1
+    ],
+    "indoor": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    "insight": "Low consistency with 0.8 rides/week average. Indoor/outdoor split: 25%/75%."
+  },
+  "alerts": [
+    {
+      "type": "info",
+      "title": "Aerobic Base",
+      "message": "64.2% in easy zones (Z1-Z2). Consider increasing base endurance work to 75-80%."
+    },
+    {
+      "type": "warning",
+      "title": "Low Ride Frequency",
+      "message": "Only 1.6 rides/week. Try to increase to 3-4 rides minimum for better progress."
+    },
+    {
+      "type": "warning",
+      "title": "Power Declining",
+      "message": "Power down 23.1%. Check for overtraining, inadequate recovery, or need for FTP test."
+    }
+  ]
+};
+
+        // ============================================================================
+        // CHART RENDERING CODE
+        // ============================================================================
+        // You don't need to modify anything below this line unless customizing styles
+        // ============================================================================
+
+        // Helper function to safely set element content (prevents errors if element doesn't exist)
+        function safeSetElement(id, content, isHTML = false) {
+            const element = document.getElementById(id);
+            if (element) {
+                if (isHTML) {
+                    element.innerHTML = content;
+                } else {
+                    element.textContent = content;
+                }
+            }
+        }
+
+        // Populate dashboard header and athlete info
+        safeSetElement('dashboardTitle', `<i class='bx bx-cycling'></i> ${DATA.dashboard.athleteName} - Cycling Performance Dashboard`, true);
+        safeSetElement('dashboardSubtitle', `Analysis Period: ${DATA.dashboard.analysisStartDate} - ${DATA.dashboard.analysisEndDate} | Generated: ${DATA.dashboard.generatedDate}`);
+        safeSetElement('ftpValue', `${DATA.athlete.ftp}<span class="stat-unit">W</span>`, true);
+        safeSetElement('ftpPerKg', `${(DATA.athlete.ftp / DATA.athlete.weight).toFixed(2)} W/kg`);
+        safeSetElement('weightValue', `${DATA.athlete.weight}<span class="stat-unit">kg</span>`, true);
+        safeSetElement('ageValue', `${DATA.athlete.age}<span class="stat-unit">years</span>`, true);
+        safeSetElement('maxHrValue', `${DATA.athlete.maxHr}<span class="stat-unit">bpm</span>`, true);
+
+        // Populate FTP Zones
+        const ftpZonesContainer = document.getElementById('ftpZonesContainer');
+        const z1Range = `0-${Math.round(DATA.athlete.ftp * 0.6)}W`;
+        const z2Range = `${Math.round(DATA.athlete.ftp * 0.6)}-${Math.round(DATA.athlete.ftp * 0.8)}W`;
+        const z3Range = `${Math.round(DATA.athlete.ftp * 0.8)}-${Math.round(DATA.athlete.ftp * 0.9)}W`;
+        const z4Range = `${Math.round(DATA.athlete.ftp * 0.9)}-${Math.round(DATA.athlete.ftp * 1.1)}W`;
+        const z5Range = `>${Math.round(DATA.athlete.ftp * 1.1)}W`;
+
+        document.getElementById('ftpZonesSubtitle').innerHTML = `
+            <strong>Actual Time-in-Zone Analysis:</strong> Based on second-by-second power data from .fit files (not ride averages).
+            Your FTP is ${DATA.athlete.ftp}W. Total: ${DATA.ftpZones.totalHours} hours analyzed from ${DATA.ftpZones.totalFiles} files with power data.
+        `;
+
+        const zonesHTML = `
+            <div class="zone-card z1">
+                <div class="zone-name">Z1: Active Recovery</div>
+                <div class="zone-range">0-60% FTP<br>(${z1Range})</div>
+                <div class="zone-count">${DATA.ftpZones.z1Percent}%</div>
+                <div class="zone-label">${DATA.ftpZones.z1Hours} hrs</div>
+            </div>
+            <div class="zone-card z2">
+                <div class="zone-name">Z2: Endurance</div>
+                <div class="zone-range">60-80% FTP<br>(${z2Range})</div>
+                <div class="zone-count">${DATA.ftpZones.z2Percent}%</div>
+                <div class="zone-label">${DATA.ftpZones.z2Hours} hrs</div>
+            </div>
+            <div class="zone-card z3">
+                <div class="zone-name">Z3: Tempo</div>
+                <div class="zone-range">80-90% FTP<br>(${z3Range})</div>
+                <div class="zone-count">${DATA.ftpZones.z3Percent}%</div>
+                <div class="zone-label">${DATA.ftpZones.z3Hours} hrs</div>
+            </div>
+            <div class="zone-card z4">
+                <div class="zone-name">Z4: Threshold</div>
+                <div class="zone-range">90-110% FTP<br>(${z4Range})</div>
+                <div class="zone-count">${DATA.ftpZones.z4Percent}%</div>
+                <div class="zone-label">${DATA.ftpZones.z4Hours} hrs</div>
+            </div>
+            <div class="zone-card z5">
+                <div class="zone-name">Z5: VO2 Max</div>
+                <div class="zone-range">>110% FTP<br>(${z5Range})</div>
+                <div class="zone-count">${DATA.ftpZones.z5Percent}%</div>
+                <div class="zone-label">${DATA.ftpZones.z5Hours} hrs</div>
+            </div>
+        `;
+        ftpZonesContainer.insertAdjacentHTML('beforeend', zonesHTML);
+
+        // Populate alerts
+        const alertsContainer = document.getElementById('alertsContainer');
+        DATA.alerts.forEach(alert => {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert-box alert-${alert.type}`;
+            alertDiv.innerHTML = `
+                <div class="alert-title">${alert.title}</div>
+                <p style="font-size: 1.1em; line-height: 1.6;">${alert.message}</p>
+            `;
+            alertsContainer.appendChild(alertDiv);
+        });
+
+        // Populate metric comparison
+        document.getElementById('metricComparison').innerHTML = `
+            <div class="metric-item">
+                <span>Weekly Distance:</span>
+                <span class="metric-change ${DATA.periodComparison.trends.distance.startsWith('+') ? 'positive' : 'negative'}">${DATA.periodComparison.trends.distance}</span>
+            </div>
+            <div class="metric-item">
+                <span>Average Power:</span>
+                <span class="metric-change ${DATA.periodComparison.trends.power.startsWith('+') ? 'positive' : 'negative'}">${DATA.periodComparison.trends.power}</span>
+            </div>
+            <div class="metric-item">
+                <span>Average HR:</span>
+                <span class="metric-change ${DATA.periodComparison.trends.hr.startsWith('+') ? 'positive' : 'negative'}">${DATA.periodComparison.trends.hr}</span>
+            </div>
+            <div class="metric-item">
+                <span>Rides per Week:</span>
+                <span class="metric-change ${DATA.periodComparison.trends.frequency.startsWith('+') ? 'positive' : 'negative'}">${DATA.periodComparison.trends.frequency}</span>
+            </div>
+        `;
+
+        // Populate insights
+        document.getElementById('powerZonesInsight').innerHTML = `<strong style="color: #664400;"><i class='bx bx-bulb'></i> Analysis:</strong> ${DATA.powerZones.insight}`;
+        document.getElementById('rideTypesInsight').innerHTML = `<strong>Analysis:</strong> ${DATA.rideTypes.insight}`;
+        document.getElementById('topPowerInsight').textContent = DATA.topPerformances.insight;
+        document.getElementById('weeklyRidesInsight').innerHTML = `<strong style="color: #384551;"><i class='bx bx-bulb'></i> Insight:</strong> ${DATA.weeklyRides.insight}`;
+
+        // Populate footer
+        document.getElementById('dashboardFooter').innerHTML = `
+            <div style="margin-bottom: 20px;">
+                <a href="index.html" style="color: #696cff; text-decoration: none; margin: 0 15px; font-weight: 500;"><i class='bx bx-arrow-back'></i> Back to Summary</a>
+                <a href="coaching_report.html" style="color: #696cff; text-decoration: none; margin: 0 15px; font-weight: 500;">View Coaching Report <i class='bx bx-arrow-to-right'></i></a>
+            </div>
+            <p>Dashboard generated from cached performance data (${DATA.dashboard.totalActivities} total activities, ${DATA.dashboard.cyclingActivities} cycling activities)</p>
+            <p>Recent period: ${DATA.dashboard.recentPeriodActivities} cycling activities (${DATA.dashboard.outdoorRides} outdoor + ${DATA.dashboard.indoorRides} indoor)</p>
+            <p>Analysis date: ${DATA.dashboard.generatedDate}</p>
+        `;
+
+        // Training Plan removed from dashboard - see coaching_report.html for full plan
+
+        // Chart.js default settings
+        Chart.defaults.color = '#646e78';
+        Chart.defaults.borderColor = '#e4e6e8';
+        Chart.defaults.font.family = "'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, sans-serif";
+
+        // Period Comparison Chart - Weekly Averages
+        const periodCtx = document.getElementById('periodComparisonChart').getContext('2d');
+        new Chart(periodCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Rides/week', 'Distance/week (km)', 'Time/week (hrs)', 'Elevation/week (m)', 'Avg Power (W)', 'Avg HR (bpm)'],
+                datasets: [{
+                    label: `Recent Period (${DATA.periodComparison.recent.weeks} weeks)`,
+                    data: [
+                        DATA.periodComparison.recent.ridesPerWeek,
+                        DATA.periodComparison.recent.distancePerWeek,
+                        DATA.periodComparison.recent.timePerWeek,
+                        DATA.periodComparison.recent.elevationPerWeek,
+                        DATA.periodComparison.recent.avgPower,
+                        DATA.periodComparison.recent.avgHr
+                    ],
+                    backgroundColor: 'rgba(255, 62, 29, 0.8)',
+                    borderColor: 'rgba(255, 62, 29, 1)',
+                    borderWidth: 2
+                }, {
+                    label: `Previous Period (${DATA.periodComparison.previous.weeks} weeks)`,
+                    data: [
+                        DATA.periodComparison.previous.ridesPerWeek,
+                        DATA.periodComparison.previous.distancePerWeek,
+                        DATA.periodComparison.previous.timePerWeek,
+                        DATA.periodComparison.previous.elevationPerWeek,
+                        DATA.periodComparison.previous.avgPower,
+                        DATA.periodComparison.previous.avgHr
+                    ],
+                    backgroundColor: 'rgba(105, 108, 255, 0.8)',
+                    borderColor: 'rgba(105, 108, 255, 1)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: { display: true }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: '#e2e8f0' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // Power Zones Chart
+        const powerZonesCtx = document.getElementById('powerZonesChart').getContext('2d');
+        new Chart(powerZonesCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Z1 (Active Recovery)', 'Z2 (Endurance)', 'Z3 (Tempo)', 'Z4 (Threshold)', 'Z5 (VO2 Max)'],
+                datasets: [{
+                    data: [DATA.powerZones.z1, DATA.powerZones.z2, DATA.powerZones.z3, DATA.powerZones.z4, DATA.powerZones.z5],
+                    backgroundColor: [
+                        'rgba(3, 195, 236, 0.8)',
+                        'rgba(8, 145, 178, 0.8)',
+                        'rgba(255, 171, 0, 0.8)',
+                        'rgba(255, 62, 29, 0.8)',
+                        'rgba(153, 27, 27, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(3, 195, 236, 1)',
+                        'rgba(8, 145, 178, 1)',
+                        'rgba(255, 171, 0, 1)',
+                        'rgba(255, 62, 29, 1)',
+                        'rgba(153, 27, 27, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: { padding: 15 }
+                    }
+                }
+            }
+        });
+
+        // HR Zones Chart
+        const hrZonesCtx = document.getElementById('hrZonesChart').getContext('2d');
+        new Chart(hrZonesCtx, {
+            type: 'polarArea',
+            data: {
+                labels: ['Z1 (<70%)', 'Z2 (70-80%)', 'Z3 (80-90%)', 'Z4 (90-100%)'],
+                datasets: [{
+                    data: [DATA.hrZones.z1, DATA.hrZones.z2, DATA.hrZones.z3, DATA.hrZones.z4],
+                    backgroundColor: [
+                        'rgba(3, 195, 236, 0.7)',
+                        'rgba(8, 145, 178, 0.7)',
+                        'rgba(255, 171, 0, 0.7)',
+                        'rgba(255, 62, 29, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgba(3, 195, 236, 1)',
+                        'rgba(8, 145, 178, 1)',
+                        'rgba(255, 171, 0, 1)',
+                        'rgba(255, 62, 29, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: { padding: 10 }
+                    }
+                },
+                scales: {
+                    r: {
+                        ticks: { display: false },
+                        grid: { color: '#e2e8f0' }
+                    }
+                }
+            }
+        });
+
+        // Ride Types Chart
+        const rideTypesCtx = document.getElementById('rideTypesChart').getContext('2d');
+        new Chart(rideTypesCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Endurance\n(>40km, <75% FTP)', 'Tempo\n(75-90% FTP)', 'Threshold\n(90-105% FTP)', 'High Intensity\n(>105% FTP)'],
+                datasets: [{
+                    label: 'Number of Rides',
+                    data: [DATA.rideTypes.endurance, DATA.rideTypes.tempo, DATA.rideTypes.threshold, DATA.rideTypes.highIntensity],
+                    backgroundColor: [
+                        'rgba(8, 145, 178, 0.8)',
+                        'rgba(255, 171, 0, 0.8)',
+                        'rgba(255, 62, 29, 0.8)',
+                        'rgba(153, 27, 27, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(8, 145, 178, 1)',
+                        'rgba(255, 171, 0, 1)',
+                        'rgba(255, 62, 29, 1)',
+                        'rgba(153, 27, 27, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Rides' },
+                        grid: { color: '#e2e8f0' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // Monthly Volume Chart
+        const monthlyVolumeCtx = document.getElementById('monthlyVolumeChart').getContext('2d');
+        new Chart(monthlyVolumeCtx, {
+            type: 'line',
+            data: {
+                labels: DATA.monthlyData.labels,
+                datasets: [{
+                    label: 'Distance (km)',
+                    data: DATA.monthlyData.distance,
+                    borderColor: 'rgba(255, 171, 0, 1)',
+                    backgroundColor: 'rgba(255, 171, 0, 0.2)',
+                    tension: 0.4,
+                    fill: true,
+                    borderWidth: 3
+                }, {
+                    label: 'Rides',
+                    data: DATA.monthlyData.rides,
+                    borderColor: 'rgba(105, 108, 255, 1)',
+                    backgroundColor: 'rgba(105, 108, 255, 0.2)',
+                    tension: 0.4,
+                    fill: true,
+                    borderWidth: 3,
+                    yAxisID: 'y1'
+                }]
+            },
+            options: {
+                responsive: true,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                plugins: {
+                    legend: { display: true }
+                },
+                scales: {
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        title: { display: true, text: 'Distance (km)' },
+                        grid: { color: '#e2e8f0' }
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        title: { display: true, text: 'Rides' },
+                        grid: { drawOnChartArea: false }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // Top Power Performances Chart
+        const topPowerCtx = document.getElementById('topPowerChart').getContext('2d');
+        new Chart(topPowerCtx, {
+            type: 'bar',
+            data: {
+                labels: DATA.topPerformances.labels,
+                datasets: [{
+                    label: 'Average Power (W)',
+                    data: DATA.topPerformances.avgPower,
+                    backgroundColor: 'rgba(105, 108, 255, 0.8)',
+                    borderColor: 'rgba(105, 108, 255, 1)',
+                    borderWidth: 2
+                }, {
+                    label: 'Normalized Power (W)',
+                    data: DATA.topPerformances.normalizedPower,
+                    backgroundColor: 'rgba(255, 62, 29, 0.8)',
+                    borderColor: 'rgba(255, 62, 29, 1)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                indexAxis: 'y',
+                plugins: {
+                    legend: { display: true }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Power (W)' },
+                        grid: { color: '#e2e8f0' }
+                    },
+                    y: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // Weekly Rides Chart (Stacked Bar)
+        const weeklyRidesCtx = document.getElementById('weeklyRidesChart').getContext('2d');
+        new Chart(weeklyRidesCtx, {
+            type: 'bar',
+            data: {
+                labels: DATA.weeklyRides.weeks,
+                datasets: [{
+                    label: 'Outdoor Rides',
+                    data: DATA.weeklyRides.outdoor,
+                    backgroundColor: 'rgba(113, 221, 55, 0.8)',
+                    borderColor: 'rgba(113, 221, 55, 1)',
+                    borderWidth: 2
+                }, {
+                    label: 'Indoor Rides',
+                    data: DATA.weeklyRides.indoor,
+                    backgroundColor: 'rgba(255, 62, 29, 0.8)',
+                    borderColor: 'rgba(255, 62, 29, 1)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            footer: function(context) {
+                                let total = 0;
+                                context.forEach(item => {
+                                    total += item.parsed.y;
+                                });
+                                return 'Total: ' + total + ' rides';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        stacked: true,
+                        grid: { display: false },
+                        ticks: {
+                            maxRotation: 45,
+                            minRotation: 45,
+                            font: { size: 9 }
+                        }
+                    },
+                    y: {
+                        stacked: true,
+                        beginAtZero: true,
+                        title: { display: true, text: 'Rides per Week' },
+                        grid: { color: '#e2e8f0' },
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

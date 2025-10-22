@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> - Cycling Performance Glossary</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="shared-styles.css">
+    <style>
+        .glossary-nav {
+            background: white;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 6px rgba(105, 108, 255, 0.1);
+        }
+
+        .glossary-nav h3 {
+            color: #696cff;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .glossary-nav ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .glossary-nav a {
+            color: #646e78;
+            text-decoration: none;
+            padding: 8px 12px;
+            background: #f5f5f9;
+            border-radius: 4px;
+            display: block;
+            transition: all 0.2s;
+        }
+
+        .glossary-nav a:hover {
+            background: #696cff;
+            color: white;
+        }
+
+        .glossary-section {
+            background: white;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 6px rgba(105, 108, 255, 0.1);
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            background: linear-gradient(135deg, #696cff 0%, #5f61e6 100%);
+            color: white;
+            padding: 20px 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+            user-select: none;
+        }
+
+        .accordion-header:hover {
+            background: linear-gradient(135deg, #5f61e6 0%, #5356cc 100%);
+        }
+
+        .accordion-header h2 {
+            color: white;
+            margin: 0;
+            font-size: 1.5em;
+            font-weight: 600;
+        }
+
+        .accordion-icon {
+            font-size: 1.5em;
+            transition: transform 0.3s;
+        }
+
+        .accordion-header.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+            padding: 0 30px;
+        }
+
+        .accordion-content.active {
+            max-height: 5000px;
+            padding: 30px;
+            transition: max-height 0.5s ease-in, padding 0.3s ease-in;
+        }
+
+        .term {
+            margin-bottom: 30px;
+        }
+
+        .term-name {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #4b4b4b;
+            margin-bottom: 8px;
+        }
+
+        .term-abbr {
+            font-size: 0.9em;
+            color: #696cff;
+            font-style: italic;
+        }
+
+        .term-definition {
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+
+        .term-why {
+            background: #f5f5f9;
+            padding: 12px 15px;
+            border-left: 3px solid #696cff;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+
+        .term-why strong {
+            color: #696cff;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #696cff;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(105, 108, 255, 0.4);
+            transition: all 0.3s;
+        }
+
+        .back-to-top:hover {
+            background: #5f61e6;
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class='bx bx-book-open'></i> Cycling Performance Glossary</h1>
+            <div class="subtitle">Understanding Your Training Metrics</div>
+            <div class="subtitle" style="margin-top: 10px; font-size: 0.95em;">
+                <a href="index.html" style="color: white; text-decoration: underline;">← Back to Summary</a> |
+                <a href="coaching_report.html" style="color: white; text-decoration: underline;">Full Report</a> |
+                <a href="performance_dashboard.html" style="color: white; text-decoration: underline;">Dashboard</a>
+            </div>
+        </header>
+
+        <!-- Quick Navigation -->
+        <div class="glossary-nav">
+            <h3><i class='bx bx-navigation'></i> Quick Navigation</h3>
+            <ul>
+                <li><a href="#zones">Training Zones</a></li>
+                <li><a href="#power">Power Metrics</a></li>
+                <li><a href="#load">Training Load</a></li>
+                <li><a href="#efficiency">Efficiency Metrics</a></li>
+                <li><a href="#training-concepts">Training Concepts</a></li>
+                <li><a href="#performance">Performance Metrics</a></li>
+            </ul>
+        </div>
+
+        <!-- Training Zones -->
+        <div class="glossary-section" id="zones">
+            <div class="accordion-header">
+                <h2><i class='bx bx-layer'></i> Training Zones</h2>
+                <i class='bx bx-chevron-down accordion-icon'></i>
+            </div>
+            <div class="accordion-content">
+                <div class="term">
+                <div class="term-name">Zone 1 (Z1) <span class="term-abbr">Active Recovery - 0-60% FTP</span></div>
+                <div class="term-definition">
+                    Very easy spinning, conversational pace. You should be able to talk in complete sentences without effort.
+                </div>
+                <div class="term-why">
+                    <strong>Why it matters:</strong> Promotes blood flow and recovery without adding fatigue. Critical for recovery days and warm-up/cool-down periods.
+                </div>
+            </div>
+
+            <div class="term">
+                <div class="term-name">Zone 2 (Z2) <span class="term-abbr">Endurance - 60-80% FTP</span></div>
+                <div class="term-definition">
+                    The foundation of aerobic fitness. Steady, sustainable pace where you can still hold a conversation but with occasional pauses. This is where most training volume should occur.
+                </div>
+                <div class="term-why">
+                    <strong>Why it matters:</strong> Builds mitochondrial density, fat oxidation capacity, and aerobic engine. Elite cyclists spend 50-70% of their training time here. It's the foundation that allows you to go hard when it counts.
+                </div>
+            </div>
+
+            <div class="term">
+                <div class="term-name">Zone 3 (Z3) <span class="term-abbr">Tempo - 80-90% FTP</span></div>
+                <div class="term-definition">
+                    Moderately hard, steady effort. Conversation becomes difficult. Also called "sweet spot" (upper Z3, ~88-93% FTP) because it provides substantial stimulus without excessive fatigue.
+                </div>
+                <div class="term-why">
+                    <strong>Why it matters:</strong> Improves lactate clearance and muscular endurance. Sweet spot training is particularly effective for time-limited athletes. However, too much Z3 ("grey zone") can limit recovery and prevent hard efforts.
+                </div>
+            </div>
+
+            <div class="term">
+                <div class="term-name">Zone 4 (Z4) <span class="term-abbr">Threshold - 90-110% FTP</span></div>
+                <div class="term-definition">
+                    Sustained hard effort near your lactate threshold. This is your "race pace" for 20-60 minute efforts. Conversation is impossible. Feels uncomfortably hard but sustainable.
+                </div>
+                <div class="term-why">
+                    <strong>Why it matters:</strong> Directly improves FTP and time-trial performance. Raises your threshold so you can sustain higher power outputs. Critical for climbing and time trials, but requires 48-72h recovery.
+                </div>
+            </div>
+
+            <div class="term">
+                <div class="term-name">Zone 5 (Z5) <span class="term-abbr">VO2 Max - >110% FTP</span></div>
+                <div class="term-definition">
+                    Very hard intervals typically lasting 2-8 minutes. Maximum sustainable intensity for these durations. Creates significant oxygen debt and burning sensations in legs.
+                </div>
+                <div class="term-why">
+                    <strong>Why it matters:</strong> Expands your aerobic ceiling and improves maximum oxygen uptake. Essential for closing gaps, climbing short hills, and responding to attacks. Highly fatiguing - quality over quantity matters.
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Power Metrics -->
+        <div class="glossary-section" id="power">
+            <div class="accordion-header">
+                <h2><i class='bx bx-battery-charging'></i> Power Metrics</h2>
+                <i class='bx bx-chevron-down accordion-icon'></i>
+            </div>
+            <div class="accordion-content">
+                <div class="term">
+                <div class="term-name">FTP <span class="term-abbr">Functional Threshold Power</span></div>
+                <div class="term-definition">
+                    The maximum power you can sustain for approximately 60 minutes in a quasi-steady state. Measured in watts (W). Often expressed relative to body weight (W/kg) for climbing performance.
+                </div>
+                <div class="term-why">
+                    <strong>Why it matters:</strong> The single most important cycling metric. It's the anchor for all training zones and the primary measure of aerobic fitness improvement. A higher FTP means you can ride faster and longer.
+                </div>
+            </div>
+
+            <div class="term">
+                <div class="term-name">W/kg <span class="term-abbr">Watts per Kilogram</span></div>
+                <div class="term-definition">
+                    Your power output divided by body weight. Example: 250W FTP ÷ 70kg = 3.57 W/kg.
+                </div>
+                <div class="term-why">
+                    <strong>Why it matters:</strong> Predicts climbing performance better than absolute power. On steep climbs, you're fighting gravity, so power-to-weight ratio is everything. 4.0+ W/kg is competitive at local races; 5.0+ is Cat 1/2 level.
+                </div>
+            </div>
+
+            <div class="term">
+                <div class="term-name">NP <span class="term-abbr">Normalized Power</span></div>
+                <div class="term-definition">
+                    A weighted average power that accounts for the physiological cost of power variability. Reflects the "true" physiological stress better than simple average power.
+                </div>
+                <div class="term-why">
+                    <strong>Why it matters:</strong> A ride with many surges can have the same average power as a steady ride but feel much harder. NP captures this difference and provides a more accurate measure of training stress.
+                </div>
+            </div>
+
+            <div class="term">
+                <div class="term-name">VI <span class="term-abbr">Variability Index</span></div>
+                <div class="term-definition">
+                    Ratio of Normalized Power to Average Power (NP ÷ AP). A perfectly steady ride has VI = 1.0. Higher values indicate more variable power output.
+                </div>
+                <div class="term-why">
+                    <strong>Why it matters:</strong> Measures pacing discipline and efficiency. For endurance rides and time trials, aim for 1.02-1.10. High VI (>1.15) indicates poor pacing or highly variable terrain/efforts, which increases fatigue for the same average power.
+                </div>
+            </div>
+
+            <div class="term">
+                <div class="term-name">Power-Duration Curve <span class="term-abbr">PD Curve</span></div>
+                <div class="term-definition">
+                    Graph showing your best power outputs across different durations (5s, 1min, 5min, 20min, 60min). Reveals your physiological phenotype.
+                </div>
+                <div class="term-why">
+                    <strong>Why it matters:</strong> Identifies your strengths and limiters. Are you a sprinter (strong at 5-15s)? Time trialist (strong at 20-60min)? Climber (high W/kg at 5-20min)? Guides training focus and race tactics.
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Training Load -->
+        <div class="glossary-section" id="load">
+            <div class="accordion-header">
+                <h2><i class='bx bx-line-chart-down'></i> Training Load Metrics</h2>
+                <i class='bx bx-chevron-down accordion-icon'></i>
+            </div>
+            <div class="accordion-content">
+                <div class="term">
+                <div class="term-name">TSS <span class="term-abbr">Training Stress Score</span></div>
+                <div class="term-definition">
+                    Quantifies training stress from a single workout based on intensity and duration. 100 TSS = 1 hour at FTP. A 2-hour endurance ride at 70% FTP = ~100 TSS. A hard 90-minute ride might be 120-150 TSS.
+                </div>
+                <div class="term-why">
+                    <strong>Why it matters:</strong> Allows you to quantify and track training load objectively. Helps prevent overtraining (too much TSS too fast) and undertraining (insufficient stimulus). Aim for 300-600 TSS/week depending on fitness level.
+                </div>
+            </div>
+
+            <div class="term">
+                <div class="term-name">CTL <span class="term-abbr">Chronic Training Load</span></div>
+                <div class="term-definition">
+                    Your fitness level, calculated as a 42-day rolling average of daily TSS. Also called "fitness" in TrainingPeaks. Measured in TSS/day.
+                </div>
+                <div class="term-why">
+                    <strong>Why it matters:</strong> Tracks your long-term fitness trajectory. Rising CTL means you're building fitness. Dropping CTL means detraining. Competitive cyclists maintain CTL of 80-120 TSS/day. Build CTL gradually (5-8 points per week max).
+                </div>
+            </div>
+
+            <div class="term">
+                <div class="term-name">ATL <span class="term-abbr">Acute Training Load</span></div>
+                <div class="term-definition">
+                    Your fatigue level, calculated as a 7-day rolling average of daily TSS. Also called "fatigue." Measures recent training stress that hasn't been absorbed yet.
+                </div>
+                <div class="term-why">
+                    <strong>Why it matters:</strong> High ATL relative to CTL means you're accumulating fatigue faster than building fitness. Used to plan recovery weeks. When ATL is much higher than CTL, performance suffers but adaptations are occurring.
+                </div>
+            </div>
+
+            <div class="term">
+                <div class="term-name">TSB <span class="term-abbr">Training Stress Balance</span></div>
+                <div class="term-definition">
+                    Your freshness/readiness level, calculated as CTL - ATL. Also called "form." Positive TSB = fresh. Negative TSB = fatigued. Zero TSB = balanced.
+                </div>
+                <div class="term-why">
+                    <strong>Why it matters:</strong> Predicts race readiness. Optimal TSB for racing: -5 to +5 (slightly fresh). TSB < -20 indicates high overtraining risk. TSB > +10 means you're losing fitness (detraining). Use TSB to time your taper before key events.
+                </div>
+            </div>
+
+            <div class="term">
+                <div class="term-name">ACWR <span class="term-abbr">Acute:Chronic Workload Ratio</span></div>
+                <div class="term-definition">
+                    Ratio of recent training load (7 days) to long-term training load (28 days). Optimal range: 0.8-1.3.
+                </div>
+                <div class="term-why">
+                    <strong>Why it matters:</strong> Injury and illness risk increases sharply when ACWR exceeds 1.5 (ramping volume too quickly). Staying in the 0.8-1.3 range minimizes injury risk while allowing progressive overload.
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Efficiency Metrics -->
+        <div class="glossary-section" id="efficiency">
+            <div class="accordion-header">
+                <h2><i class='bx bx-trending-up'></i> Efficiency Metrics</h2>
+                <i class='bx bx-chevron-down accordion-icon'></i>
+            </div>
+            <div class="accordion-content">
+                <div class="term">
+                <div class="term-name">EF <span class="term-abbr">Efficiency Factor</span></div>
+                <div class="term-definition">
+                    Ratio of Normalized Power to average heart rate (NP ÷ HR). Example: 200W NP at 140 bpm = EF of 1.43.
+                </div>
+                <div class="term-why">
+                    <strong>Why it matters:</strong> Rising EF over time indicates improved aerobic efficiency - you're producing more power for the same heart rate (or the same power at lower heart rate). Track EF on steady Z2 rides to monitor base fitness improvements.
+                </div>
+            </div>
+
+            <div class="term">
+                <div class="term-name">Pa:HR Decoupling <span class="term-abbr">Power-to-Heart Rate Decoupling</span></div>
+                <div class="term-definition">
+                    Compares the ratio of power to heart rate in the first half vs. second half of a steady ride. Calculated as: [(NP/HR)2nd half ÷ (NP/HR)1st half - 1] × 100%.
+                </div>
+                <div class="term-why">
+                    <strong>Why it matters:</strong> Decoupling < 5% on rides ≥2 hours indicates strong aerobic base and good endurance. Higher decoupling suggests aerobic system weakness, dehydration, or inadequate fueling. Champions show minimal decoupling even on 4-5 hour rides.
+                </div>
+            </div>
+
+            <div class="term">
+                <div class="term-name">TTE <span class="term-abbr">Time to Exhaustion at FTP</span></div>
+                <div class="term-definition">
+                    How long you can sustain FTP before failure. Well-trained cyclists can hold FTP for 35-50 minutes. Less trained: 20-30 minutes.
+                </div>
+                <div class="term-why">
+                    <strong>Why it matters:</strong> TTE is a key limiter for time trials and climbing. You might have decent FTP but poor TTE, meaning you can't utilize your FTP fully in races. Improved through threshold intervals and tempo-over-distance work.
+                </div>
+            </div>
+
+            <div class="term">
+                <div class="term-name">Durability</div>
+                <div class="term-definition">
+                    Your ability to maintain power output late in long rides. Measured by comparing power in final hour vs. first hour of 3+ hour rides.
+                </div>
+                <div class="term-why">
+                    <strong>Why it matters:</strong> Races are often decided in the final hour when fatigue is high. Poor durability means your effective FTP drops 20-30% late in rides. Improved through long Z2 rides with "finishers" (hard efforts in final 30-60 min).
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Training Concepts -->
+        <div class="glossary-section" id="training-concepts">
+            <div class="accordion-header">
+                <h2><i class='bx bx-brain'></i> Training Concepts</h2>
+                <i class='bx bx-chevron-down accordion-icon'></i>
+            </div>
+            <div class="accordion-content">
+                <div class="term">
+                <div class="term-name">Polarized Training</div>
+                <div class="term-definition">
+                    Intensity distribution where ~80% of training time is easy (Z1-Z2) and ~20% is hard (Z4-Z5+), with minimal time in Z3. Creates a "polarized" distribution with two distinct intensity peaks.
+                </div>
+                <div class="term-why">
+                    <strong>Why it matters:</strong> The approach used by most elite endurance athletes. Allows high total volume while maintaining quality in hard sessions. Going easy enough on easy days enables going hard enough on hard days. Reduces injury/burnout risk.
+                </div>
+            </div>
+
+            <div class="term">
+                <div class="term-name">Pyramidal Training</div>
+                <div class="term-definition">
+                    Intensity distribution with most time in Z2, moderate time in Z3/Z4, and small amount in Z5. Forms a pyramid shape when graphed. Example: 70% Z2, 20% Z3/Z4, 10% Z5.
+                </div>
+                <div class="term-why">
+                    <strong>Why it matters:</strong> Common among masters/time-limited athletes. More sustainable than threshold-heavy training. Good for building base fitness and maintaining consistency. Less risky than polarized for recovery-limited athletes.
+                </div>
+            </div>
+
+            <div class="term">
+                <div class="term-name">Threshold Training</div>
+                <div class="term-definition">
+                    Heavy focus on Z3-Z4 work (tempo and threshold). Typically 40-50% of training time at moderate-high intensity.
+                </div>
+                <div class="term-why">
+                    <strong>Why it matters:</strong> Can rapidly improve FTP in short training blocks (4-8 weeks). However, high injury/burnout risk with prolonged use. Best for short-term FTP gains before events, not year-round. Requires excellent recovery practices.
+                </div>
+            </div>
+
+            <div class="term">
+                <div class="term-name">Periodization</div>
+                <div class="term-definition">
+                    Systematic planning of training into phases (macrocycle, mesocycle, microcycle) with specific goals. Typically: Base → Build → Peak → Recovery → Race.
+                </div>
+                <div class="term-why">
+                    <strong>Why it matters:</strong> You can't be in peak form year-round. Periodization prevents plateaus, reduces injury risk, and ensures you're fresh for key events. Each phase has specific volume/intensity targets that build upon previous phases.
+                </div>
+            </div>
+
+            <div class="term">
+                <div class="term-name">Deload Week</div>
+                <div class="term-definition">
+                    Planned recovery week with 40-60% reduction in training volume/intensity. Typically every 3-4 weeks. Maintains frequency but reduces duration and intensity.
+                </div>
+                <div class="term-why">
+                    <strong>Why it matters:</strong> Adaptations occur during recovery, not during training. Deload weeks allow your body to absorb the previous weeks' training stress, convert it to fitness, and prepare for the next training block. Skipping deloads leads to cumulative fatigue.
+                </div>
+            </div>
+
+            <div class="term">
+                <div class="term-name">Progressive Overload</div>
+                <div class="term-definition">
+                    Gradually increasing training stress over time through higher volume, intensity, or frequency. Typically increase weekly TSS by 5-10% when building fitness.
+                </div>
+                <div class="term-why">
+                    <strong>Why it matters:</strong> Your body adapts to current training loads. To improve, you must gradually increase stress. Too fast = injury/overtraining. Too slow = plateau. The 5-10% rule balances adaptation stimulus with recovery capacity.
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Performance Metrics -->
+        <div class="glossary-section" id="performance">
+            <div class="accordion-header">
+                <h2><i class='bx bx-trophy'></i> Performance Metrics</h2>
+                <i class='bx bx-chevron-down accordion-icon'></i>
+            </div>
+            <div class="accordion-content">
+                <div class="term">
+                <div class="term-name">VO2 Max</div>
+                <div class="term-definition">
+                    Maximum rate at which your body can consume oxygen during maximal exercise. Measured in ml/kg/min. Elite cyclists: 70-85 ml/kg/min. Recreational: 40-55 ml/kg/min.
+                </div>
+                <div class="term-why">
+                    <strong>Why it matters:</strong> Sets your aerobic ceiling - the upper limit of your endurance capacity. While partly genetic, it's trainable through high-intensity intervals (Z5+). Higher VO2 max enables higher sustainable power outputs.
+                </div>
+            </div>
+
+            <div class="term">
+                <div class="term-name">Lactate Threshold</div>
+                <div class="term-definition">
+                    The exercise intensity where lactate begins accumulating faster than it can be cleared. Closely related to FTP. The primary limiter for sustained efforts.
+                </div>
+                <div class="term-why">
+                    <strong>Why it matters:</strong> You can ride just below threshold for hours, but minutes above it. Raising your threshold (via Z3-Z4 training) allows higher sustainable speeds. It's the single most trainable aspect of endurance performance.
+                </div>
+            </div>
+
+            <div class="term">
+                <div class="term-name">Consistency Score</div>
+                <div class="term-definition">
+                    Percentage of planned training sessions completed. Can also measure week-to-week volume variability. High consistency: >85% sessions completed, low weekly TSS variation.
+                </div>
+                <div class="term-why">
+                    <strong>Why it matters:</strong> Consistency beats intensity. Missing sessions creates fitness gaps. Erratic volume (big weeks followed by nothing) prevents adaptation. Aim for 4-6 rides/week year-round rather than sporadic blocks of high volume.
+                </div>
+            </div>
+
+            <div class="term">
+                <div class="term-name">Cadence</div>
+                <div class="term-definition">
+                    Pedal revolutions per minute (rpm). Optimal cadence varies by rider but typically 85-95 rpm for endurance, 95-105 rpm for climbing, 75-85 rpm for time trials.
+                </div>
+                <div class="term-why">
+                    <strong>Why it matters:</strong> Cadence affects muscular vs. cardiovascular stress. Very low cadence (<70 rpm) increases muscular fatigue and injury risk. Very high cadence (>110 rpm) is cardiovascularly demanding. Find your optimal cadence where power feels sustainable.
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Performance Analysis prepared by Claude Code Performance Coach</p>
+            <p style="margin-top: 10px;">Generated with Claude Code Performance Analyzer</p>
+        </footer>
+    </div>
+
+    <a href="#" class="back-to-top" aria-label="Back to top">
+        <i class='bx bx-up-arrow-alt'></i>
+    </a>
+
+    <script>
+        // Accordion functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+            // Function to open a specific section
+            function openSection(sectionId) {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    const header = section.querySelector('.accordion-header');
+                    const content = section.querySelector('.accordion-content');
+
+                    if (header && content && !header.classList.contains('active')) {
+                        header.classList.add('active');
+                        content.classList.add('active');
+                    }
+                }
+            }
+
+            // Add click event to each accordion header
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    // Toggle active class on header
+                    this.classList.toggle('active');
+
+                    // Get the content div (next sibling)
+                    const content = this.nextElementSibling;
+
+                    // Toggle active class on content
+                    content.classList.toggle('active');
+                });
+            });
+
+            // Handle navigation links
+            const navLinks = document.querySelectorAll('.glossary-nav a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    // Get the target section ID from href
+                    const targetId = this.getAttribute('href').substring(1);
+
+                    // Open the target section
+                    openSection(targetId);
+
+                    // Scroll to the section
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        setTimeout(() => {
+                            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 100);
+                    }
+                });
+            });
+
+            // Optional: Open first section by default
+            if (accordionHeaders.length > 0) {
+                accordionHeaders[0].classList.add('active');
+                accordionHeaders[0].nextElementSibling.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
