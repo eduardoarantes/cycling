@@ -73,8 +73,12 @@
         return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     }
 
+    // Track which terms have already been tooltipped (global state)
+    const tooltippedTerms = new Set();
+
     /**
      * Add tooltips to matching terms in text nodes
+     * Only tooltips the FIRST occurrence of each term in the document
      */
     function addTooltipsToElement(element, terms) {
         // Skip if already processed
@@ -151,8 +155,14 @@
                     );
                 }
 
-                // Add tooltip
-                fragment.appendChild(createTooltip(termKey, termData));
+                // Only add tooltip if this is the FIRST occurrence of this term
+                if (!tooltippedTerms.has(termKey)) {
+                    fragment.appendChild(createTooltip(termKey, termData));
+                    tooltippedTerms.add(termKey);
+                } else {
+                    // Just add the plain text for subsequent occurrences
+                    fragment.appendChild(document.createTextNode(termKey));
+                }
 
                 lastIndex = startIndex + termKey.length;
             });
@@ -178,6 +188,9 @@
             console.warn('Glossary terms not loaded');
             return;
         }
+
+        // Clear previously tracked terms to start fresh
+        tooltippedTerms.clear();
 
         selectors.forEach(selector => {
             const elements = document.querySelectorAll(selector);
